@@ -6,12 +6,13 @@ import time
 import datetime
 import codecs
 import sys
+import os
 from Connections.models import Connection
 reload(sys) 
 sys.setdefaultencoding('utf-8') 
 
-gi = pygeoip.GeoIP('D:\Proyectos\Python\Django\Dionaea\Maps\GeoIP.dat', pygeoip.MEMORY_CACHE)
-gic = pygeoip.GeoIP('D:\Proyectos\Python\Django\Dionaea\Maps\GeoLiteCity.dat', pygeoip.STANDARD)
+gi = pygeoip.GeoIP(os.path.join('Maps', 'GeoIP.dat'), pygeoip.MEMORY_CACHE)
+gic = pygeoip.GeoIP(os.path.join('Maps', 'GeoLiteCity.dat'), pygeoip.STANDARD)
 
 def countries(request):
 	date_now = datetime.date.today() - datetime.timedelta(days=7)

@@ -1,8 +1,9 @@
 from django.db import models
 import datetime
 import pygeoip
+import os
 
-gi = pygeoip.GeoIP('D:\Proyectos\Python\Django\Dionaea\Maps\GeoIP.dat', pygeoip.MEMORY_CACHE)
+gi = pygeoip.GeoIP(os.path.join('Maps', 'GeoIP.dat'), pygeoip.MEMORY_CACHE)
 
 class Connection(models.Model):
     connection = models.IntegerField(primary_key=True, blank=True)

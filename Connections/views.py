@@ -38,7 +38,7 @@ def detail(request, connection_id):
         next = 0
         if int(connection_id) > 0:
             previous = int(connection_id) - 1
-        if int(connection_id) < int(length):
+        if int(connection_id) < length:
             next = int(connection_id) + 1
     except Connection.DoesNotExist:
         raise Http404
@@ -59,7 +59,7 @@ def detail(request, connection_id):
             'p0f' : p0f,
             'resolve' : resolve,
             'sipcommand' : sipcommand,
-            'previous' : str(previous),
-            'next' : str(next)
+            'previous' : previous,
+            'next' : next
 		}
 	)

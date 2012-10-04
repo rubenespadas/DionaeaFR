@@ -441,7 +441,7 @@
                 </div>
 {% endblock %}
 {% block pagination %}
-    {% if previous != "0" %}
+    {% if previous != 0 %}
             <li class="previous">
                 <a href="http://localhost:8000/connections/{{ previous }}/">previous</a>
             </li>
@@ -450,7 +450,7 @@
                 <a href="">previous</a>
             </li>
     {% endif %}
-    {% if next != "0" %}
+    {% if next != 0 %}
             <li class="next">
                 <a href="http://localhost:8000/connections/{{ next }}/">next</a>
             </li>

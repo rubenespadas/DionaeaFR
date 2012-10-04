@@ -1,0 +1,86 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Countries
+{% endblock %}
+{% block scripts %}
+	{% load staticfiles %}
+	<link rel="stylesheet" href="{% static "css/jquery-jvectormap-1.0.css" %}" type="text/css" media="screen"/>
+	<script type="text/javascript" src="{% static "js/jquery-jvectormap-1.0.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/jquery-jvectormap-world-mill-en.js" %}"></script>
+{% endblock %}
+{% block menu %}
+	<ul class="nav nav-list">
+		<li class="nav-header">Data</li>
+		<li><a href="/">Connections</a></li>
+		<li><a href="/downloads">Downloads</a></li>
+		<li class="nav-header">Graphs</li>
+		<li><a href="/graphs/protocols">Protocols</a></li>
+		<li><a href="/graphs/urls">URLs</a></li>
+		<li><a href="/graphs/ips">IPs</a></li>
+		<li><a href="/graphs/malware">Malware</a></li>
+		<li class="nav-header">Maps</li>
+		<li><a href="/maps/attackers">Attackers</a></li>
+		<li class="active"><a href="/maps/countries">Countries</a></li>
+	</ul>
+{% endblock %}
+{% block titlecontent %}
+Countries
+{% endblock %}
+{% block content %}
+	<div style="height: 600px; padding: 5px; margin-bottom: 40px;" class="jvectormap span10" id="map">
+	</div>
+{% endblock %}
+{% block pagination %}
+	<li class="previous disabled">
+		<a href="#">previous</a>
+	</li>
+	<li class="next disabled">
+    	<a href="#">next</a>
+	</li>
+{% endblock %}
+{% block info %}
+Last 7 days.
+{% endblock %}
+{% block Lastscripts %}
+	<script type="text/javascript" charset="utf-8">
+		$(function(){
+			{{ cc|safe }}
+			$('#map').vectorMap({
+				map: 'world_mill_en',
+				series: {
+					regions: [{
+						values: gdpData,
+						scale: ['#f8eaf9','#6E009E'],
+						normalizeFunction: 'polynomial'
+					}]
+				},
+				regionStyle: {
+            		initial: {
+              			fill: 'white',
+						"fill-opacity": 1,
+						stroke: '#000',
+						"stroke-width": 0.2,
+						"stroke-opacity": 1
+            		},
+            		hover: {
+						"fill-opacity": 0.8
+					}
+          		},
+          		backgroundColor: 'transparent',
+				hoverOpacity: 0.7,
+				hoverColor: true,
+				onRegionLabelShow: function(event, label, code){
+					if(gdpData[code])
+					{
+						label.html('<img src="/static/images/flags/'+code+'.gif" style="margin-bottom:3px;"/> <b>'+label.html()+'</b></br>'+'<b>Attacks: </b>'+ gdpData[code]);
+					}
+					else
+					{
+						label.html('<img src="/static/images/flags/'+code+'.gif"/> <b>'+label.html()+'</b></br>'+'<b>Attacks: </b>0');
+					}
+				}
+			})
+		});
+	</script>
+{% endblock %}

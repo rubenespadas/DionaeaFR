@@ -1,0 +1,103 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Connections
+{% endblock %}
+{% block menu %}
+	<ul class="nav nav-list">
+		<li class="nav-header">Data</li>
+		<li class="active"><a href="/">Connections</a></li>
+		<li><a href="/downloads">Downloads</a></li>
+		<li class="nav-header">Graphs</li>
+		<li><a href="/graphs/protocols">Protocols</a></li>
+		<li><a href="/graphs/urls">URLs</a></li>
+		<li><a href="/graphs/ips">IPs</a></li>
+		<li><a href="/graphs/malware">Malware</a></li>
+		<li class="nav-header">Maps</li>
+		<li><a href="/maps/attackers">Attackers</a></li>
+		<li><a href="/maps/countries">Countries</a></li>
+	</ul>
+{% endblock %}
+{% block titlecontent %}
+Connections
+{% endblock %}
+{% block info %}
+	{% if latest_connection_list %}
+		Page {{ latest_connection_list.number }} of {{ latest_connection_list.paginator.num_pages }}.
+	{% endif %}
+{% endblock %}
+{% block content %}
+			<div class="span10" id="content">
+				{% if latest_connection_list %}
+				    <table class="table" id="connections">
+				    	<thead>
+							<tr>
+								<th>ID</th>
+								<th>Type</th>
+								<th>Transport</th>
+								<th>Protocol</th>
+								<th>Timestamp</th>
+								<th>Root</th>
+								<th>Parent</th>
+								<th>CC</th>
+								<th>IP_SRC</th>
+								<th>Port_SRC</th>
+								<th>IP_DST</th>
+								<th>Port_DST</th>
+							</tr>
+						</thead>
+						<tbody>
+					    	{% for connection in latest_connection_list %}
+					    	<tr>
+					        	<td><a href="/connections/{{ connection.connection }}/">{{ connection.connection }}</a></td>
+						        <td>{{ connection.connection_type }}</td>
+						        <td>{{ connection.connection_transport }}</td>
+						        <td>{{ connection.connection_protocol }}</td>
+						        <td>{{ connection.getDate }}</td>
+						        <td><a href="/connections/{{ connection.connection_root }}/">{{ connection.connection_root }}</a>
+                                {% if connection.connection_parent != None %}
+                                    <td><a href="/connections/{{ connection.connection_parent }}/">{{ connection.connection_parent }}</a>
+                                {% else %}
+                                    <td>{{ connection.connection_parent }}</td>
+                                {% endif %}
+                                <td><img class="flag" src="/static/images/flags/{{ connection.getCC }}.gif" rel="tooltip" title="{{ connection.getCC }}" alt="{{ connection.getCC }}" data-placement="top"/></td>
+						        <td>{{ connection.getRemoteHost }}</td>
+						        <td>{{ connection.remote_port }}</td>
+						        <td>{{ connection.local_host }}</td>
+						        <td>{{ connection.local_port }}</td>
+					    	</tr>
+					    	{% endfor %}
+				    	</tbody>
+				    </table>
+				{% else %}
+				    <p>No Data.</p>
+				{% endif %}
+			</div>
+{% endblock %}
+{% block pagination %}
+	{% if latest_connection_list.has_next %}
+	        <li class="previous">
+				<a href="?page={{ latest_connection_list.next_page_number }}">previous</a>
+			</li>
+	{% else %}
+			<li class="previous disabled">
+				<a href="#">previous</a>
+			</li>
+	{% endif %}
+	{% if latest_connection_list.has_previous %}
+				<li class="next">
+	            	<a href="?page={{ latest_connection_list.previous_page_number }}">next</a>
+	            </li>
+	{% else %}
+				<li class="next disabled">
+	            	<a href="#">next</a>
+				</li>
+	{% endif %}
+{% endblock %}
+{% block Lastscripts %}
+	<script type="text/javascript">
+		$(document).ready(function() { 
+			$('.flag').tooltip();
+		});
+	</script>
+{% endblock %}

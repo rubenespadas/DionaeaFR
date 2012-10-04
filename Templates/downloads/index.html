@@ -1,0 +1,90 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Downloads
+{% endblock %}
+{% block menu %}
+	<ul class="nav nav-list">
+		<li class="nav-header">Data</li>
+		<li><a href="/">Connections</a></li>
+		<li class="active"><a href="/downloads">Downloads</a></li>
+		<li class="nav-header">Graphs</li>
+		<li><a href="/graphs/protocols">Protocols</a></li>
+		<li><a href="/graphs/urls">URLs</a></li>
+		<li><a href="/graphs/ips">IPs</a></li>
+		<li><a href="/graphs/malware">Malware</a></li>
+		<li class="nav-header">Maps</li>
+		<li><a href="/maps/attackers">Attackers</a></li>
+		<li><a href="/maps/countries">Countries</a></li>
+	</ul>
+{% endblock %}
+{% block titlecontent %}
+Downloads
+{% endblock %}
+{% block content %}
+			<div class="span10" id="content">
+		    	{% if latest_download_list %}
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Connection</th>
+                                <th>Url</th>
+                                <th>Hash</th>
+                                <th>Report VT</th>
+                                <th>Date VT</th>
+                                <th>Results VT</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for file in latest_download_list %}
+                                <tr>
+                                    <td>{{ file.download }}</td>
+                                    <td><a href="/connections/{{ file.connection }}/">{{ file.connection }}</a></td>
+                                    <td>{{ file.download_url }}</td>
+                                    <td>{{ file.download_md5_hash }}</td>
+                                	{% if file.getReport %}
+                                		{% for report in file.getReport %}
+                                        	<td><a href="{{ report.getUrl }}">See Report</a></td>
+                                        	<td>{{ report.getDate }}</td>
+                                        	<td>{{ report.getResult|safe }}</td>
+	                                	{% endfor %}
+	                                {% else %}
+	                                	<td>None</td>
+	                                	<td>None</td>
+	                                	<td>None</td>
+	                                {% endif %}
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+				{% else %}
+				    <p>No Data.</p>
+				{% endif %}
+			</div>
+{% endblock %}
+{% block pagination %}
+	{% if latest_download_list.has_next %}
+	        <li class="previous">
+				<a href="?page={{ latest_download_list.next_page_number }}">previous</a>
+			</li>
+	{% else %}
+			<li class="previous disabled">
+				<a href="#">previous</a>
+			</li>
+	{% endif %}
+	{% if latest_download_list.has_previous %}
+				<li class="next">
+	            	<a href="?page={{ latest_download_list.previous_page_number }}">next</a>
+	            </li>
+	{% else %}
+				<li class="next disabled">
+	            	<a href="#">next</a>
+				</li>
+	{% endif %}
+{% endblock %}
+{% block info %}
+	{% if latest_download_list %}
+		Page {{ latest_download_list.number }} of {{ latest_download_list.paginator.num_pages }}.
+	{% endif %}
+{% endblock %}

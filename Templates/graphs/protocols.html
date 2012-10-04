@@ -1,0 +1,98 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Protocols
+{% endblock %}
+{% block scripts %}
+	{% load staticfiles %}
+	<script type="text/javascript" src="{% static "js/kendo.core.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/kendo.data.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/kendo.chart.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/kendo.fx.min.js" %}"></script>
+{% endblock %}
+{% block menu %}
+	<ul class="nav nav-list">
+		<li class="nav-header">Data</li>
+		<li><a href="/">Connections</a></li>
+		<li><a href="/downloads">Downloads</a></li>
+		<li class="nav-header">Graphs</li>
+		<li class="active"><a href="/graphs/protocols">Protocols</a></li>
+		<li><a href="/graphs/urls">URLs</a></li>
+		<li><a href="/graphs/ips">IPs</a></li>
+		<li><a href="/graphs/malware">Malware</a></li>
+		<li class="nav-header">Maps</li>
+		<li><a href="/maps/attackers">Attackers</a></li>
+		<li><a href="/maps/countries">Countries</a></li>
+	</ul>
+{% endblock %}
+{% block titlecontent %}
+Protocols
+{% endblock %}
+{% block content %}
+	<div class="span10" id="chart">
+		{{ chartActivity }}
+	</div>
+{% endblock %}
+{% block pagination %}
+	<li class="previous disabled">
+		<a href="#">previous</a>
+	</li>
+	<li class="next disabled">
+    	<a href="#">next</a>
+	</li>
+{% endblock %}
+{% block info %}
+	Last 7 days.
+{% endblock %}
+{% block Lastscripts %}
+	<script type="text/javascript">
+		function Protocols() {
+		    $("#chart").kendoChart({
+		    	autoBind: true,
+		    	dataSource: {
+		            transport: {
+		                read: {
+		                    url: "http://localhost:8000/graphs/protocolsdata/",
+		                    dataType: "json"
+		                }
+		            }
+		        },
+		        title: {
+		            text: "Last 7 days"
+		        },
+		        legend: {
+		            position: "bottom"
+		        },
+		        seriesDefaults: {
+		            type: "bar"
+		        },
+		        series: [{
+		            field: "value",
+		            name: "Number of Connections",
+		            color: "#6E009E"
+		        }],
+		        axisDefaults: {
+		            labels: {
+		                font: "14px Tahoma, sans-serif"
+		            }
+		        },
+		        valueAxis: {
+		            labels: {
+		                format: "{0}"
+		            }
+		        },
+		        categoryAxis: {
+		            field: "name",
+		        },
+		        tooltip: {
+		            visible: true,
+		            format: "{0}"
+		        },
+		        chartArea: {
+		            background: ""
+		        }
+		    });
+		}
+		$(document).ready(function() { Protocols(); });
+	</script>
+{% endblock %}

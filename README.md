@@ -9,6 +9,7 @@ Home Dionaea: http://dionaea.carnivore.it/
   
   - Python 2.7.3
   - Django 1.4
+  - Jquery 1.7.2
   - Bootstrap Framework 2.1.1
   - jVectorMap 1.0
   - Kendo-UI v2011.3.1129

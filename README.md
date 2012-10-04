@@ -42,6 +42,6 @@ Home Dionaea: http://dionaea.carnivore.it/
   - Add filters in downloads table
   - Add more Graphs and Maps
 
-¿Suggestions?
+Suggestions?
 
 Designed by @rubenespadas

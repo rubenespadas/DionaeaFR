@@ -21,6 +21,8 @@ Front Web to Dionaea log analysis.
 
   Copy /opt/dionaea/var/dionaea/logsql.sqlite to DionaeaFR/Database directory
   
+  Download GeoIP.dat and GeoLiteCity.dat from https://www.maxmind.com/en/home and copy in DionaeaFR/Maps
+  
   Change STATICFILES_DIRS in DionaeaFR/Dionaea/settings.py to absolute paths of DionaeaFR/static
   
   Change TEMPLATE_DIRS in DionaeaFR/Dionaea/settings.py to absolute paths of DionaeaFR/Templates
@@ -33,9 +35,9 @@ Front Web to Dionaea log analysis.
 
 [*] Upcoming
 
-  - Add filters in connections table.
-  - Add filters in downloads table.
-  - Add more Graphs and Maps.
+  - Add filters in connections table
+  - Add filters in downloads table
+  - Add more Graphs and Maps
 
 ¿Suggestions?
 

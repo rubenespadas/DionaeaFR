@@ -22,9 +22,11 @@ Front Web to Dionaea log analysis.
   Copy /opt/dionaea/var/dionaea/logsql.sqlite to DionaeaFR/Database directory
   
   Change STATICFILES_DIRS in DionaeaFR/Dionaea/settings.py to absolute paths of DionaeaFR/static
+  
   Change TEMPLATE_DIRS in DionaeaFR/Dionaea/settings.py to absolute paths of DionaeaFR/Templates
   
   python manage.py collecstatic
+  
   python manage.py runserver
   
   Access to http://localhost:8000 in browser.

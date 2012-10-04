@@ -25,7 +25,7 @@ Front Web to Dionaea log analysis.
   
   Change TEMPLATE_DIRS in DionaeaFR/Dionaea/settings.py to absolute paths of DionaeaFR/Templates
   
-  python manage.py collecstatic
+  python manage.py collectstatic
   
   python manage.py runserver
   

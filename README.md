@@ -17,8 +17,9 @@ Home Dionaea: http://dionaea.carnivore.it/
 
 [*] Requeriments:
   
-  - pygeoip
-  - django-pagination
+	pip install Django
+	pip install pygeoip
+	pip install django-pagination
 
 [*] Install
 

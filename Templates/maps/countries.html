@@ -31,16 +31,10 @@ Countries
 	<div style="height: 600px; padding: 5px; margin-bottom: 40px;" class="jvectormap span10" id="map">
 	</div>
 {% endblock %}
-{% block pagination %}
-	<li class="previous disabled">
-		<a href="#">previous</a>
-	</li>
-	<li class="next disabled">
-    	<a href="#">next</a>
-	</li>
-{% endblock %}
 {% block info %}
-Last 7 days.
+	<div class="alert alert-info" id="info">
+		Last 7 days.
+	</div>
 {% endblock %}
 {% block Lastscripts %}
 	<script type="text/javascript" charset="utf-8">

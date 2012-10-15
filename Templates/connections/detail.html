@@ -441,6 +441,8 @@
                 </div>
 {% endblock %}
 {% block pagination %}
+    <div class="pagination pagination-centered">
+        <ul class="pager">
     {% if previous != 0 %}
             <li class="previous">
                 <a href="http://localhost:8000/connections/{{ previous }}/">previous</a>
@@ -459,9 +461,13 @@
                 <a href="">next</a>
             </li>
     {% endif %}
+        </ul>
+    </div>
 {% endblock %}
 {% block info %}
-    Detail of {{ connection.connection }}.
+    <div class="alert alert-info" id="info">
+        Detail of {{ connection.connection }}.
+    </div>
 {% endblock %}
 {% block Lastscripts %}
     <script type="text/javascript">

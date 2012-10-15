@@ -9,6 +9,8 @@
 		<link rel="stylesheet" href="{% static "css/bootstrap.min.css" %}" />
 		<link rel="stylesheet" href="{% static "css/bootstrap-responsive.min.css" %}" />
     	<link rel="stylesheet" href="{% static "css/styles.css" %}" />
+    	<link rel="stylesheet" href="{% static "django_tables2/themes/bootstrap/css/screen.css" %}" />
+    	<link rel="stylesheet" href="{% static "django_tables2_simplefilter/filter.css" %}" />
     	<!--[if lt IE 9]>
     	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   		<![endif]-->
@@ -47,18 +49,12 @@
 							</ul>
 						{% endblock %}
 					</div>
-					<div class="pagination pagination-centered">
-						<ul class="pager">
-							{% block pagination %}
-							{% endblock %}
-						</ul>
-					</div>
+					{% block pagination %}
+					{% endblock %}
 					{% block filters %}
 					{% endblock %}
-					<div class="alert alert-info" id="info">
-						{% block info %}
-						{% endblock %}
-					</div>
+					{% block info %}
+					{% endblock %}
 				</div>
 				<div class="span10" id="titlecontent">
 					<h4>

@@ -1,0 +1,103 @@
+table.bootstrap a:link,
+table.bootstrap a:visited,
+table.bootstrap + ul.pagination > li > a {
+    color: #7EA419;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+table.bootstrap a:hover {
+    color: #7EA419;
+}
+
+table.bootstrap td,
+table.bootstrap th {
+    padding: 5px;
+    line-height: 13px;
+    border-bottom: 1px solid #EEE;
+    border-left: 1px solid #DDD;
+    text-align: left;
+}
+
+table.bootstrap thead th:first-child,
+table.bootstrap thead td:first-child {
+    border-left: none !important;
+}
+
+table.bootstrap thead th,
+table.bootstrap thead td {
+    background: #FCFCFC url(../img/header-bg.png) left bottom repeat-x;
+    border-bottom: 1px solid #DDD;
+    padding: 2px 5px;
+    font-size: 11px;
+    vertical-align: middle;
+    color: #6E009E;
+}
+
+table.bootstrap thead th > a:link,
+table.bootstrap thead th > a:visited {
+    color: #7EA419;
+}
+
+table.bootstrap thead th.orderable > a {
+    padding-right: 20px;
+    background: url(../img/arrow-inactive-up.png) right center no-repeat;
+}
+table.bootstrap thead th.orderable.asc > a {
+    background-image: url(../img/arrow-active-up.png);
+}
+table.bootstrap thead th.orderable.desc > a {
+    background-image: url(../img/arrow-active-down.png);
+}
+
+table.bootstrap tr.odd {
+    background-color: #EEEEEE;
+}
+
+table.bootstrap tr.even {
+    background-color: white;
+}
+
+table.bootstrap + ul.pagination {
+    overflow: auto;
+    margin: 0;
+    padding: 10px;
+    list-style: none;
+}
+
+table.bootstrap + ul.pagination > li {
+    float: left;
+    line-height: 22px;
+    margin-left: 10px;
+}
+
+table.bootstrap + ul.pagination > li:first-child {
+    margin-left: 0;
+}
+
+table.bootstrap + ul.pagination > li.cardinality {
+    float: right;
+}
+
+table.bootstrap > tbody > tr > td > span.true,
+table.bootstrap > tbody > tr > td > span.false {
+    background-position: top left;
+    background-repeat: no-repeat;
+    display: inline-block;
+    height: 10px;
+    overflow: hidden;
+    text-indent: -200px;
+    width: 10px;
+}
+
+table.bootstrap > tbody > tr > td > span.true {
+    background-image: url(../img/true.gif);
+}
+
+table.bootstrap > tbody > tr > td > span.false {
+    background-image: url(../img/false.gif);
+}
+
+div.table-container {
+    display: inline-block;
+}

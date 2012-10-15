@@ -6,7 +6,7 @@ Front Web to Dionaea log analysis.
 Home Dionaea: http://dionaea.carnivore.it/
 
 [*] Technologies:
-  
+
   - Python 2.7.3
   - Django 1.4
   - Jquery 1.7.2
@@ -16,32 +16,34 @@ Home Dionaea: http://dionaea.carnivore.it/
   - SQLite3
 
 [*] Requeriments:
-  
+
 	pip install Django
 	pip install pygeoip
 	pip install django-pagination
+	pip install django-tables2
+	
+	django-tables2-simplefilter:
+		https://github.com/benjiec/django-tables2-simplefilter
 
 [*] Install
 
-  Copy /opt/dionaea/var/dionaea/logsql.sqlite to DionaeaFR/Database directory
-  
-  Download GeoIP.dat and GeoLiteCity.dat from https://www.maxmind.com/en/home and copy in DionaeaFR/Maps
-  
+  Copy /opt/dionaea/var/dionaea/logsql.sqlite to DionaeaFR root directory
+
+  Download GeoIP.dat and GeoLiteCity.dat from https://www.maxmind.com/en/home and copy in DionaeaFR/static
+
   Change STATICFILES_DIRS in DionaeaFR/Dionaea/settings.py to absolute paths of DionaeaFR/static
-  
+
   Change TEMPLATE_DIRS in DionaeaFR/Dionaea/settings.py to absolute paths of DionaeaFR/Templates
-  
+
   python manage.py collectstatic
-  
+
   python manage.py runserver
-  
+
   Access to http://localhost:8000 in browser.
 
-[*] Upcoming
+[*] Changelog
 
-  - Add filters in connections table
-  - Add filters in downloads table
-  - Add more Graphs and Maps
+  - Add transport, type and protocol filters in connections table.
 
 Suggestions?
 

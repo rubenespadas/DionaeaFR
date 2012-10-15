@@ -1,0 +1,33 @@
+<div class="accordion" id="filter">
+    <div class="accordion-group">
+        <div class="accordion-heading">
+            <a class="accordion-toggle" data-toggle="collapse" data-parent="#filter" href="#filters">
+            Filters
+            </a>
+        </div>
+        <div style="height: auto;" id="filters" class="accordion-body in collapse">
+            <div class="accordion-inner">
+                <form action="?" method="GET">
+                    {% for p in filters.base_params %}
+                        <input type="hidden" name="{{ p.0 }}" value="{{ p.1 }}" />
+                    {% endfor %}
+                    {% for f in filters.filters %}
+                        <div class="filter-item">
+                            <div class="filter-name filter-left-column">{{ f.verbose_name }}:</div>
+                            <select class="fliter-selection filter-right-column" name="{{ f.field }}">
+                                <option value="">All</option>
+                                {% for obj in f.values_list %}
+                                <option value="{{ obj.1 }}" {% if f.selected == obj.1 %}selected{% endif %}>{{ obj.0 }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    {% endfor %}
+                    <div class="filter-actions">
+                        <button type="submit" class="btn">Filter</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+

@@ -68,11 +68,9 @@ select {
 #info{
   margin-top: 40px;
 }
+
 #content {
-  border: 1px solid #E3E3E3;
-  border-radius: 4px 4px 4px 4px;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05) inset;
-  margin-bottom: 40px;
+  margin-bottom: 20px;
 }
 
 .label-important, .badge-important {
@@ -84,9 +82,14 @@ select {
     background-color: #FFF;
 }
 
-.table
+.table, .bootstrap
 {
   font-size: 11px;
+}
+
+.bootstrap
+{
+  width: 1025px;
 }
 
 #chart

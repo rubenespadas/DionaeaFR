@@ -33,14 +33,14 @@ h3, h4, h5, h6 {
 }
 
 a {
-  color:#39c;
+  color:#6E009E;
   font-weight:400;
   text-decoration:none;
 }
 
 a small {
   font-size:11px;
-  color:#777;
+  color:#6E009E;
   margin-top:-0.6em;
   display:block;
 }

@@ -68,7 +68,7 @@ header {
   padding-bottom: 40px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
   background: #7EA419;
-  border-bottom: solid 1px #275da1;
+  border-bottom: solid 1px #6E009E;
 }
 
 header h1 {
@@ -165,21 +165,21 @@ code, pre {
 }
 
 code {
-  background-color: #f2f8fc;
+  background-color: #000;
   border: solid 1px #dbe7f3;
   padding: 0 3px;
 }
 
 pre {
   padding: 20px;
-  background: #fff;
+  background: #000;
   text-shadow: none;
   overflow: auto;
   border: solid 1px #f2f2f2;
 }
 pre code {
-  color: #2879d0;
-  background-color: #fff;
+  color: #6E009E;
+  background-color: #000;
   border: none;
   padding: 0;
 }

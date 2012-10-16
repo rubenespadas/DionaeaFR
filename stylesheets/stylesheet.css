@@ -57,17 +57,17 @@ body {
 }
 
 a {
-  color: #2879d0;
+  color: #6E009E;
 }
 a:hover {
-  color: #2268b2;
+  color: #6E009E;
 }
 
 header {
   padding-top: 40px;
   padding-bottom: 40px;
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
-  background: #2e7bcf url(../images/header-bg.jpg) 0 0 repeat-x;
+  background: #7EA419;
   border-bottom: solid 1px #275da1;
 }
 

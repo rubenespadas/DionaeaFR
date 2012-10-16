@@ -146,7 +146,7 @@ header a.button {
   position: absolute;
   right: 0;
   top: 0;
-  background: #7EA419;
+  background: transparent url(../images/github-button.png) 0 0 no-repeat;
 }
 aside a.button {
   width: 138px;

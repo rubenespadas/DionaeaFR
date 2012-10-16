@@ -50,14 +50,14 @@ table {
 body {
   font-size: 15px;
   line-height: 1.5; 
-  background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
+  background: #FFF;
   font-family: 'Helvetica Neue', Helvetica, Arial, serif;
   font-weight: 400;
   color: #666;
 }
 
 a {
-  color: #6E009E;
+  color: #7EA419;
 }
 a:hover {
   color: #6E009E;
@@ -82,7 +82,7 @@ header h1 {
 
 header h2 {
   font-size: 26px;
-  color: #9ddcff;
+  color: #DDD;
   font-weight: normal;
   line-height: 1.3;
   width: 540px;
@@ -146,7 +146,7 @@ header a.button {
   position: absolute;
   right: 0;
   top: 0;
-  background: transparent url(../images/github-button.png) 0 0 no-repeat;
+  background: #7EA419;
 }
 aside a.button {
   width: 138px;

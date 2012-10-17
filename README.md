@@ -1,7 +1,7 @@
 DionaeaFR
 =========
 
-Front Web to Dionaea log analysis.
+Front Web to Dionaea low-interaction honeypot.
 
 Home Dionaea: http://dionaea.carnivore.it/
 
@@ -45,6 +45,6 @@ Home Dionaea: http://dionaea.carnivore.it/
 
   - Add transport, type and protocol filters in connections table.
 
-Suggestions?
+[*] Suggestions?
 
 Designed by @rubenespadas

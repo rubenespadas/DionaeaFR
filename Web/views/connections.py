@@ -57,7 +57,7 @@ def cdetail(request, connection_id):
             'p0f' : p0f,
             'resolve' : resolve,
             'sipcommand' : sipcommand,
-            'previous' : previous,
-            'next' : next
+            'previous' : int(previous),
+            'next' : int(next)
 		}
 	)

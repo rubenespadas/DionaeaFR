@@ -68,15 +68,36 @@
           </pre>
           <p><h2>Install</h2></p>
           <p>Copy /opt/dionaea/var/dionaea/logsql.sqlite to DionaeaFR root directory</p>
-          <p>Download GeoIP.dat and GeoLiteCity.dat from <a href="https://www.maxmind.com/en/home">https://www.maxmind.com/en/home</a> and copy in DionaeaFR/static</p>
-          <p>Change STATICFILES_DIRS in DionaeaFR/Dionaea/settings.py to absolute paths of DionaeaFR/static</p>
-          <p>Change TEMPLATE_DIRS in DionaeaFR/Dionaea/settings.py to absolute paths of DionaeaFR/Templates</p>
-          <pre>
+		  <p>Download GeoIP and GeoLiteCity:</p>
+<pre>
+<code>  
+wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
+wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
+</code>
+</pre>
+		  <p>Decompress GeoIP and GeoLiteCity:</p>
+<pre>
+<code>		  
+gunzip GeoLiteCity.dat.gz
+gunzip GeoIP.dat.gz
+</code>
+</pre>
+		  <p>Move GeoIP and GeoLiteCity to DionaeaFR/static:</p>
+<pre>
+<code>		  
+mv GeoIP.dat DionaeaFR/static
+mv GeoLiteCity.dat DionaeaFR/static
+</code>
+</pre>
+		  <p>Change STATICFILES_DIRS in DionaeaFR/settings.py to absolute paths of DionaeaFR/static</p>
+		  <p>Change TEMPLATE_DIRS in DionaeaFR/settings.py to absolute paths of DionaeaFR/Templates</p>
+		  <p>Run server:</p>
+<pre>
 <code>
 python manage.py collectstatic
 python manage.py runserver
 </code>
-          </pre>
+</pre>
           <p>Access to http://localhost:8000 in browser.</p>
           <p><h2>Changelog</h2></p>
           <ul>

@@ -66,7 +66,7 @@ Attackers
 					label.html('<b>' + gdpData[index]['host'] + '</b><br/><b>Attacks</b>: ' + gdpData[index]['count']);
             	},
             	onRegionLabelShow: function(event, label, code){
-					label.html('<img src="/static/images/flags/'+code+'.gif" style="margin-bottom:3px;"/><b>'+label.html()+'</b>');
+					label.html('<img src="/static/images/flags/'+code.toLowerCase()+'.gif" style="margin-bottom:3px;"/><b>'+label.html()+'</b>');
 				}
 			})
 		});

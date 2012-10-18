@@ -67,11 +67,11 @@ Countries
 				onRegionLabelShow: function(event, label, code){
 					if(gdpData[code])
 					{
-						label.html('<img src="/static/images/flags/'+code+'.gif" style="margin-bottom:3px;"/> <b>'+label.html()+'</b></br>'+'<b>Attacks: </b>'+ gdpData[code]);
+						label.html('<img src="/static/images/flags/'+code.toLowerCase()+'.gif" style="margin-bottom:3px;"/> <b>'+label.html()+'</b></br>'+'<b>Attacks: </b>'+ gdpData[code]);
 					}
 					else
 					{
-						label.html('<img src="/static/images/flags/'+code+'.gif"/> <b>'+label.html()+'</b></br>'+'<b>Attacks: </b>0');
+						label.html('<img src="/static/images/flags/'+code.toLowerCase()+'.gif"/> <b>'+label.html()+'</b></br>'+'<b>Attacks: </b>0');
 					}
 				}
 			})

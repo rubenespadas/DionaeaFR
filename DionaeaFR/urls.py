@@ -22,6 +22,8 @@ urlpatterns = patterns('Web.views',
     url(r'^graphs/malwaredata/$', 'malwareData'),
     url(r'^graphs/ips/$', 'ips'),
     url(r'^graphs/ipsdata/$', 'ipsData'),
+	url(r'^graphs/attacks/$', 'attacks'),
+    url(r'^graphs/attacksdata/$', 'attacksData'),
     url(r'^maps/attackers/$', 'attackers'),
     url(r'^maps/countries/$', 'countries'),
 )

@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-URLs
+Attacks
 {% endblock %}
 {% block scripts %}
 	{% load staticfiles %}
@@ -17,17 +17,17 @@ URLs
 		<li><a href="/downloads">Downloads</a></li>
 		<li class="nav-header">Graphs</li>
 		<li><a href="/graphs/protocols">Protocols</a></li>
-		<li class="active"><a href="/graphs/urls">URLs</a></li>
+		<li><a href="/graphs/urls">URLs</a></li>
 		<li><a href="/graphs/ips">IPs</a></li>
 		<li><a href="/graphs/malware">Malware</a></li>
-		<li><a href="/graphs/attacks">Attacks</a></li>
+		<li class="active"><a href="/graphs/attacks">Attacks</a></li>
 		<li class="nav-header">Maps</li>
 		<li><a href="/maps/attackers">Attackers</a></li>
 		<li><a href="/maps/countries">Countries</a></li>
 	</ul>
 {% endblock %}
 {% block titlecontent %}
-URLs
+Attacks
 {% endblock %}
 {% block content %}
 	<div class="span10" id="chart">
@@ -41,53 +41,50 @@ URLs
 {% endblock %}
 {% block Lastscripts %}
 	<script type="text/javascript">
-		function URLs() {
+		function Attacks() {
 		    $("#chart").kendoChart({
-		    	autoBind: true,
-		    	dataSource: {
+		        dataSource: {
 		            transport: {
 		                read: {
-		                    url: "/graphs/urlsdata/",
+		                    url: "/graphs/attacksdata/",
 		                    dataType: "json"
 		                }
 		            }
 		        },
+		        autoBind: true,
 		        title: {
-		            text: "Top 10 last 7 days"
+		            text: "Attacks on last 7 days"
 		        },
 		        legend: {
-		            position: "bottom"
-		        },
-		        seriesDefaults: {
-		            type: "bar"
+		            visible: false
 		        },
 		        series: [{
-		            field: "value",
-		            name: "Number of Connections",
-		            color: "#6E009E"
+		            type: "line",
+		            color: "#6E009E",
+		            field: "value"
 		        }],
 		        axisDefaults: {
 		            labels: {
-		                font: "14px Tahoma, sans-serif"
+		                font: "13px Tahoma, sans-serif"
 		            }
 		        },
 		        valueAxis: {
 		            labels: {
-		                format: "{0}"
+		                format: "{0:N0}"
 		            }
 		        },
 		        categoryAxis: {
-		            field: "name",
+		            field: "day",
 		        },
 		        tooltip: {
 		            visible: true,
-		            format: "{0}"
+		            format: "{0:N0}"
 		        },
 		        chartArea: {
 		            background: ""
 		        }
 		    });
 		}
-		$(document).ready(function() { URLs(); });
+		$(document).ready(function() { Attacks(); });
 	</script>
 {% endblock %}

@@ -58,6 +58,7 @@ Home Dionaea: http://dionaea.carnivore.it/
 [*] Changelog
 
   - Add transport, type and protocol filters in connections table.
+  - Add Attacks graph last 7 days.
 
 [*] Suggestions?
 

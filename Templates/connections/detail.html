@@ -445,7 +445,7 @@
         <ul class="pager">
     {% if previous != 0 %}
             <li class="previous">
-                <a href="http://localhost:8000/connections/{{ previous }}/">previous</a>
+                <a href="/connections/{{ previous }}/">previous</a>
             </li>
     {% else %}
             <li class="previous disabled">
@@ -454,7 +454,7 @@
     {% endif %}
     {% if next != 0 %}
             <li class="next">
-                <a href="http://localhost:8000/connections/{{ next }}/">next</a>
+                <a href="/connections/{{ next }}/">next</a>
             </li>
     {% else %}
             <li class="next disabled">

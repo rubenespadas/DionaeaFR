@@ -189,25 +189,6 @@
                             </tbody>
                         </table>
                     {% endif %}
-                    {% if emuServiceOld %}
-                        <span class="label label-important">Emu Services Old</span>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>ID</th>
-                                    <th>Json</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for service in emuServiceOld %}
-                                    <tr>
-                                        <td>{{ service.emu_serivce }}</td>
-                                        <td>{{ service.emu_service_url }}</td>
-                                    </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    {% endif %}
                     {% if login %}
                         <span class="label label-important">Login</span>
                         <table class="table">

@@ -23,7 +23,6 @@ def cdetail(request, connection_id):
        	download = Download.objects.filter(connection=connection_id)
        	emuProfile = EmuProfile.objects.filter(connection=connection_id)
        	emuService = EmuService.objects.filter(connection=connection_id)
-       	emuServiceOld = EmuServiceOld.objects.filter(connection=connection_id)
        	login = Login.objects.filter(connection=connection_id)
        	mssqlCommand = MssqlCommand.objects.filter(connection=connection_id)
        	mssqlFingerprint = MssqlFingerprint.objects.filter(connection=connection_id)
@@ -48,7 +47,6 @@ def cdetail(request, connection_id):
             'download' : download,
             'emuProfile' : emuProfile,
             'emuService' : emuService,
-            'emuServiceOld' : emuServiceOld,
             'login' : login,
             'mssqlCommand' : mssqlCommand,
             'mssqlFingerprint' : mssqlFingerprint,

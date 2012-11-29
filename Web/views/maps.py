@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from django.db.models import Count
-from Web.models import Connection
+from web.models import Connection
 import re
 import pygeoip
 import time

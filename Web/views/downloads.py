@@ -1,8 +1,8 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django_tables2 import RequestConfig
-from Web.tables import DownloadsTable
-from Web.models import Download
+from web.tables import DownloadsTable
+from web.models import Download
 
 
 length = len(Download.objects.all())

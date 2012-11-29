@@ -1,6 +1,6 @@
 import django_tables2 as tables
 from django.utils.safestring import mark_safe
-from Web.models import Connection
+from web.models import Connection
 from django_tables2_simplefilter import F
 import pygeoip
 import os

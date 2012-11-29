@@ -168,17 +168,6 @@ class EmuService(models.Model):
     def __str__(self):
         return str(self.emu_serivce)
 
-class EmuServiceOld(models.Model):
-    emu_serivce = models.IntegerField(primary_key=True, blank=True)
-    connection = models.IntegerField(blank=True)
-    emu_service_url = models.TextField(blank=True)
-    class Meta:
-        db_table = u'emu_services_old'
-        ordering = ['-emu_serivce']
-        verbose_name_plural = "EmuServicesOld"
-    def __str__(self):
-        return self.emu_serivce
-
 class Login(models.Model):
     login = models.IntegerField(primary_key=True, blank=True)
     connection = models.IntegerField(blank=True)

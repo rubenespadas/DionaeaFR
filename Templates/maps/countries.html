@@ -9,28 +9,8 @@ Countries
 	<script type="text/javascript" src="{% static "js/jquery-jvectormap-1.0.min.js" %}"></script>
 	<script type="text/javascript" src="{% static "js/jquery-jvectormap-world-mill-en.js" %}"></script>
 {% endblock %}
-{% block menu %}
-	<ul class="nav nav-list">
-		<li class="nav-header">Data</li>
-		<li><a href="/">Connections</a></li>
-		<li><a href="/downloads">Downloads</a></li>
-		<li class="nav-header">Graphs</li>
-		<li><a href="/graphs/protocols">Protocols</a></li>
-		<li><a href="/graphs/urls">URLs</a></li>
-		<li><a href="/graphs/ips">IPs</a></li>
-		<li><a href="/graphs/malware">Malware</a></li>
-		<li><a href="/graphs/attacks">Attacks</a></li>
-		<li class="nav-header">Maps</li>
-		<li><a href="/maps/attackers">Attackers</a></li>
-		<li class="active"><a href="/maps/countries">Countries</a></li>
-	</ul>
-{% endblock %}
 {% block titlecontent %}
 Countries
-{% endblock %}
-{% block content %}
-	<div style="height: 600px; padding: 5px; margin-bottom: 40px;" class="jvectormap span10" id="map">
-	</div>
 {% endblock %}
 {% block info %}
 	<div class="alert alert-info" id="info">
@@ -41,7 +21,7 @@ Countries
 	<script type="text/javascript" charset="utf-8">
 		$(function(){
 			{{ cc|safe }}
-			$('#map').vectorMap({
+			$('#content').vectorMap({
 				map: 'world_mill_en',
 				series: {
 					regions: [{
@@ -62,7 +42,7 @@ Countries
 						"fill-opacity": 0.8
 					}
           		},
-          		backgroundColor: 'transparent',
+          		backgroundColor: 'white',
 				hoverOpacity: 0.7,
 				hoverColor: true,
 				onRegionLabelShow: function(event, label, code){

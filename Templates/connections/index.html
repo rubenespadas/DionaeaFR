@@ -3,30 +3,12 @@
 {% block title %}
 Connections
 {% endblock %}
-{% block menu %}
-	<ul class="nav nav-list">
-		<li class="nav-header">Data</li>
-		<li class="active"><a href="/">Connections</a></li>
-		<li><a href="/downloads">Downloads</a></li>
-		<li class="nav-header">Graphs</li>
-		<li><a href="/graphs/protocols">Protocols</a></li>
-		<li><a href="/graphs/urls">URLs</a></li>
-		<li><a href="/graphs/ips">IPs</a></li>
-		<li><a href="/graphs/malware">Malware</a></li>
-		<li><a href="/graphs/attacks">Attacks</a></li>
-		<li class="nav-header">Maps</li>
-		<li><a href="/maps/attackers">Attackers</a></li>
-		<li><a href="/maps/countries">Countries</a></li>
-	</ul>
-{% endblock %}
 {% block titlecontent %}
 Connections
 {% endblock %}
 {% block content %}
-			<div class="span10" id="content">
-				{% load django_tables2 %}
-				{% render_table table %}
-			</div>
+	{% load django_tables2 %}
+	{% render_table table %}
 {% endblock %}
 {% block filters %}
 	{% include "tables/filter.html" with filters=filters only %}

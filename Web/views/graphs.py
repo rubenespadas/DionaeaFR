@@ -1,9 +1,9 @@
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.db.models import Count
-from Web.models import Connection
-from Web.models import Virustotal
-from Web.models import Offer
+from web.models import Connection
+from web.models import Virustotal
+from web.models import Offer
 import datetime
 import time
 import json

@@ -23,10 +23,8 @@ Downloads
 Downloads
 {% endblock %}
 {% block content %}
-			<div class="span10" id="content">
-                {% load django_tables2 %}
-                {% render_table table %}
-            </div>
+    {% load django_tables2 %}
+    {% render_table table %}
 {% endblock %}
 {% block info %}
 	<div class="alert alert-info" id="info">

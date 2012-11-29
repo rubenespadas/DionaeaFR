@@ -62,9 +62,12 @@ Home Dionaea:   http://dionaea.carnivore.it/
 
   - Add transport, type and protocol filters in connections table.
   - Add Attacks graph last 7 days.
-  - Add less support
-  - Add HTML minify
-  - Add menu icons
+  
+  29/11/2012
+	- Add less support
+	- Add HTML minify
+	- Add menu icons
+	- Other visuals changes
 
 [*] Suggestions?
 

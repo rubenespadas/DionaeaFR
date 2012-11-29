@@ -23,6 +23,7 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	pip install pygeoip
 	pip install django-pagination
 	pip install django-tables2
+	pip install django-compressor
 	
 	django-tables2-simplefilter:
 		https://github.com/benjiec/django-tables2-simplefilter
@@ -61,6 +62,9 @@ Home Dionaea:   http://dionaea.carnivore.it/
 
   - Add transport, type and protocol filters in connections table.
   - Add Attacks graph last 7 days.
+  - Add less support
+  - Add HTML minify
+  - Add menu icons
 
 [*] Suggestions?
 

@@ -27,6 +27,8 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	
 	django-tables2-simplefilter:
 		https://github.com/benjiec/django-tables2-simplefilter
+	
+	npm install -g less
 
 [*] Install
 

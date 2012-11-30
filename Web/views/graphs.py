@@ -26,7 +26,6 @@ def urls(request):
 	return render_to_response('graphs/urls.html')
 
 def urlsData(request):
-	date_now = datetime.date.today() - datetime.timedelta(days=7)
 	conn = Offer.objects.all().values('offer_url').annotate(Count("offer_url")).order_by('-offer_url__count')[:10]
 	data = []
 	for c in conn:
@@ -40,13 +39,23 @@ def malware(request):
 	return render_to_response('graphs/malware.html')
 
 def malwareData(request):
-	conn = Virustotal.objects.filter().values('virustotal_md5_hash').annotate(Count("virustotal_md5_hash")).order_by('-virustotal_md5_hash__count')[:10]
+	from django.db import connection
+	cursor = connection.cursor()
+	sql = U"""SELECT virustotalscans.virustotalscan_result, count(*) as num
+		FROM downloads, virustotals, virustotalscans
+		WHERE downloads.download_md5_hash = virustotals.virustotal_md5_hash
+		AND virustotals.virustotal = virustotalscans.virustotal
+		AND virustotalscans.virustotalscan_scanner = 'Sophos'
+		AND virustotalscans.virustotalscan_result IS NOT NULL
+		GROUP BY virustotalscans.virustotalscan_result
+		ORDER BY num DESC
+		"""
+	cursor.execute(sql)
 	data = []
-	for c in conn:
+	for c in cursor.fetchall():
 		b = {}
-		name = Virustotal.objects.filter(virustotal_md5_hash=c['virustotal_md5_hash'])[:1]
-		b['name'] = c['virustotal_md5_hash'] + ' - ' + name[0].getResult() 
-		b['value'] = c['virustotal_md5_hash__count']
+		b['name'] = c[0]
+		b['value'] = c[1]
 		data.append(b)
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 

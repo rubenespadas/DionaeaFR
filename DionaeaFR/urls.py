@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 from django_tables2_simplefilter import FilteredSingleTableView
 from Web.views import *
 
-urlpatterns = patterns('web.views',
+urlpatterns = patterns('Web.views',
 	url(r'^$', FilteredSingleTableView.as_view(template_name='connections/index.html',
                                         table_class=ConnectionsTable,
                                         model=Connection,

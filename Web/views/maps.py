@@ -1,5 +1,5 @@
 from django.shortcuts import render_to_response
-from web.models import Connection
+from Web.models import Connection
 import re
 import pygeoip
 import time

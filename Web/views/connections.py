@@ -1,10 +1,9 @@
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 from django_tables2 import RequestConfig
 from django.http import Http404
-from web.tables import ConnectionsTable
-from web.models import *
+from Web.tables import ConnectionsTable
+from Web.models import *
 
 
 length = len(Connection.objects.all())

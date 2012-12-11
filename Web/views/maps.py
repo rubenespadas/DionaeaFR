@@ -1,11 +1,9 @@
 from django.shortcuts import render_to_response
-from django.db.models import Count
 from web.models import Connection
 import re
 import pygeoip
 import time
 import datetime
-import codecs
 import sys
 import os
 reload(sys)

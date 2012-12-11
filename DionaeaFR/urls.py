@@ -1,6 +1,6 @@
-from django.conf.urls import patterns, include, url
+from django.conf.urls import patterns, url
 from django_tables2_simplefilter import FilteredSingleTableView
-from web.views import *
+from Web.views import *
 
 urlpatterns = patterns('web.views',
 	url(r'^$', FilteredSingleTableView.as_view(template_name='connections/index.html',

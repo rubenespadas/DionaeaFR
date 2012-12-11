@@ -1,7 +1,6 @@
 import django_tables2 as tables
 from django.utils.safestring import mark_safe
-from web.models import Download
-from django_tables2_simplefilter import F
+from Web.models import Download
 
 class LinkID(tables.Column):
 	def render(self, value):

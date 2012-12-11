@@ -136,7 +136,7 @@ INSTALLED_APPS = (
     'django_tables2',
     'django_tables2_simplefilter',
     'pagination',
-    'web',
+    'Web',
 )
 
 # A sample logging configuration. The only tangible logging

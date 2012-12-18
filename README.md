@@ -25,10 +25,8 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	pip install django-tables2
 	pip install django-compressor
 	pip install django-htmlmin
-	
-	django-tables2-simplefilter:
-		https://github.com/benjiec/django-tables2-simplefilter
-	
+	pip install -e git://github.com/benjiec/django-tables2-simplefilter.git#egg=django_tables2_simplefilter
+	apt-get install nodejs
 	npm install -g less
 
 [*] Install

@@ -30,6 +30,9 @@
           <p><h2>Front Web to <a href="http://dionaea.carnivore.it/">Dionaea</a> low-interaction honeypot.</h2></p>
           <div class="flexslider">
             <ul class="slides">
+			  <li>
+                <img src="images/home.png" />
+              </li>
               <li>
                 <img src="images/maps.png" />
               </li>
@@ -60,16 +63,26 @@
           <p><h2>Requeriment</h2></p>
           <pre>
 <code>
-  pip install Django
-  pip install pygeoip
-  pip install django-pagination
-  pip install django-tables2
-  pip install django-compressor
+pip install Django
+pip install pygeoip
+pip install django-pagination
+pip install django-tables2
+pip install django-compressor
+pip install django-htmlmin
 
-  django-tables2-simplefilter:
-    https://github.com/benjiec/django-tables2-simplefilter
+django-tables2-simplefilter:
+	https://github.com/benjiec/django-tables2-simplefilter
+	python setup.py install
+	
+nodejs:
+	http://nodejs.org/dist/v0.8.16/node-v0.8.16.tar.gz
+	tar xzvf node-v0.8.16.tar.gz
+	cd node-v0.8.16
+	./configure
+	make
+	make install
 
-  npm install -g less
+npm install -g less
 </code>
           </pre>
           <p><h2>Install</h2></p>

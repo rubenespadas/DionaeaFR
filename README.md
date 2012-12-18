@@ -82,7 +82,7 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	- Other visuals changes
 	
   18/12/2012
-	Add home panel
+	- Add home panel
 
 [*] Suggestions?
 

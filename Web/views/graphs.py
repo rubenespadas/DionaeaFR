@@ -3,7 +3,8 @@ from django.http import HttpResponse
 from django.db.models import Count
 from Web.models import Connection
 from Web.models import Offer
-from collections import defaultdict, Counter
+from collections import defaultdict
+from collections import Counter
 import pygeoip
 import datetime
 import time

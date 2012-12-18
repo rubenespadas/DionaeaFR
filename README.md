@@ -25,8 +25,19 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	pip install django-tables2
 	pip install django-compressor
 	pip install django-htmlmin
-	pip install -e git://github.com/benjiec/django-tables2-simplefilter.git#egg=django_tables2_simplefilter
-	apt-get install nodejs
+	
+	django-tables2-simplefilter:
+		https://github.com/benjiec/django-tables2-simplefilter
+		python setup.py install
+		
+	nodejs:
+		http://nodejs.org/dist/v0.8.16/node-v0.8.16.tar.gz
+		tar xzvf node-v0.8.16.tar.gz
+		cd node-v0.8.16
+		./configure
+		make
+		make install
+	
 	npm install -g less
 
 [*] Install
@@ -69,6 +80,9 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	- Add HTML minify
 	- Add menu icons
 	- Other visuals changes
+	
+  18/12/2012
+	Add home panel
 
 [*] Suggestions?
 

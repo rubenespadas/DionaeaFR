@@ -44,7 +44,7 @@ Attackers
 				backgroundColor: 'white',
 				markers: gdpData,
 				onMarkerLabelShow: function(event, label, index){
-					label.html('<b>' + gdpData[index]['host'] + '</b><br/><b>Attacks</b>: ' + gdpData[index]['count']);
+					label.html('<b>' + gdpData[index]['host'] + '</b><br/><b>Connections</b>: ' + gdpData[index]['count']);
             	},
             	onRegionLabelShow: function(event, label, code){
 					label.html('<img src="/static/images/flags/'+code.toLowerCase()+'.gif" style="margin-bottom:3px;"/><b>'+label.html()+'</b>');

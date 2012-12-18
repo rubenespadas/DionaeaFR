@@ -23,19 +23,19 @@ Attacks
 {% endblock %}
 {% block Lastscripts %}
 	<script type="text/javascript">
-		function Attacks() {
+		function Connections() {
 		    $("#content").kendoChart({
 		        dataSource: {
 		            transport: {
 		                read: {
-		                    url: "/graphs/attacksdata/",
+		                    url: "/graphs/connectionsdata/",
 		                    dataType: "json"
 		                }
 		            }
 		        },
 		        autoBind: true,
 		        title: {
-		            text: "Attacks on last 7 days"
+		            text: "Connections on last 7 days"
 		        },
 		        legend: {
 		            visible: false
@@ -67,6 +67,6 @@ Attacks
 		        }
 		    });
 		}
-		$(document).ready(function() { Attacks(); });
+		$(document).ready(function() { Connections(); });
 	</script>
 {% endblock %}

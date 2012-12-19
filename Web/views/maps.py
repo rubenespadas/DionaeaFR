@@ -9,8 +9,8 @@ import os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-gi = pygeoip.GeoIP(os.path.join('static', 'GeoIP.dat'), pygeoip.MEMORY_CACHE)
-gic = pygeoip.GeoIP(os.path.join('static', 'GeoLiteCity.dat'), pygeoip.STANDARD)
+gi = pygeoip.GeoIP(os.path.join('DionaeaFr/', 'GeoIP.dat'), pygeoip.MEMORY_CACHE)
+gic = pygeoip.GeoIP(os.path.join('DionaeaFr/', 'GeoLiteCity.dat'), pygeoip.STANDARD)
 
 def countries(request):
 	date_now = datetime.date.today() - datetime.timedelta(days=7)

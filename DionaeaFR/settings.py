@@ -1,4 +1,6 @@
 # Django settings for DionaeaFR project.
+import os
+CURRENT_PATH=os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -12,7 +14,7 @@ MANAGERS = ADMINS
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': 'logsql.sqlite',                      # Or path to database file if using sqlite3.
+        'NAME': '/opt/dionaea/var/dionaea/logsql.sqlite', # Or path to database file if using sqlite3.
         'USER': '',                      # Not used with sqlite3.
         'PASSWORD': '',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
@@ -70,7 +72,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    "",
+    os.path.join(CURRENT_PATH,'static'),,
 )
 
 # List of finder classes that know how to find static files in
@@ -118,7 +120,7 @@ ROOT_URLCONF = 'DionaeaFR.urls'
 WSGI_APPLICATION = 'DionaeaFR.wsgi.application'
 
 TEMPLATE_DIRS = (
-	"",
+	os.path.join(CURRENT_PATH,'Templates'),,
 )
 
 COMPRESS_PRECOMPILERS = (

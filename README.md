@@ -42,8 +42,6 @@ Home Dionaea:   http://dionaea.carnivore.it/
 
 [*] Install
 
-  Copy /opt/dionaea/var/dionaea/logsql.sqlite to DionaeaFR root directory
-  
   Download GeoIP and GeoLiteCity:
   
     wget http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
@@ -54,15 +52,11 @@ Home Dionaea:   http://dionaea.carnivore.it/
     gunzip GeoLiteCity.dat.gz
     gunzip GeoIP.dat.gz
 
-  Move GeoIP and GeoLiteCity to DionaeaFR/static:
+  Move GeoIP and GeoLiteCity to DionaeaFR/DionaeaFR/static:
   
-    mv GeoIP.dat DionaeaFR/static
-	mv GeoLiteCity.dat DionaeaFR/static
+    mv GeoIP.dat DionaeaFR/DionaeaFR/static
+	mv GeoLiteCity.dat DionaeaFR/DionaeaFR/static
 
-  Change STATICFILES_DIRS in DionaeaFR/settings.py to absolute paths of DionaeaFR/static
-
-  Change TEMPLATE_DIRS in DionaeaFR/settings.py to absolute paths of DionaeaFR/Templates
-  
   Run server:
   
 	python manage.py collectstatic

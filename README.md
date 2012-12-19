@@ -62,7 +62,7 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	python manage.py collectstatic
 	python manage.py runserver 0.0.0.0:8000
 
-  Access to http://YOU_IP:8000 in browser.
+  Access to http://YOUR_IP:8000 in browser.
 
 [*] Changelog
 

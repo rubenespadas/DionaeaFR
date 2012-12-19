@@ -15,7 +15,7 @@ import os
 reload(sys)
 sys.setdefaultencoding('utf-8')
 
-gi = pygeoip.GeoIP(os.path.join('DionaeaFr/static', 'GeoIP.dat'), pygeoip.MEMORY_CACHE)
+gi = pygeoip.GeoIP(os.path.join('DionaeaFR/static', 'GeoIP.dat'), pygeoip.MEMORY_CACHE)
 
 def protocols(request):
 	return render_to_response('graphs/protocols.html')

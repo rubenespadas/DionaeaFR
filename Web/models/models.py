@@ -4,7 +4,7 @@ import pygeoip
 import os
 
 
-gi = pygeoip.GeoIP(os.path.join('DionaeaFr/static', 'GeoIP.dat'), pygeoip.MEMORY_CACHE)
+gi = pygeoip.GeoIP(os.path.join('DionaeaFR/static', 'GeoIP.dat'), pygeoip.MEMORY_CACHE)
 
 class Connection(models.Model):
     connection = models.IntegerField(primary_key=True, blank=True, verbose_name='ID')

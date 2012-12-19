@@ -72,7 +72,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    os.path.join(CURRENT_PATH,'static'),,
+    os.path.join(CURRENT_PATH,'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -120,7 +120,7 @@ ROOT_URLCONF = 'DionaeaFR.urls'
 WSGI_APPLICATION = 'DionaeaFR.wsgi.application'
 
 TEMPLATE_DIRS = (
-	os.path.join(CURRENT_PATH,'Templates'),,
+	os.path.join(CURRENT_PATH,'Templates'),
 )
 
 COMPRESS_PRECOMPILERS = (

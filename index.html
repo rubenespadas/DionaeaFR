@@ -86,7 +86,6 @@ npm install -g less
 </code>
           </pre>
           <p><h2>Install</h2></p>
-          <p>Copy /opt/dionaea/var/dionaea/logsql.sqlite to DionaeaFR root directory</p>
 		  <p>Download GeoIP and GeoLiteCity:</p>
 <pre>
 <code>  
@@ -101,15 +100,13 @@ gunzip GeoLiteCity.dat.gz
 gunzip GeoIP.dat.gz
 </code>
 </pre>
-		  <p>Move GeoIP and GeoLiteCity to DionaeaFR/static:</p>
+		  <p>Move GeoIP and GeoLiteCity to DionaeaFR/DionaeaFR/static:</p>
 <pre>
 <code>		  
-mv GeoIP.dat DionaeaFR/static
-mv GeoLiteCity.dat DionaeaFR/static
+mv GeoIP.dat DionaeaFR/DionaeaFR/static
+mv GeoLiteCity.dat DionaeaFR/DionaeaFR/static
 </code>
 </pre>
-		  <p>Change STATICFILES_DIRS in DionaeaFR/settings.py to absolute paths of DionaeaFR/static</p>
-		  <p>Change TEMPLATE_DIRS in DionaeaFR/settings.py to absolute paths of DionaeaFR/Templates</p>
 		  <p>Run server:</p>
 <pre>
 <code>

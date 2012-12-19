@@ -67,6 +67,18 @@ Home
 		<li class="span2">
 			<div class="thumbnail">
 				<h2 class="statistics">
+				{% if num_unique %}
+					{{ num_unique|intcomma }}
+				{% else %}
+					0
+				{% endif %}
+				</h2>
+				<h5>Malware Unique</h5>
+			</div>
+		</li>
+		<li class="span2">
+			<div class="thumbnail">
+				<h2 class="statistics">
 				{% if num_known %}
 					{{ num_known|intcomma }}
 				{% else %}
@@ -74,18 +86,6 @@ Home
 				{% endif %}
 				</h2>
 				<h5>Malware Known</h5>
-			</div>
-		</li>
-		<li class="span2">
-			<div class="thumbnail">
-				<h2 class="statistics">
-				{% if num_unkown %}
-					{{ num_unkown|intcomma }}
-				{% else %}
-					0
-				{% endif %}
-				</h2>
-				<h5>Malware Unknown</h5>
 			</div>
 		</li>
 	</ul>

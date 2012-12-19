@@ -3,7 +3,20 @@ from django.template import RequestContext
 from django_tables2 import RequestConfig
 from django.http import Http404
 from Web.tables import ConnectionsTable
-from Web.models import *
+from Web.models import Connection
+from Web.models import Dcerpcbind
+from Web.models import Dcerpcrequest
+from Web.models import Download
+from Web.models import EmuProfile
+from Web.models import EmuService
+from Web.models import Login
+from Web.models import MssqlCommand
+from Web.models import MssqlFingerprint
+from Web.models import MysqlCommand
+from Web.models import Offer
+from Web.models import P0f
+from Web.models import Resolve
+from Web.models import SipCommand
 
 
 length = len(Connection.objects.all())

@@ -247,21 +247,21 @@ def ipsCountries(request):
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 
 def malwareCountries(request):
-	downloads = Download.objects.select_related().all()
+	conn = Connection.objects.values('remote_host').annotate(Count("remote_host")).order_by('-remote_host__count')
 	data = []
 	b = defaultdict(str)
 	b['UNKNOWN'] = 0
 	b['RESERVED'] = 0
-	for download in downloads:
-		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",download['remote_host']) is not None):
+	for c in conn:
+		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
 			try:
-				reserved_ipv4[str(download['remote_host'])]
+				reserved_ipv4[str(c['remote_host'])]
 				if b['RESERVED']:
 					b['RESERVED'] = int(b['RESERVED']) + 1
 				else:
 					b['RESERVED'] = 1
 			except KeyError:
-				cc = gi.country_name_by_addr(download['remote_host'])
+				cc = gi.country_name_by_addr(c['remote_host'])
 				if cc != '':
 					if b[cc]:
 						b[cc] = int(b[cc]) + 1

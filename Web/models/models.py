@@ -139,7 +139,7 @@ class Dcerpcservice(models.Model):
 
 class Download(models.Model):
     download = models.IntegerField(primary_key=True, blank=True, verbose_name='ID')
-    connection = models.ForeignKey(Connection)
+    connection = models.IntegerField(blank=True, verbose_name='Connection')
     download_url = models.TextField(blank=True, verbose_name='URL')
     download_md5_hash = models.TextField(blank=True, verbose_name='MD5')
     class Meta:

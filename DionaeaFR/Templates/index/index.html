@@ -29,7 +29,7 @@ Home
 			</div>
 		</li>
 		<li class="span2">
-			<div class="thumbnail">
+			<div class="thumbnail" rel="tooltip" title="Number of unique IPs" alt="Number of unique IPs" data-placement="top">
 				<h2 class="statistics">
 				{% if num_ips %}
 					{{ num_ips|intcomma }}
@@ -41,7 +41,7 @@ Home
 			</div>
 		</li>
 		<li class="span2">
-			<div class="thumbnail">
+			<div class="thumbnail" rel="tooltip" title="Number of unique URLs" alt="Number of unique URLs" data-placement="top">
 				<h2 class="statistics">
 				{% if num_urls %}
 					{{ num_urls|intcomma }}
@@ -53,7 +53,7 @@ Home
 			</div>
 		</li>
 		<li class="span2">
-			<div class="thumbnail">
+			<div class="thumbnail" rel="tooltip" title="Number of total downloads" alt="Number of total downloads" data-placement="top">
 				<h2 class="statistics">
 				{% if num_downloads %}
 					{{ num_downloads|intcomma }}
@@ -65,7 +65,7 @@ Home
 			</div>
 		</li>
 		<li class="span2">
-			<div class="thumbnail">
+			<div class="thumbnail" rel="tooltip" title="Number of malware analized with {{ av_motor }}" alt="Number of malware analized with {{ av_motor }}" data-placement="top">
 				<h2 class="statistics">
 				{% if num_analized %}
 					{{ num_analized|intcomma }}
@@ -77,7 +77,7 @@ Home
 			</div>
 		</li>
 		<li class="span2">
-			<div class="thumbnail">
+			<div class="thumbnail" rel="tooltip" title="Number of malware detected with {{ av_motor }}" alt="Number of malware detected with {{ av_motor }}" data-placement="top">
 				<h2 class="statistics">
 				{% if num_known %}
 					{{ num_known|intcomma }}

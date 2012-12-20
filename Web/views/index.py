@@ -20,7 +20,8 @@ def index(request):
 			'num_urls': num_urls,
 			'num_downloads': num_downloads,
 			'num_analized': num_analized,
-			'num_known': num_known
+			'num_known': num_known,
+			'av_motor': settings.ANTIVIRUS_VIRUSTOTAL
 		}
 	)
 

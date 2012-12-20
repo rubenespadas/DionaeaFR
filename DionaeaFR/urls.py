@@ -30,7 +30,6 @@ urlpatterns = patterns('Web.views',
     url(r'^graphs/timeline/$', 'timeline'),
     url(r'^graphs/conncountries/$', 'connCountries'),
     url(r'^graphs/ipscountries/$', 'ipsCountries'),
-    url(r'^graphs/malwarecountries/$', 'malwareCountries'),
     url(r'^maps/attackers/$', 'attackers'),
     url(r'^maps/countries/$', 'countries'),
 )

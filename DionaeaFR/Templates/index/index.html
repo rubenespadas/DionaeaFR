@@ -90,16 +90,12 @@ Home
 		</li>
 	</ul>
     <ul class="thumbnails">
-		<li class="span4">
+		<li class="span6">
 			<div class="thumbnail" id="chart1">
 			</div>
 		</li>
-		<li class="span4">
+		<li class="span6">
 			<div class="thumbnail" id="chart2">
-			</div>
-		</li>
-		<li class="span4">
-			<div class="thumbnail" id="chart3">
 			</div>
 		</li>
 	</ul>
@@ -179,49 +175,6 @@ Home
 		        },
 		        seriesDefaults: {
 					type: "pie"
-				},
-		        series: [{
-					field: "value",
-					categoryField: "cc",
-					padding: 0
-				}],
-				seriesColors: ['#7EA419', '#6E009E','#A034CF','#AC5DCF','#CA88E7','#D2A1E7','#E2BCF3','#E7CAF3', '#EFD9F9', '#F2E2F9'],
-		        tooltip: {
-					visible: true,
-					template: "#= category # - #= kendo.format('{0:P}', percentage)#"
-				},
-		        chartArea: {
-		            background: "",
-		            height: 220
-		        }
-		    });
-		}
-	</script>
-	<script type="text/javascript">
-		function MalwareCountries() {
-		    $("#chart3").kendoChart({
-		        dataSource: {
-		            transport: {
-		                read: {
-		                    url: "/graphs/malwarecountries/",
-		                    dataType: "json"
-		                }
-		            },
-		            sort: {
-						field: "value",
-						dir: "desc"
-						}
-				},
-		        autoBind: true,
-		        title: {
-		            text: "Malware by country"
-		        },
-		        legend: {
-		            visible: true,
-		            offsetY: 20,
-		        },
-		        seriesDefaults: {
-					type: "pie",
 				},
 		        series: [{
 					field: "value",

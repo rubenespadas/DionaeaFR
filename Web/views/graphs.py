@@ -6,7 +6,7 @@ from Web.models import Connection
 from Web.models import Offer
 from collections import defaultdict
 from collections import Counter
-from netaddr import IPAddress
+from netaddr import IPAddress, AddrFormatError
 import SubnetTree
 import pygeoip
 import datetime
@@ -149,32 +149,38 @@ def timeline(request):
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 
 def connCountries(request):
-	conn = Connection.objects.values('remote_host').exclude(connection_type="listen", remote_host="").annotate(Count("remote_host")).order_by('-remote_host__count')
+	conn = Connection.objects.values('remote_host').exclude(connection_type="listen").annotate(Count("remote_host")).order_by('-remote_host__count')
 	data = []
 	b = defaultdict(str)
 	b['UNKNOWN'] = 0
 	b['RESERVED'] = 0
 	for c in conn:
-		ip = IPAddress(c['remote_host'])
-		if ip.version == 4:
-			try:
-				reserved_ipv4[str(c['remote_host'])]
-				if b['RESERVED']:
-					b['RESERVED'] = int(b['RESERVED']) + int(c['remote_host__count'])
-				else:
-					b['RESERVED'] = int(c['remote_host__count'])
-			except KeyError:
-				cc = gi.country_name_by_addr(c['remote_host'])
-				if cc != '':
-					if b[cc]:
-						b[cc] = int(b[cc]) + int(c['remote_host__count'])
+		try:
+			ip = IPAddress(c['remote_host'])
+			if ip.version == 4:
+				try:
+					reserved_ipv4[str(c['remote_host'])]
+					if b['RESERVED']:
+						b['RESERVED'] = int(b['RESERVED']) + int(c['remote_host__count'])
 					else:
-						b[cc] = int(c['remote_host__count'])
-				else:
-					if b['UNKNOWN']:
-						b['UNKNOWN'] = int(b['UNKNOWN']) + int(c['remote_host__count'])
+						b['RESERVED'] = int(c['remote_host__count'])
+				except KeyError:
+					cc = gi.country_name_by_addr(c['remote_host'])
+					if cc != '':
+						if b[cc]:
+							b[cc] = int(b[cc]) + int(c['remote_host__count'])
+						else:
+							b[cc] = int(c['remote_host__count'])
 					else:
-						b['UNKNOWN'] = int(c['remote_host__count'])
+						if b['UNKNOWN']:
+							b['UNKNOWN'] = int(b['UNKNOWN']) + int(c['remote_host__count'])
+						else:
+							b['UNKNOWN'] = int(c['remote_host__count'])
+		except AddrFormatError:
+			if b['UNKNOWN']:
+				b['UNKNOWN'] = int(b['UNKNOWN']) + int(c['remote_host__count'])
+			else:
+				b['UNKNOWN'] = int(c['remote_host__count'])
 	try:
 		reserved = int(b['RESERVED'])
 		del b['RESERVED']
@@ -205,26 +211,32 @@ def ipsCountries(request):
 	b['UNKNOWN'] = 0
 	b['RESERVED'] = 0
 	for c in conn:
-		ip = IPAddress(c['remote_host'])
-		if ip.version == 4:
-			try:
-				reserved_ipv4[str(c['remote_host'])]
-				if b['RESERVED']:
-					b['RESERVED'] = int(b['RESERVED']) + 1
-				else:
-					b['RESERVED'] = 1
-			except KeyError:
-				cc = gi.country_name_by_addr(c['remote_host'])
-				if cc != '':
-					if b[cc]:
-						b[cc] = int(b[cc]) + 1
+		try:
+			ip = IPAddress(c['remote_host'])
+			if ip.version == 4:
+				try:
+					reserved_ipv4[str(c['remote_host'])]
+					if b['RESERVED']:
+						b['RESERVED'] = int(b['RESERVED']) + 1
 					else:
-						b[cc] = 1
-				else:
-					if b['UNKNOWN']:
-						b['UNKNOWN'] = int(b['UNKNOWN']) + 1
+						b['RESERVED'] = int(c['remote_host__count'])
+				except KeyError:
+					cc = gi.country_name_by_addr(c['remote_host'])
+					if cc != '':
+						if b[cc]:
+							b[cc] = int(b[cc]) + 1
+						else:
+							b[cc] = int(c['remote_host__count'])
 					else:
-						b['UNKNOWN'] = 1
+						if b['UNKNOWN']:
+							b['UNKNOWN'] = int(b['UNKNOWN']) + 1
+						else:
+							b['UNKNOWN'] = int(c['remote_host__count'])
+		except AddrFormatError:
+			if b['UNKNOWN']:
+				b['UNKNOWN'] = int(b['UNKNOWN']) + 1
+			else:
+				b['UNKNOWN'] = int(c['remote_host__count'])
 	try:
 		reserved = int(b['RESERVED'])
 		del b['RESERVED']

@@ -251,7 +251,8 @@ def malwareCountries(request):
 	ips = []
 	for c in downloads:
 		conn = Connection.objects.filter(connection=c['connection'])
-		ips[conn['remote_host']] += 1
+		for res in conn:
+			ips[res['remote_host']] += 1
 	data = []
 	b = defaultdict(str)
 	for ip in ips:

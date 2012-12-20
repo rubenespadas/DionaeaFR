@@ -3,6 +3,7 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.db.models import Count
 from Web.models import Connection
+from Web.models import Download
 from Web.models import Offer
 from collections import defaultdict
 from collections import Counter
@@ -246,35 +247,52 @@ def ipsCountries(request):
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 
 def malwareCountries(request):
-	conn = Connection.objects.values('remote_host').annotate(Count("remote_host")).order_by('-remote_host__count')
+	downloads = Download.objects.values('connection')
+	ips = []
+	for c in downloads:
+		conn = Connection.objects.filter(connection=c)
+		ips[conn['remote_host']] += 1
 	data = []
 	b = defaultdict(str)
-	for c in conn:
+	for ip in ips:
 		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
-			cc = gi.country_name_by_addr(c['remote_host'])
-			if cc != '':
-				if b[cc]:
-					b[cc] = int(b[cc]) + 1
+			try:
+				reserved_ipv4[str(c['remote_host'])]
+				if b['RESERVED']:
+					b['RESERVED'] = int(b['RESERVED']) + ips[ip]
 				else:
-					b[cc] = 1
-		else:
-			if b['UNKNOWN']:
-				b['UNKNOWN'] = int(b['UNKNOWN']) + 1
-			else:
-				b['UNKNOWN'] = 1
+					b['RESERVED'] = ips[ip]
+			except KeyError:
+				cc = gi.country_name_by_addr(c['remote_host'])
+				if cc != '':
+					if b[cc]:
+						b[cc] = int(b[cc]) + ips[ip]
+					else:
+						b[cc] = ips[ip]
+				else:
+					if b['UNKNOWN']:
+						b['UNKNOWN'] = int(b['UNKNOWN']) + ips[ip]
+					else:
+						b['UNKNOWN'] = ips[ip]
 	try:
-		others = b['UNKNOWN']
+		reserved = int(b['RESERVED'])
+		del b['RESERVED']
+	except KeyError:
+		reserved = 0
+	try:
+		unknown = int(b['UNKNOWN'])
 		del b['UNKNOWN']
 	except KeyError:
-		others = 0
-	values = Counter(b).most_common(9)
+		unknown = 0
+	values = Counter(b).most_common(8)
 	top = []
 	for country in values:
 		top.append(country[0])
 	for country, count in b.iteritems():
 		if country not in top:
-			others += count
+			unknown += count
 	for c in values:
 		data.append({'cc':c[0], 'value':c[1]})
-	data.append({'cc':'Others', 'value':others})
+	data.append({'cc':'Reserved', 'value':reserved})
+	data.append({'cc':'Unknown', 'value':unknown})
 	return HttpResponse(json.dumps(data), mimetype="application/json")

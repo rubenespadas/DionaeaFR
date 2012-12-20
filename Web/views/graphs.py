@@ -188,18 +188,18 @@ def ipsCountries(request):
 	for c in conn:
 		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
 			try:
-				if reserved_ipv4[str(c['remote_host'])]:
-					cc = gi.country_name_by_addr(c['remote_host'])
-					if cc != '':
-						if b[cc]:
-							b[cc] = int(b[cc]) + 1
-						else:
-							b[cc] = 1
-			except KeyError:
+				reserved_ipv4[str(c['remote_host'])]
 				if b['RESERVED']:
 					b['RESERVED'] = int(b['RESERVED']) + int(c['remote_host__count'])
 				else:
 					b['RESERVED'] = int(c['remote_host__count'])
+			except KeyError:
+				cc = gi.country_name_by_addr(c['remote_host'])
+				if cc != '':
+					if b[cc]:
+						b[cc] = int(b[cc]) + 1
+					else:
+						b[cc] = 1
 		else:
 			if b['UNKNOWN']:
 				b['UNKNOWN'] = int(b['UNKNOWN']) + int(c['remote_host__count'])

@@ -6,6 +6,7 @@ from Web.models import Connection
 from Web.models import Offer
 from collections import defaultdict
 from collections import Counter
+from netaddr import IPAddress
 import pygeoip
 import datetime
 import time
@@ -181,24 +182,35 @@ def ipsCountries(request):
 	data = []
 	b = defaultdict(str)
 	for c in conn:
-		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
+		ip = IPAddress(c['remote_host'])
+		if ip.is_unicast() and not ip.is_private():
 			cc = gi.country_name_by_addr(c['remote_host'])
 			if cc != '':
 				if b[cc]:
 					b[cc] = int(b[cc]) + 1
 				else:
 					b[cc] = 1
+		elif ip.is_private():
+			if b['LOCAL']:
+				b['LOCAL'] = int(b['LOCAL']) + int(c['remote_host__count'])
+			else:
+				b['LOCAL'] = int(c['remote_host__count'])
 		else:
 			if b['UNKNOWN']:
-				b['UNKNOWN'] = int(b['UNKNOWN']) + 1
+				b['UNKNOWN'] = int(b['UNKNOWN']) + int(c['remote_host__count'])
 			else:
-				b['UNKNOWN'] = 1
+				b['UNKNOWN'] = int(c['remote_host__count'])
+	try:
+		local = b['LOCAL']
+		del b['LOCAL']
+	except KeyError:
+		local = 0
 	try:
 		others = b['UNKNOWN']
 		del b['UNKNOWN']
 	except KeyError:
 		others = 0
-	values = Counter(b).most_common(9)
+	values = Counter(b).most_common(8)
 	top = []
 	for country in values:
 		top.append(country[0])
@@ -207,6 +219,7 @@ def ipsCountries(request):
 			others += count
 	for c in values:
 		data.append({'cc':c[0], 'value':c[1]})
+	data.append({'cc':'Local', 'value':local})
 	data.append({'cc':'Others', 'value':others})
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 

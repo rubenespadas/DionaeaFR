@@ -6,7 +6,7 @@ from Web.models import Connection
 from Web.models import Offer
 from collections import defaultdict
 from collections import Counter
-from netaddr import IPAddress
+from netaddr import IPAddress, AddrFormatError
 import pygeoip
 import datetime
 import time
@@ -182,20 +182,26 @@ def ipsCountries(request):
 	data = []
 	b = defaultdict(str)
 	for c in conn:
-		ip = IPAddress(c['remote_host'])
-		if ip.is_unicast() and not ip.is_private():
-			cc = gi.country_name_by_addr(c['remote_host'])
-			if cc != '':
-				if b[cc]:
-					b[cc] = int(b[cc]) + 1
+		try:
+			ip = IPAddress(c['remote_host'])
+			if ip.is_unicast() and not ip.is_private():
+				cc = gi.country_name_by_addr(c['remote_host'])
+				if cc != '':
+					if b[cc]:
+						b[cc] = int(b[cc]) + 1
+					else:
+						b[cc] = 1
+			elif ip.is_private():
+				if b['LOCAL']:
+					b['LOCAL'] = int(b['LOCAL']) + int(c['remote_host__count'])
 				else:
-					b[cc] = 1
-		elif ip.is_private():
-			if b['LOCAL']:
-				b['LOCAL'] = int(b['LOCAL']) + int(c['remote_host__count'])
-			else:
-				b['LOCAL'] = int(c['remote_host__count'])
-		else:
+					b['LOCAL'] = int(c['remote_host__count'])
+			elif ip.is_reserved():
+				if b['RESERVED']:
+					b['RESERVED'] = int(b['RESERVED']) + int(c['remote_host__count'])
+				else:
+					b['RESERVED'] = int(c['remote_host__count'])
+		except AddrFormatError:
 			if b['UNKNOWN']:
 				b['UNKNOWN'] = int(b['UNKNOWN']) + int(c['remote_host__count'])
 			else:
@@ -205,6 +211,11 @@ def ipsCountries(request):
 		del b['LOCAL']
 	except KeyError:
 		local = 0
+	try:
+		reserved = b['RESERVED']
+		del b['RESERVED']
+	except KeyError:
+		reserved = 0
 	try:
 		others = b['UNKNOWN']
 		del b['UNKNOWN']
@@ -220,6 +231,7 @@ def ipsCountries(request):
 	for c in values:
 		data.append({'cc':c[0], 'value':c[1]})
 	data.append({'cc':'Local', 'value':local})
+	data.append({'cc':'Reserved', 'value':reserved})
 	data.append({'cc':'Others', 'value':others})
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 

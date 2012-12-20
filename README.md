@@ -43,6 +43,7 @@ Home Dionaea:   http://dionaea.carnivore.it/
 		make install
 	
 	npm install -g less
+	apt-get install python-netaddr
 
 [*] Install
 

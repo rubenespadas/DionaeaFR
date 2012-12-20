@@ -1,0 +1,75 @@
+{% extends "base/base.html" %}
+
+{% block title %}
+Ports
+{% endblock %}
+{% block scripts %}
+	{% load staticfiles %}
+	<script type="text/javascript" src="{% static "js/kendo.core.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/kendo.data.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/kendo.chart.min.js" %}"></script>
+	<script type="text/javascript" src="{% static "js/kendo.fx.min.js" %}"></script>
+{% endblock %}
+{% block titlecontent %}
+Ports
+{% endblock %}
+{% block content %}
+	{{ chartActivity }}
+{% endblock %}
+{% block info %}
+	<div class="alert alert-info" id="info">
+		Last 7 days.
+	</div>
+{% endblock %}
+{% block Lastscripts %}
+	<script type="text/javascript">
+		function Ports() {
+		    $("#content").kendoChart({
+		    	autoBind: true,
+		    	dataSource: {
+		            transport: {
+		                read: {
+		                    url: "/graphs/portsdata/",
+		                    dataType: "json"
+		                }
+		            }
+		        },
+		        title: {
+		            text: "Last 7 days"
+		        },
+		        legend: {
+		            position: "bottom"
+		        },
+		        seriesDefaults: {
+		            type: "bar"
+		        },
+		        series: [{
+		            field: "value",
+		            name: "Top 10 Ports",
+		            color: "#6E009E"
+		        }],
+		        axisDefaults: {
+		            labels: {
+		                font: "14px Tahoma, sans-serif"
+		            }
+		        },
+		        valueAxis: {
+		            labels: {
+		                format: "{0}"
+		            }
+		        },
+		        categoryAxis: {
+		            field: "name",
+		        },
+		        tooltip: {
+		            visible: true,
+		            format: "{0}"
+		        },
+		        chartArea: {
+		            background: ""
+		        }
+		    });
+		}
+		$(document).ready(function() { Ports(); });
+	</script>
+{% endblock %}

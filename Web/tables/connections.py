@@ -1,12 +1,19 @@
+from django.conf import settings
 import django_tables2 as tables
 from django.utils.safestring import mark_safe
 from Web.models import Connection
 from django_tables2_simplefilter import F
+from netaddr import IPAddress
+import SubnetTree
 import pygeoip
 import os
 import datetime
 
 gi = pygeoip.GeoIP(os.path.join('DionaeaFR/static', 'GeoIP.dat'), pygeoip.MEMORY_CACHE)
+
+reserved_ipv4 = SubnetTree.SubnetTree()
+for subnet in settings.RESERVED_IP:
+	reserved_ipv4[subnet] = subnet
 
 class getDate(tables.Column):
 	def render(self, value):
@@ -14,14 +21,17 @@ class getDate(tables.Column):
 
 class remoteHost(tables.Column):
 	def render(self, value):
-		cc = None
-		if value:
-			cc = gi.country_code_by_addr(value)
-			name = gi.country_name_by_addr(value)
-		else:
-			cc = "zz"
-			name = "Unknown"
+		cc = "zz"
+		name = "Unknown"
+		ip = IPAddress(value)
+		if ip.version == 4:
+			try:
+				reserved_ipv4[value]
+			except KeyError:
+				cc = gi.country_code_by_addr(value)
+				name = gi.country_name_by_addr(value)
 		return mark_safe('<img class="flag" src="/static/images/flags/' + cc.lower() + '.gif" rel="tooltip" title="'+name+'" alt="'+name+'" data-placement="top"/> '+ value)
+
 class LinkID(tables.Column):
 	def render(self, value):
 		return mark_safe('<a href="/connections/' + str(value) + '">' + str(value) + '</a>')

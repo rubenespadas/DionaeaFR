@@ -3,10 +3,10 @@ from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.db.models import Count
 from Web.models import Connection
-from Web.models import Download
 from Web.models import Offer
 from collections import defaultdict
 from collections import Counter
+from netaddr import IPAddress
 import SubnetTree
 import pygeoip
 import datetime
@@ -155,7 +155,8 @@ def connCountries(request):
 	b['UNKNOWN'] = 0
 	b['RESERVED'] = 0
 	for c in conn:
-		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
+		ip = IPAddress(c['remote_host'])
+		if ip.version == 4:
 			try:
 				reserved_ipv4[str(c['remote_host'])]
 				if b['RESERVED']:
@@ -204,7 +205,8 @@ def ipsCountries(request):
 	b['UNKNOWN'] = 0
 	b['RESERVED'] = 0
 	for c in conn:
-		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
+		ip = IPAddress(c['remote_host'])
+		if ip.version == 4:
 			try:
 				reserved_ipv4[str(c['remote_host'])]
 				if b['RESERVED']:

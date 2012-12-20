@@ -40,6 +40,11 @@ class Connection(models.Model):
             return cc.lower()
         else:
             return "zz"
+    def getCountryName(self):
+        name = "Unkown"
+        if self.remote_host:
+            name = gi.country_name_by_addr(self.remote_host)
+        return name
     def getRemoteHost(self):
         if self.remote_host == "":
             return '127.0.0.1'

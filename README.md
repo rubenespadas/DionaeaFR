@@ -79,10 +79,11 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	- Add home panel
 
   20/12/2012
-	- Add country name in tooltips.
+	- Add country name in tooltips
+	- Add Top 10 Ports Graph
 	- Add ANTIVIRUS_VIRUSTOTAL variable in settings.py
 	- Deactive minify by default
-	- Restructure directories.
+	- Restructure directories
 
 [*] Suggestions?
 

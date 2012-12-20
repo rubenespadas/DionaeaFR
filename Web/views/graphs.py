@@ -94,7 +94,7 @@ def ips(request):
 
 def ipsData(request):
 	date_now = datetime.date.today() - datetime.timedelta(days=7)
-	conn = Connection.objects.filter(connection_timestamp__gt=time.mktime(date_now.timetuple())).values('remote_host').annotate(Count("remote_host")).order_by('-remote_host__count')[:10]
+	conn = Connection.objects.filter(connection_timestamp__gt=time.mktime(date_now.timetuple())).values('remote_host').exclude(remote_host=None).annotate(Count("remote_host")).order_by('-remote_host__count')[:10]
 	data = []
 	for c in conn:
 		b = {}
@@ -149,7 +149,7 @@ def timeline(request):
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 
 def connCountries(request):
-	conn = Connection.objects.values('remote_host').exclude(connection_type='listen').annotate(Count("remote_host")).order_by('-remote_host__count')
+	conn = Connection.objects.values('remote_host').exclude(remote_host=None).annotate(Count("remote_host")).order_by('-remote_host__count')
 	data = []
 	b = defaultdict(str)
 	b['UNKNOWN'] = 0
@@ -198,7 +198,7 @@ def connCountries(request):
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 
 def ipsCountries(request):
-	conn = Connection.objects.values('remote_host').exclude(connection_type='listen').annotate(Count("remote_host")).order_by('-remote_host__count')
+	conn = Connection.objects.values('remote_host').exclude(remote_host=None).annotate(Count("remote_host")).order_by('-remote_host__count')
 	data = []
 	b = defaultdict(str)
 	b['UNKNOWN'] = 0

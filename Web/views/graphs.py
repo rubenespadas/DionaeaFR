@@ -247,7 +247,7 @@ def ipsCountries(request):
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 
 def malwareCountries(request):
-	downloads = Download.objects.select_related()
+	downloads = Download.objects.select_related().all()
 	data = []
 	b = defaultdict(str)
 	b['UNKNOWN'] = 0

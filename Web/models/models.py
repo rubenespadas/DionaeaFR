@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 import datetime
 import pygeoip
@@ -427,9 +428,7 @@ class Virustotal(models.Model):
     def getDate(self):
         return datetime.datetime.fromtimestamp(float(self.virustotal_timestamp)).strftime("%d-%m-%Y %H:%M:%S")
     def getResult(self):
-        result = Virustotalscan.objects.get(virustotal=self.virustotal,virustotalscan_scanner="Microsoft")
-        if result.getVirusName() == "None":
-            result = Virustotalscan.objects.get(virustotal=self.virustotal,virustotalscan_scanner="Sophos")
+        result = Virustotalscan.objects.get(virustotal=self.virustotal,virustotalscan_scanner=settings.ANTIVIRUS_VIRUSTOTAL)
         return result.getVirusName()
 
 class Virustotalscan(models.Model):

@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.shortcuts import render_to_response
 from django.http import HttpResponse
 from django.db.models import Count
@@ -54,7 +55,7 @@ def malwareData(request):
 		FROM downloads, virustotals, virustotalscans
 		WHERE downloads.download_md5_hash = virustotals.virustotal_md5_hash
 		AND virustotals.virustotal = virustotalscans.virustotal
-		AND virustotalscans.virustotalscan_scanner = 'Sophos'
+		AND virustotalscans.virustotalscan_scanner = '""" + settings.ANTIVIRUS_VIRUSTOTAL + """'
 		AND virustotalscans.virustotalscan_result IS NOT NULL
 		GROUP BY virustotalscans.virustotalscan_result
 		ORDER BY num DESC

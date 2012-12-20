@@ -112,6 +112,8 @@ MIDDLEWARE_CLASSES = (
     'pagination.middleware.PaginationMiddleware',
 )
 
+ANTIVIRUS_VIRUSTOTAL = 'Sophos'
+
 HTML_MINIFY = True
 
 ROOT_URLCONF = 'DionaeaFR.urls'

@@ -20,7 +20,7 @@ sys.setdefaultencoding('utf-8')
 gi = pygeoip.GeoIP(os.path.join('DionaeaFR/static', 'GeoIP.dat'), pygeoip.MEMORY_CACHE)
 
 reserved_ipv4 = SubnetTree.SubnetTree()
-for subnet in settings.RESERVED_IPv4:
+for subnet in settings.RESERVED_IP:
 	reserved_ipv4[subnet] = subnet
 
 def protocols(request):

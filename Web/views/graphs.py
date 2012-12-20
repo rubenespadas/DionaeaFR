@@ -247,36 +247,31 @@ def ipsCountries(request):
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 
 def malwareCountries(request):
-	downloads = Download.objects.values('connection')
-	ips = []
-	for c in downloads:
-		conn = Connection.objects.get(connection=c['connection'])
-		try:
-			ips[str(conn.getRemoteHost)] = int(ips[str(conn.getRemoteHost)]) + 1
-		except KeyError:
-			ips[str(conn.getRemoteHost)] = 1
+	downloads = Download.objects.select_related()
 	data = []
 	b = defaultdict(str)
-	for ip in ips:
-		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
+	b['UNKNOWN'] = 0
+	b['RESERVED'] = 0
+	for download in downloads:
+		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",download['remote_host']) is not None):
 			try:
-				reserved_ipv4[str(c['remote_host'])]
+				reserved_ipv4[str(download['remote_host'])]
 				if b['RESERVED']:
-					b['RESERVED'] = int(b['RESERVED']) + ips[ip]
+					b['RESERVED'] = int(b['RESERVED']) + 1
 				else:
-					b['RESERVED'] = ips[ip]
+					b['RESERVED'] = 1
 			except KeyError:
-				cc = gi.country_name_by_addr(c['remote_host'])
+				cc = gi.country_name_by_addr(download['remote_host'])
 				if cc != '':
 					if b[cc]:
-						b[cc] = int(b[cc]) + ips[ip]
+						b[cc] = int(b[cc]) + 1
 					else:
-						b[cc] = ips[ip]
+						b[cc] = 1
 				else:
 					if b['UNKNOWN']:
-						b['UNKNOWN'] = int(b['UNKNOWN']) + ips[ip]
+						b['UNKNOWN'] = int(b['UNKNOWN']) + 1
 					else:
-						b['UNKNOWN'] = ips[ip]
+						b['UNKNOWN'] = 1
 	try:
 		reserved = int(b['RESERVED'])
 		del b['RESERVED']

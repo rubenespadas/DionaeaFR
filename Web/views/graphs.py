@@ -252,9 +252,9 @@ def malwareCountries(request):
 	for c in downloads:
 		conn = Connection.objects.get(connection=c['connection'])
 		try:
-			ips[conn.getRemoteHost] = int(ips[conn.getRemoteHost]) + 1
+			ips[str(conn.getRemoteHost)] = int(ips[str(conn.getRemoteHost)]) + 1
 		except KeyError:
-			ips[conn.getRemoteHost] = 1
+			ips[str(conn.getRemoteHost)] = 1
 	data = []
 	b = defaultdict(str)
 	for ip in ips:

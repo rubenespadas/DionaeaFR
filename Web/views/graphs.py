@@ -32,6 +32,20 @@ def protocolsData(request):
 		data.append(b)
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 
+def ports(request):
+	return render_to_response('graphs/ports.html')
+
+def portsData(request):
+	date_now = datetime.date.today() - datetime.timedelta(days=7)
+	conn = Connection.objects.filter(connection_timestamp__gt=time.mktime(date_now.timetuple())).values('local_port').annotate(Count("local_port")).order_by('-local_port__count')[:10]
+	data = []
+	for c in conn:
+		b = {}
+		b['name'] = c['local_port']
+		b['value'] = c['local_port__count']
+		data.append(b)
+	return HttpResponse(json.dumps(data), mimetype="application/json")
+
 def urls(request):
 	return render_to_response('graphs/urls.html')
 

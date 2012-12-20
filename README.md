@@ -29,7 +29,11 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	django-tables2-simplefilter:
 		https://github.com/benjiec/django-tables2-simplefilter
 		python setup.py install
-		
+	
+	SubnetTree:
+		git clone git://git.bro-ids.org/pysubnettree.git
+		python setup.py install
+	
 	nodejs:
 		http://nodejs.org/dist/v0.8.16/node-v0.8.16.tar.gz
 		tar xzvf node-v0.8.16.tar.gz
@@ -84,6 +88,7 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	- Add ANTIVIRUS_VIRUSTOTAL variable in settings.py
 	- Deactive minify by default
 	- Restructure directories
+	- Fixed Graphs
 
 [*] Suggestions?
 

@@ -23,14 +23,14 @@ class remoteHost(tables.Column):
 	def render(self, value):
 		cc = "zz"
 		name = "Unknown"
-		ip = IPAddress(value)
+		ip = IPAddress(str(value))
 		if ip.version == 4:
 			try:
-				reserved_ipv4[value]
+				reserved_ipv4[str(ip)]
 			except KeyError:
-				cc = gi.country_code_by_addr(value)
-				name = gi.country_name_by_addr(value)
-		return mark_safe('<img class="flag" src="/static/images/flags/' + cc.lower() + '.gif" rel="tooltip" title="'+name+'" alt="'+name+'" data-placement="top"/> '+ value)
+				cc = gi.country_code_by_addr(str(ip))
+				name = gi.country_name_by_addr(str(ip))
+		return mark_safe('<img class="flag" src="/static/images/flags/' + cc.lower() + '.gif" rel="tooltip" title="'+name+'" alt="'+name+'" data-placement="top"/> '+ str(ip))
 
 class LinkID(tables.Column):
 	def render(self, value):

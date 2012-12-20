@@ -213,11 +213,11 @@ def ipsCountries(request):
 						b[cc] = int(b[cc]) + 1
 					else:
 						b[cc] = 1
-		else:
-			if b['UNKNOWN']:
-				b['UNKNOWN'] = int(b['UNKNOWN']) + 1
-			else:
-				b['UNKNOWN'] = 1
+				else:
+					if b['UNKNOWN']:
+						b['UNKNOWN'] = int(b['UNKNOWN']) + 1
+					else:
+						b['UNKNOWN'] = 1
 	try:
 		reserved = b['RESERVED']
 		del b['RESERVED']

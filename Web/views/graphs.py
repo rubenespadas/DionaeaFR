@@ -191,15 +191,17 @@ def connCountries(request):
 		del b['UNKNOWN']
 	except KeyError:
 		unknown = 0
-	values = Counter(b).most_common(8)
+	values = Counter(b).most_common(7)
 	top = []
+	others = 0
 	for country in values:
 		top.append(country[0])
 	for country, count in b.iteritems():
 		if country not in top:
-			unknown += count
+			others += count
 	for c in values:
 		data.append({'cc':c[0], 'value':c[1]})
+	data.append({'cc':'Others', 'value':others})
 	data.append({'cc':'Reserved', 'value':reserved})
 	data.append({'cc':'Unknown', 'value':unknown})
 	return HttpResponse(json.dumps(data), mimetype="application/json")
@@ -247,15 +249,17 @@ def ipsCountries(request):
 		del b['UNKNOWN']
 	except KeyError:
 		unknown = 0
-	values = Counter(b).most_common(8)
+	values = Counter(b).most_common(7)
 	top = []
+	others = 0
 	for country in values:
 		top.append(country[0])
 	for country, count in b.iteritems():
 		if country not in top:
-			unknown += count
+			others += count
 	for c in values:
 		data.append({'cc':c[0], 'value':c[1]})
+	data.append({'cc':'Others', 'value':others})
 	data.append({'cc':'Reserved', 'value':reserved})
 	data.append({'cc':'Unknown', 'value':unknown})
 	return HttpResponse(json.dumps(data), mimetype="application/json")

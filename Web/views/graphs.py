@@ -219,12 +219,12 @@ def ipsCountries(request):
 					else:
 						b['UNKNOWN'] = 1
 	try:
-		reserved = b['RESERVED']
+		reserved = int(b['RESERVED'])
 		del b['RESERVED']
 	except KeyError:
 		reserved = 0
 	try:
-		unknown = b['UNKNOWN']
+		unknown = int(b['UNKNOWN'])
 		del b['UNKNOWN']
 	except KeyError:
 		unknown = 0

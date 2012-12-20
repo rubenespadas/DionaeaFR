@@ -97,13 +97,13 @@ def ipsData(request):
 	conn = Connection.objects.filter(connection_timestamp__gt=time.mktime(date_now.timetuple())).values('remote_host').exclude(remote_host=None).annotate(Count("remote_host")).order_by('-remote_host__count')[:10]
 	data = []
 	for c in conn:
-		b = {}
-		if c['remote_host'] == "":
-			b['name'] = '127.0.0.1'
-		else:
+		try:
+			reserved_ipv4[str(c['remote_host'])]
+		except KeyError:
+			b = {}
 			b['name'] = c['remote_host']
-		b['value'] = c['remote_host__count']
-		data.append(b)
+			b['value'] = c['remote_host__count']
+			data.append(b)
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 
 def connections(request):

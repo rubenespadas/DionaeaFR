@@ -114,6 +114,25 @@ MIDDLEWARE_CLASSES = (
 
 ANTIVIRUS_VIRUSTOTAL = 'Sophos'
 
+RESERVED_IPv4 = (
+    '0.0.0.0/8', # "This" network
+    '10.0.0.0/8', # Private-Use networks
+    '100.64.0.0/10', # RFC-6598
+    '127.0.0.0/8', # Loopback
+    '169.254.0.0/16', # Link Local
+    '172.16.0.0/12', # Private-Use networks
+    '192.0.0.0/24', # IETF Protocol Assignments
+    '192.0.2.0/24', # TEST-NET-1
+    '192.88.99.0/24', # 6to4 Relay Anycast
+    '192.168.0.0/16', # Private-Use networks
+    '198.15.0.0/15', # Network interconnect device benchmark testing
+    '198.51.100.0/24', # TEST-NET-2
+    '203.0.113.0/24', # TEST-NET-3
+    '224.0.0.0/4', # Multicast
+    '240.0.0.0/4', # Reserved for future use
+    '255.255.255.255/32' # Limited broadcast
+)
+
 HTML_MINIFY = True
 
 ROOT_URLCONF = 'DionaeaFR.urls'

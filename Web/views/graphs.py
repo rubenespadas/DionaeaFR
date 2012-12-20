@@ -6,7 +6,7 @@ from Web.models import Connection
 from Web.models import Offer
 from collections import defaultdict
 from collections import Counter
-from netaddr import IPAddress, AddrFormatError
+import SubnetTree
 import pygeoip
 import datetime
 import time
@@ -18,6 +18,10 @@ reload(sys)
 sys.setdefaultencoding('utf-8')
 
 gi = pygeoip.GeoIP(os.path.join('DionaeaFR/static', 'GeoIP.dat'), pygeoip.MEMORY_CACHE)
+
+reserved_ipv4 = SubnetTree.SubnetTree()
+for subnet in settings.RESERVED_IPv4:
+	reserved_ipv4[subnet] = subnet
 
 def protocols(request):
 	return render_to_response('graphs/protocols.html')
@@ -182,57 +186,45 @@ def ipsCountries(request):
 	data = []
 	b = defaultdict(str)
 	for c in conn:
-		try:
-			ip = IPAddress(c['remote_host'])
-			if ip.is_unicast() and not ip.is_private():
+		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
+			if c['remote_host'] not in reserved_ipv4:
 				cc = gi.country_name_by_addr(c['remote_host'])
 				if cc != '':
 					if b[cc]:
 						b[cc] = int(b[cc]) + 1
 					else:
 						b[cc] = 1
-			elif ip.is_private():
-				if b['LOCAL']:
-					b['LOCAL'] = int(b['LOCAL']) + int(c['remote_host__count'])
-				else:
-					b['LOCAL'] = int(c['remote_host__count'])
-			elif ip.is_reserved():
+			else:
 				if b['RESERVED']:
 					b['RESERVED'] = int(b['RESERVED']) + int(c['remote_host__count'])
 				else:
 					b['RESERVED'] = int(c['remote_host__count'])
-		except AddrFormatError:
+		else:
 			if b['UNKNOWN']:
 				b['UNKNOWN'] = int(b['UNKNOWN']) + int(c['remote_host__count'])
 			else:
 				b['UNKNOWN'] = int(c['remote_host__count'])
-	try:
-		local = b['LOCAL']
-		del b['LOCAL']
-	except KeyError:
-		local = 0
 	try:
 		reserved = b['RESERVED']
 		del b['RESERVED']
 	except KeyError:
 		reserved = 0
 	try:
-		others = b['UNKNOWN']
+		unknown = b['UNKNOWN']
 		del b['UNKNOWN']
 	except KeyError:
-		others = 0
+		unknown = 0
 	values = Counter(b).most_common(8)
 	top = []
 	for country in values:
 		top.append(country[0])
 	for country, count in b.iteritems():
 		if country not in top:
-			others += count
+			unknown += count
 	for c in values:
 		data.append({'cc':c[0], 'value':c[1]})
-	data.append({'cc':'Local', 'value':local})
 	data.append({'cc':'Reserved', 'value':reserved})
-	data.append({'cc':'Others', 'value':others})
+	data.append({'cc':'Unknown', 'value':unknown})
 	return HttpResponse(json.dumps(data), mimetype="application/json")
 
 def malwareCountries(request):

@@ -17,12 +17,11 @@ class remoteHost(tables.Column):
 		cc = None
 		if value:
 			cc = gi.country_code_by_addr(value)
+			name = gi.country_name_by_addr(value)
 		else:
 			cc = "zz"
-		if cc:
-			return mark_safe('<img class="flag" src="/static/images/flags/' + cc.lower() + '.gif" rel="tooltip" title="'+cc+'" alt="'+cc+'" data-placement="top"/> '+ value)
-		else:
-			return mark_safe('<img class="flag" src="/static/images/flags/zz.gif" rel="tooltip" title="Unknown" alt="Unknown" data-placement="top"/> '+ value)
+			name = "Unknown"
+		return mark_safe('<img class="flag" src="/static/images/flags/' + cc.lower() + '.gif" rel="tooltip" title="'+name+'" alt="'+name+'" data-placement="top"/> '+ value)
 class LinkID(tables.Column):
 	def render(self, value):
 		return mark_safe('<a href="/connections/' + str(value) + '">' + str(value) + '</a>')

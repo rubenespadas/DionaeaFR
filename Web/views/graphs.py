@@ -158,21 +158,21 @@ def connCountries(request):
 			try:
 				reserved_ipv4[str(c['remote_host'])]
 				if b['RESERVED']:
-					b['RESERVED'] = int(b['RESERVED']) + 1
+					b['RESERVED'] = int(b['RESERVED']) + int(c['remote_host__count'])
 				else:
-					b['RESERVED'] = 1
+					b['RESERVED'] = int(c['remote_host__count'])
 			except KeyError:
 				cc = gi.country_name_by_addr(c['remote_host'])
 				if cc != '':
 					if b[cc]:
-						b[cc] = int(b[cc]) + 1
+						b[cc] = int(b[cc]) + int(c['remote_host__count'])
 					else:
-						b[cc] = 1
+						b[cc] = int(c['remote_host__count'])
 				else:
 					if b['UNKNOWN']:
-						b['UNKNOWN'] = int(b['UNKNOWN']) + 1
+						b['UNKNOWN'] = int(b['UNKNOWN']) + int(c['remote_host__count'])
 					else:
-						b['UNKNOWN'] = 1
+						b['UNKNOWN'] = int(c['remote_host__count'])
 	try:
 		reserved = int(b['RESERVED'])
 		del b['RESERVED']
@@ -207,21 +207,21 @@ def ipsCountries(request):
 			try:
 				reserved_ipv4[str(c['remote_host'])]
 				if b['RESERVED']:
-					b['RESERVED'] = int(b['RESERVED']) + int(c['remote_host__count'])
+					b['RESERVED'] = int(b['RESERVED']) + 1
 				else:
-					b['RESERVED'] = int(c['remote_host__count'])
+					b['RESERVED'] = 1
 			except KeyError:
 				cc = gi.country_name_by_addr(c['remote_host'])
 				if cc != '':
 					if b[cc]:
-						b[cc] = int(b[cc]) + int(c['remote_host__count'])
+						b[cc] = int(b[cc]) + 1
 					else:
-						b[cc] = int(c['remote_host__count'])
+						b[cc] = 1
 				else:
 					if b['UNKNOWN']:
-						b['UNKNOWN'] = int(b['UNKNOWN']) + int(c['remote_host__count'])
+						b['UNKNOWN'] = int(b['UNKNOWN']) + 1
 					else:
-						b['UNKNOWN'] = int(c['remote_host__count'])
+						b['UNKNOWN'] = 1
 	try:
 		reserved = int(b['RESERVED'])
 		del b['RESERVED']

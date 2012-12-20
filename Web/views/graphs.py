@@ -153,40 +153,6 @@ def connCountries(request):
 	b = defaultdict(str)
 	for c in conn:
 		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
-			cc = gi.country_name_by_addr(c['remote_host'])
-			if cc != '':
-				if b[cc]:
-					b[cc] = int(b[cc]) + int(c['remote_host__count'])
-				else:
-					b[cc] = int(c['remote_host__count'])
-		else:
-			if b['UNKNOWN']:
-				b['UNKNOWN'] = int(b['UNKNOWN']) + int(c['remote_host__count'])
-			else:
-				b['UNKNOWN'] = int(c['remote_host__count'])
-	try:
-		others = b['UNKNOWN']
-		del b['UNKNOWN']
-	except KeyError:
-		others = 0
-	values = Counter(b).most_common(9)
-	top = []
-	for country in values:
-		top.append(country[0])
-	for country, count in b.iteritems():
-		if country not in top:
-			others += count
-	for c in values:
-		data.append({'cc':c[0], 'value':c[1]})
-	data.append({'cc':'Others', 'value':others})
-	return HttpResponse(json.dumps(data), mimetype="application/json")
-
-def ipsCountries(request):
-	conn = Connection.objects.values('remote_host').annotate(Count("remote_host")).order_by('-remote_host__count')
-	data = []
-	b = defaultdict(str)
-	for c in conn:
-		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
 			try:
 				reserved_ipv4[str(c['remote_host'])]
 				if b['RESERVED']:
@@ -205,6 +171,53 @@ def ipsCountries(request):
 				b['UNKNOWN'] = int(b['UNKNOWN']) + int(c['remote_host__count'])
 			else:
 				b['UNKNOWN'] = int(c['remote_host__count'])
+	try:
+		reserved = b['RESERVED']
+		del b['RESERVED']
+	except KeyError:
+		reserved = 0
+	try:
+		unknown = b['UNKNOWN']
+		del b['UNKNOWN']
+	except KeyError:
+		unknown = 0
+	values = Counter(b).most_common(8)
+	top = []
+	for country in values:
+		top.append(country[0])
+	for country, count in b.iteritems():
+		if country not in top:
+			unknown += count
+	for c in values:
+		data.append({'cc':c[0], 'value':c[1]})
+	data.append({'cc':'Reserved', 'value':reserved})
+	data.append({'cc':'Unknown', 'value':unknown})
+	return HttpResponse(json.dumps(data), mimetype="application/json")
+
+def ipsCountries(request):
+	conn = Connection.objects.values('remote_host').annotate(Count("remote_host")).order_by('-remote_host__count')
+	data = []
+	b = defaultdict(str)
+	for c in conn:
+		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
+			try:
+				reserved_ipv4[str(c['remote_host'])]
+				if b['RESERVED']:
+					b['RESERVED'] = int(b['RESERVED']) + 1
+				else:
+					b['RESERVED'] = 1
+			except KeyError:
+				cc = gi.country_name_by_addr(c['remote_host'])
+				if cc != '':
+					if b[cc]:
+						b[cc] = int(b[cc]) + 1
+					else:
+						b[cc] = 1
+		else:
+			if b['UNKNOWN']:
+				b['UNKNOWN'] = int(b['UNKNOWN']) + 1
+			else:
+				b['UNKNOWN'] = 1
 	try:
 		reserved = b['RESERVED']
 		del b['RESERVED']

@@ -198,6 +198,8 @@ def ipsCountries(request):
 	conn = Connection.objects.values('remote_host').annotate(Count("remote_host")).order_by('-remote_host__count')
 	data = []
 	b = defaultdict(str)
+	b['UNKNOWN'] = 0
+	b['RESERVED'] = 0
 	for c in conn:
 		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c['remote_host']) is not None):
 			try:

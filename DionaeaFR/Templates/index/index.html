@@ -17,8 +17,8 @@ Home
 	{% load humanize %}
 	<ul class="thumbnails">
 		<li class="span2">
-			<div class="thumbnail">
-				<h2 class="statistics" rel="tooltip" title="Connections" alt="Number of total connections" data-placement="top">
+			<div class="thumbnail" rel="tooltip" title="Number of total connections" alt="Number of total connections" data-placement="top">
+				<h2 class="statistics">
 				{% if num_connections %}
 					{{ num_connections|intcomma }}
 				{% else %}

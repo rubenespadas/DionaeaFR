@@ -133,7 +133,7 @@ RESERVED_IP = (
     '255.255.255.255/32'
 )
 
-HTML_MINIFY = True
+HTML_MINIFY = False
 
 ROOT_URLCONF = 'DionaeaFR.urls'
 

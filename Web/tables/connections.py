@@ -48,20 +48,20 @@ class ConnectionsTable(tables.Table):
 		empty_text = 'No data.'
 		template = 'tables/bootstrap.html'
 	filters = (
-		F('connection_type','Type',values_list=(
+		F('connection_type','State',values_list=(
 				('accept','accept'),
 				('connect','connect'),
 				('listen','listen'),
 				('reject','reject')
 			)
 		),
-		F('connection_transport','Transport',values_list=(
+		F('connection_transport','Protocol',values_list=(
 				('TCP','tcp'),
 				('UDP','udp'),
 				('TLS','tls')
 			)
 		),
-		F('connection_protocol','Protocol',values_list=(
+		F('connection_protocol','Service',values_list=(
 				('xmppclient','xmppclient'),
 				('smbd','smbd'),
 				('remoteshell','remoteshell'),

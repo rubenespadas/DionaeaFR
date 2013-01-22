@@ -9,9 +9,9 @@ gi = pygeoip.GeoIP(os.path.join('DionaeaFR/static', 'GeoIP.dat'), pygeoip.MEMORY
 
 class Connection(models.Model):
     connection = models.IntegerField(primary_key=True, blank=True, verbose_name='ID')
-    connection_type = models.TextField(blank=True, verbose_name='Type')
-    connection_transport = models.TextField(blank=True, verbose_name='Transport')
-    connection_protocol = models.TextField(blank=True, verbose_name='Protocol')
+    connection_type = models.TextField(blank=True, verbose_name='State')
+    connection_transport = models.TextField(blank=True, verbose_name='Protocol')
+    connection_protocol = models.TextField(blank=True, verbose_name='Service')
     connection_timestamp = models.IntegerField(blank=True, verbose_name='Date')
     connection_root = models.IntegerField(blank=True, verbose_name='Root')
     connection_parent = models.IntegerField(blank=True, verbose_name='Parent')

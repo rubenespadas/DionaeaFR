@@ -27,7 +27,8 @@ def cindex(request):
 
 def cdetail(request, connection_id):
     try:
-        length = len(Connection.objects.all())
+        q = Connection.objects.annotate(length=Count('connection_id'))
+		length = q[0].length
         conn = Connection.objects.get(pk=connection_id)
         dcerpcbind = Dcerpcbind.objects.filter(connection=connection_id)
        	dcerpcrequest = Dcerpcrequest.objects.filter(connection=connection_id)

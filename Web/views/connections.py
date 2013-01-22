@@ -19,8 +19,6 @@ from Web.models import Resolve
 from Web.models import SipCommand
 
 
-length = len(Connection.objects.all())
-
 def cindex(request):
     queryset = Connection.objects.all()
     table = ConnectionsTable(queryset)
@@ -29,6 +27,7 @@ def cindex(request):
 
 def cdetail(request, connection_id):
     try:
+		length = len(Connection.objects.all())
         conn = Connection.objects.get(pk=connection_id)
         dcerpcbind = Dcerpcbind.objects.filter(connection=connection_id)
        	dcerpcrequest = Dcerpcrequest.objects.filter(connection=connection_id)

@@ -24,10 +24,10 @@ reserved_ipv4 = SubnetTree.SubnetTree()
 for subnet in settings.RESERVED_IP:
 	reserved_ipv4[subnet] = subnet
 
-def protocols(request):
-	return render_to_response('graphs/protocols.html')
+def services(request):
+	return render_to_response('graphs/services.html')
 
-def protocolsData(request):
+def servicesData(request):
 	date_now = datetime.date.today() - datetime.timedelta(days=7)
 	conn = Connection.objects.filter(connection_timestamp__gt=time.mktime(date_now.timetuple())).values('connection_protocol').exclude(connection_type="listen").annotate(Count("connection_protocol")).order_by('-connection_protocol__count')
 	data = []

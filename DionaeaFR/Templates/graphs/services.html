@@ -1,7 +1,7 @@
 {% extends "base/base.html" %}
 
 {% block title %}
-Protocols
+Services
 {% endblock %}
 {% block scripts %}
 	{% load staticfiles %}
@@ -23,19 +23,19 @@ Protocols
 {% endblock %}
 {% block Lastscripts %}
 	<script type="text/javascript">
-		function Protocols() {
+		function Services() {
 		    $("#content").kendoChart({
 		    	autoBind: true,
 		    	dataSource: {
 		            transport: {
 		                read: {
-		                    url: "/graphs/protocolsdata/",
+		                    url: "/graphs/servicesdata/",
 		                    dataType: "json"
 		                }
 		            }
 		        },
 		        title: {
-		            text: "Protocols"
+		            text: "Services"
 		        },
 		        legend: {
 		            position: "bottom"
@@ -70,6 +70,6 @@ Protocols
 		        }
 		    });
 		}
-		$(document).ready(function() { Protocols(); });
+		$(document).ready(function() { Services(); });
 	</script>
 {% endblock %}

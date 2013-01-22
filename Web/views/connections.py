@@ -1,4 +1,5 @@
 from django.shortcuts import render_to_response
+from django.db.models import Count
 from django.template import RequestContext
 from django_tables2 import RequestConfig
 from django.http import Http404

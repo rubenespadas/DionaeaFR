@@ -427,20 +427,20 @@
     <div class="pagination pagination-centered">
         <ul class="pager">
     {% if previous != 0 %}
-            <li class="previous">
+            <li class="next">
                 <a href="/connections/{{ previous }}/">previous</a>
             </li>
     {% else %}
-            <li class="previous disabled">
+            <li class="next disabled">
                 <a href="">previous</a>
             </li>
     {% endif %}
     {% if next != 0 %}
-            <li class="next">
+            <li class="previous">
                 <a href="/connections/{{ next }}/">next</a>
             </li>
     {% else %}
-            <li class="next disabled">
+            <li class="previous disabled">
                 <a href="">next</a>
             </li>
     {% endif %}

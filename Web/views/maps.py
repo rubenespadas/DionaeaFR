@@ -48,7 +48,7 @@ def attackers(request):
 	for c in counts:
 		if(re.match("(^[2][0-5][0-5]|^[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})\.([0-2][0-5][0-5]|[1]{0,1}[0-9]{1,2})$",c) != None):
 			cc = gic.record_by_addr(c)
-			if cc != None:
+			if cc:
 				try:
 					var = var + "{latLng:[" + str(cc['latitude']) + "," + str(cc['longitude']) + "], count:'" + str(counts[c]).decode('iso-8859-1', 'ignore').encode('utf-8','ignore') + "',host:'" + str(c)+"'},"
 				except:

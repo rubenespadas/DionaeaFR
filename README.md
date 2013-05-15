@@ -25,6 +25,7 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	pip install django-tables2
 	pip install django-compressor
 	pip install django-htmlmin
+	pip install django-filter
 	
 	django-tables2-simplefilter:
 		https://github.com/benjiec/django-tables2-simplefilter

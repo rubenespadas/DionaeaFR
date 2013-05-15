@@ -1,4 +1,9 @@
-import django_filters as filters
+try:
+	import django_filters as filters
+except ImportError:
+	print "Install django-filter"
+	print "\tpip install django-filter"
+	pass
 
 from Web.models.connection import Connection
 

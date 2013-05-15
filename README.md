@@ -92,7 +92,7 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	- Fixed Graphs
   
   15/05/2013
-    - Refactor Code
+    - Refactoring Code
 	- New filters system
 
 [*] Suggestions?

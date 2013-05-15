@@ -88,6 +88,11 @@ class ConnectionFilterForm(forms.Form):
         required=False
     )
 
+    remote_host = forms.IPAddressField(
+        label='Attacker',
+        required=False
+    )
+
     remote_port = forms.IntegerField(
         label='Remote Port',
         required=False

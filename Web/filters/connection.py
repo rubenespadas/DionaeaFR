@@ -1,9 +1,4 @@
-try:
-	import django_filters as filters
-except ImportError:
-	print "Install django-filter"
-	print "\tpip install django-filter"
-	pass
+import django_filters as filters
 
 from Web.models.connection import Connection
 
@@ -24,6 +19,10 @@ class ConnectionFilter(filters.FilterSet):
 
     local_port = filters.NumberFilter()
 
+    remote_host = filters.CharFilter(
+        lookup_type='contains'
+    )
+
     remote_port = filters.NumberFilter()
 
     class Meta:
@@ -33,6 +32,7 @@ class ConnectionFilter(filters.FilterSet):
             'connection_transport',
             'connection_protocol',
             'local_port',
+            'remote_host',
             'remote_port',
         ]
 

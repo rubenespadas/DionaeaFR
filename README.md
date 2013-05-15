@@ -90,6 +90,10 @@ Home Dionaea:   http://dionaea.carnivore.it/
 	- Deactive minify by default
 	- Restructure directories
 	- Fixed Graphs
+  
+  15/05/2013
+    - Refactor Code
+	- New filters system
 
 [*] Suggestions?
 

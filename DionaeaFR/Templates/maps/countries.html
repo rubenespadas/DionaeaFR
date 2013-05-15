@@ -1,4 +1,4 @@
-{% extends "base/base.html" %}
+{% extends "base.html" %}
 
 {% block title %}
 Countries
@@ -56,11 +56,11 @@ Countries
 				onRegionLabelShow: function(event, label, code){
 					if(gdpData[code])
 					{
-						label.html('<img src="/static/images/flags/'+code.toLowerCase()+'.gif" style="margin-bottom:3px;"/> <b>'+label.html()+'</b></br>'+'<b>Connections: </b>'+ gdpData[code]);
+						label.html('<img src="/static/img/flags/'+code.toLowerCase()+'.gif" style="margin-bottom:3px;"/> <b>'+label.html()+'</b></br>'+'<b>Connections: </b>'+ gdpData[code]);
 					}
 					else
 					{
-						label.html('<img src="/static/images/flags/'+code.toLowerCase()+'.gif"/> <b>'+label.html()+'</b></br>'+'<b>Connections: </b>0');
+						label.html('<img src="/static/img/flags/'+code.toLowerCase()+'.gif"/> <b>'+label.html()+'</b></br>'+'<b>Connections: </b>0');
 					}
 				}
 			})

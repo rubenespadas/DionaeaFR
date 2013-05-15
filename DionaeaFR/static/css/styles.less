@@ -221,6 +221,19 @@ a:hover {
   font-size: @font-table;
 }
 
+.table td {
+	max-width: 850px;
+	overflow-x: hidden;
+	white-space: pre;
+	white-space: pre-wrap;
+	white-space: pre-line;
+	white-space: -pre-wrap;
+	white-space: -o-pre-wrap;
+	white-space: -moz-pre-wrap;
+	white-space: -hp-pre-wrap;
+	word-wrap: break-word;
+}
+
 #content {
 	.rounded-corners;
 	.padding;
@@ -267,4 +280,14 @@ select {
 	box-shadow: none;
 	width: auto;
 	height: @height-map;
+}
+
+.btn-danger {
+	background-color: @purple;
+	background-image: none;
+}
+
+.btn-danger:hover, .btn-danger:focus {
+	background-color: @purple;
+	background-image: none;
 }

@@ -1,1 +1,2 @@
-from models import *
+
+# vim: set expandtab:ts=4

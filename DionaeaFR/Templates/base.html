@@ -2,7 +2,7 @@
 <html class="no-js">
 <head>
 	<meta charset="utf-8"/>
-    <title>DionaeaFR - {% block title %}{% endblock %}</title>
+    <title>DionaeaFR - {% block title %}{{title}}{% endblock %}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     {% block head %}
     	{% load staticfiles %}
@@ -20,7 +20,7 @@
     	<!--[if lt IE 9]>
     	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
   		<![endif]-->
-  		<script src="{% static "js/less-1.3.1.min.js" %}"></script>
+  		<script src="{% static "js/less.min.js" %}"></script>
   		<script type="text/javascript" src="{% static "js/jquery.min.js" %}"></script>
     	<script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
     	{% block scripts %}
@@ -61,15 +61,50 @@
 						</ul>
 					</div>
 					{% block info %}
-					{% endblock %}
-					{% block pagination %}
-					{% endblock %}
-					{% block filters %}
-					{% endblock %}
-
+                    {% endblock %}
+                    {% block pagination %}
+                    {% endblock %}
 				</div>
                 <div class="container-fluid span10" id="content">
+                    {% if filters %}
+                        <div>
+                            {% block filters %}
+                                <a href="#Filters" role="button" class="btn-danger btn-mini" data-toggle="modal">Filters</a>
+                                <div id="Filters" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myFilters" aria-hidden="true">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                        <h3 id="myFilters">Filters</h3>
+                                    </div>
+                                    <form class="form-horizontal" action="" method="get">
+                                        {% csrf_token %}
+                                        {% for field in filters %}
+                                            <div class="control-group">
+                                                <label class="control-label" for="{{field.label}}">{{field.label}}</label>
+                                                <div class="controls">
+                                                    {% for error in field.errors %}
+                                                        <div class="alert alert-error input-large">
+                                                            {{ error }}
+                                                        </div>
+                                                    {% endfor %}
+                                                    {{ field }}
+                                                </div>
+                                            </div>
+                                        {% endfor %}
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <input class="btn-danger" type="submit" value="Filter" />
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            {% endblock %}
+                        </div>
+                    {% endif %}
                     {% block content %}
+                        {% if table %}
+                            {% load django_tables2 %}
+                            {% render_table table %}
+                        {% endif %}
                     {% endblock %}
                 </div>
             </div>

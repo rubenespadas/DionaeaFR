@@ -8,7 +8,7 @@ class MysqlCommandArg(models.Model):
         blank=True
     )
 
-    mysql_command_arg = models.IntegerField()
+    mysql_command = models.IntegerField()
 
     mysql_command_arg_index = models.TextField()
 

@@ -270,8 +270,8 @@
                 {% for command in mysqlCommand %}
                     <tr>
                         <td>{{ command.mysql_command }}</td>
-                        <td>{{ command.getOps }}</td>
-                        <td>{{ command.getArgs }}</td>
+                        <td>{{ command.getOps.getName }}</td>
+                        <td>{{ command.getArgs.getData }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

@@ -241,8 +241,11 @@ Home
 		}
 		$(document).ready(function() {
 			ConnCountries();
+			setInterval(ConnCountries, 60000);
 			IPsCountries();
+			setInterval(IPsCountries, 60000);
 			Attacks();
+			setInterval(Attacks, 60000);
 		});
 	</script>
 {% endblock %}

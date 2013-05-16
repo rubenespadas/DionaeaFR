@@ -67,6 +67,11 @@ Attacks
 		        }
 		    });
 		}
-		$(document).ready(function() { Connections(); });
+
+		$(document).ready(function() {
+			Connections();
+			setInterval(Connections, 60000);
+		});
+
 	</script>
 {% endblock %}

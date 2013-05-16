@@ -70,6 +70,9 @@ Protocols
 		        }
 		    });
 		}
-		$(document).ready(function() { Services(); });
+		$(document).ready(function() {
+			Services();
+			setInterval(Services, 60000);
+		});
 	</script>
 {% endblock %}

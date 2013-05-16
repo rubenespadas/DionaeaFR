@@ -35,13 +35,13 @@ class MysqlCommand(models.Model):
         ops = MysqlCommandOp.objects.get(
             mysql_command_cmd=self.mysql_command_cmd
         )
-        return ops.getName()
+        return ops
 
     @property
     def getArgs(self):
         args = MysqlCommandArg.objects.get(
-            mysql_command=self.mysql_command
+            mysql_command=int(self.mysql_command)
         )
-        return args.getData()
+        return args
 
 # vim: set expandtab:ts=4

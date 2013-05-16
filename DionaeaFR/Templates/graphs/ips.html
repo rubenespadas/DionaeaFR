@@ -70,6 +70,9 @@ IPs
 		        }
 		    });
 		}
-		$(document).ready(function() { IPs(); });
+		$(document).ready(function() {
+			IPs();
+			setInterval(IPs, 60000);
+		});
 	</script>
 {% endblock %}

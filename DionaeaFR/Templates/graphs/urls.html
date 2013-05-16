@@ -70,6 +70,9 @@ URLs
 		        }
 		    });
 		}
-		$(document).ready(function() { URLs(); });
+		$(document).ready(function() {
+			URLs();
+			setInterval(URLs, 60000);
+		});
 	</script>
 {% endblock %}

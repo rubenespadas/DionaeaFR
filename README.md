@@ -96,6 +96,10 @@ Home Dionaea:   http://dionaea.carnivore.it/
     - Refactoring Code
 	- New filters system
 
+  16/05/2013
+    - Fixed mysql_command.
+    - Add refresh interval in graphs.
+
 [*] Suggestions?
 
 Designed by @rubenespadas

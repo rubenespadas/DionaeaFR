@@ -50,11 +50,7 @@ class SipCommand(models.Model):
         addrs = SipAddr.objects.filter(
             sip_command=self.sip_command
         )
-        data = '<ul class="unstyled">'
-        for addr in addrs:
-            data = data + addr.getData()
-        data += '</ul>'
-        return data
+        return addrs
 
     @property
     def getData(self):

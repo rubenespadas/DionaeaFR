@@ -373,7 +373,7 @@
                         <td>{{ command.sip_command_call_id }}</td>
                         <td>{{ command.sip_command_user_agent }}</td>
                         <td>{{ command.sip_command_allow }}</td>
-                        <td>{{ command.getAddr.getData|safe }}{{ command.getData.getData|safe }}{{ command.getMedia.getData|safe }}</td>
+                        <td><ul class="unstyled">{% for addr in command.getAddr %}{% if addr %}<li>{{ addr.getData|safe }}</li>{% endif %}{% endfor %}</ul>{{ command.getData.getData|safe }}{{ command.getMedia.getData|safe }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

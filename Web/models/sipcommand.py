@@ -61,13 +61,13 @@ class SipCommand(models.Model):
         cdat = SipSdpConnectionData.objects.get(
             sip_command=self.sip_command
         )
-        return cdat.getData()
+        return cdat
 
     @property
     def getMedia(self):
         media = SipSdpMedia.objects.get(
             sip_command=self.sip_command
         )
-        return media.getData()
+        return media
 
 # vim: set expandtab:ts=4

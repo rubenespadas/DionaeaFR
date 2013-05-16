@@ -42,7 +42,7 @@
                     {% else %}
                         <td>{{ connection.connection_parent }}</td>
                     {% endif %}
-                    <td><img class="flag" src="/static/images/flags/{{ connection.getCC }}.gif" rel="tooltip" title="{{ connection.getCountryName }}" alt="{{ connection.getCountryName }}" data-placement="top"/></td>
+                    <td><img class="flag" src="/static/img/flags/{{ connection.getCC }}.gif" rel="tooltip" title="{{ connection.getCountryName }}" alt="{{ connection.getCountryName }}" data-placement="top"/></td>
                     <td>{{ connection.getRemoteHost }}</td>
                     <td>{{ connection.remote_port }}</td>
                     <td>{{ connection.local_host }}</td>
@@ -91,9 +91,9 @@
                         <td>{{ request.dcerpcrequest }}</td>
                         <td>{{ request.dcerpcrequest_uuid }}</td>
                         <td>{{ request.dcerpcrequest_opnum }}</td>
-                        <td>{{ request.getService|safe }}</td>
-                        <td>{{ request.getOpsName|safe }}</td>
-                        <td>{{ request.getOpsVuln|safe }}</td>
+                        <td><ul class="unstyled">{% for op in request.getOps %}{% if op %}<li>{{ op.getService.getName|safe }}</li>{% endif %}{% endfor %}</ul></td>
+                        <td><ul class="unstyled">{% for op in request.getOps %}{% if op %}<li>{{ op.getName|safe }}</li>{% endif %}{% endfor %}</ul></td>
+                        <td><ul class="unstyled">{% for op in request.getOps %}{% if op %}<li><a href="https://technet.microsoft.com/en-us/security/bulletin/{{ op.getVuln|safe }}">{{ op.getVuln|safe }}</a></li>{% endif %}{% endfor %}</ul></td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -122,7 +122,7 @@
                             {% for report in file.getReport %}
                                 <td><a href="{{ report.getUrl }}">See Report</a></td>
                                 <td>{{ report.getDate }}</td>
-                                <td>{{ report.getResult }}</td>
+                                <td>{{ report.getResult.getVirusName }}</td>
                             {% endfor %}
                         {% else %}
                             <td>None</td>
@@ -373,7 +373,7 @@
                         <td>{{ command.sip_command_call_id }}</td>
                         <td>{{ command.sip_command_user_agent }}</td>
                         <td>{{ command.sip_command_allow }}</td>
-                        <td>{{ command.getAddr|safe }}{{ command.getData|safe }}{{ command.getMedia|safe }}</td>
+                        <td>{{ command.getAddr.getData|safe }}{{ command.getData.getData|safe }}{{ command.getMedia.getData|safe }}</td>
                     </tr>
                 {% endfor %}
             </tbody>
@@ -412,7 +412,7 @@
                         {% else %}
                             <td>{{ c.connection_parent }}</td>
                         {% endif %}
-                        <td><img class="flag" src="/static/images/flags/{{ c.getCC }}.gif" rel="tooltip" title="{{ c.getCountryName }}" alt="{{ c.getCountryName }}" data-placement="top"/></td>
+                        <td><img class="flag" src="/static/img/flags/{{ c.getCC }}.gif" rel="tooltip" title="{{ c.getCountryName }}" alt="{{ c.getCountryName }}" data-placement="top"/></td>
                         <td>{{ c.getRemoteHost }}</td>
                         <td>{{ c.remote_port }}</td>
                         <td>{{ c.local_host }}</td>

@@ -45,15 +45,15 @@ class Dcerpcserviceop(models.Model):
             if vuln[1][:1] != '0':
                 return str(vuln[0] + '-0' + vuln[1])
             else:
-                return self.dcerpcserviceop_vuln
+                return str(self.dcerpcserviceop_vuln)
         else:
-            return self.dcerpcserviceop_vuln
+            return str(self.dcerpcserviceop_vuln)
 
     @property
     def getService(self):
         srv = Dcerpcservice.objects.get(
             dcerpcservice=self.dcerpcservice
         )
-        return srv.getName()
+        return srv
 
 # vim: set expandtab:ts=4

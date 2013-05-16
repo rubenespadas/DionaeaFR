@@ -45,7 +45,7 @@ class Virustotal(models.Model):
             virustotal=self.virustotal,
             virustotalscan_scanner=settings.ANTIVIRUS_VIRUSTOTAL
         )
-        return result.getVirusName()
+        return result
 
 
 # vim: set expandtab:ts=4

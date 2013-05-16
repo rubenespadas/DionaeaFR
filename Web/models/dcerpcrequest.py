@@ -3,9 +3,6 @@ from django.db import models
 from Web.models.connection import Connection
 from Web.models.dcerpcserviceop import Dcerpcserviceop
 
-LINK_MS_PATTERN = '<a href="https://technet.microsoft.com/en-us/security/bulletin/{0}">{1}</a>'
-LIST_PATTERN = '<li>{0}</li>'
-
 
 class Dcerpcrequest(models.Model):
 
@@ -39,45 +36,10 @@ class Dcerpcrequest(models.Model):
         return str(self.dcerpcrequest)
 
     @property
-    def getOpsName(self):
+    def getOps(self):
         ops = Dcerpcserviceop.objects.filter(
             dcerpcserviceop_opnum=self.dcerpcrequest_opnum
         )
-        data = '<ul class="unstyled">'
-        for op in ops:
-            data = data + LIST_PATTERN.fomart(
-                op.getName()
-            )
-        data += '</ul>'
-        return data
-
-    @property
-    def getOpsVuln(self):
-        ops = Dcerpcserviceop.objects.filter(
-            dcerpcserviceop_opnum=self.dcerpcrequest_opnum
-        )
-        data = '<ul class="unstyled">'
-        for op in ops:
-            data = data + LIST_PATTERN.fomart(
-                LINK_MS_PATTERN.format(
-                    op.getVuln(),
-                    op.getVuln()
-                )
-            )
-        data += '</ul>'
-        return data
-
-    @property
-    def getService(self):
-        ops = Dcerpcserviceop.objects.filter(
-            dcerpcserviceop_opnum=self.dcerpcrequest_opnum
-        )
-        data = '<ul class="unstyled">'
-        for op in ops:
-            data = data + LIST_PATTERN.fomart(
-                op.getService()
-            )
-        data += '</ul>'
-        return data
+        return ops
 
 # vim: set expandtab:ts=4

@@ -17,7 +17,7 @@ Home Dionaea:   http://dionaea.carnivore.it/
   - Kendo-UI v2011.3.1129
   - SQLite3
 
-[*] Requeriments:
+[*] Requirements:
 
 	pip install Django
 	pip install pygeoip

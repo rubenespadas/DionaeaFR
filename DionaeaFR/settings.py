@@ -1,6 +1,7 @@
 # Django settings for DionaeaFR project.
 import os
-CURRENT_PATH=os.path.abspath(os.path.dirname(__file__))
+
+CURRENT_PATH = os.path.abspath(os.path.dirname(__file__))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -13,16 +14,16 @@ MANAGERS = ADMINS
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': '/opt/dionaea/var/dionaea/logsql.sqlite', # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
-        'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
-        'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
+        'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'NAME': '/opt/dionaea/var/dionaea/logsql.sqlite',  # Or path to database file if using sqlite3.
+        'USER': '',  # Not used with sqlite3.
+        'PASSWORD': '',  # Not used with sqlite3.
+        'HOST': '',  # Set to empty string for localhost. Not used with sqlite3.
+        'PORT': '',  # Set to empty string for default. Not used with sqlite3.
     },
-	'OPTIONS': {
-		'timeout': 60,
-	}
+    'OPTIONS': {
+    'timeout': 60,
+    }
 }
 
 # Local time zone for this installation. Choices can be found here:
@@ -33,7 +34,7 @@ DATABASES = {
 # If running in a Windows environment this must be set to the same as your
 # system time zone.
 DATETIME_FORMAT = 'd-m-Y H:i:s'
-TIME_ZONE = 'Europe/Madrid'
+TIME_ZONE = 'Etc/UTC'
 
 # Language code for this installation. All choices can be found here:
 # http://www.i18nguy.com/unicode/language-identifiers.html
@@ -65,7 +66,7 @@ MEDIA_URL = '/media/'
 # Don't put anything in this directory yourself; store your static files
 # in apps' "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-STATIC_ROOT = ''
+STATIC_ROOT = os.path.abspath(os.path.join(os.path.join(CURRENT_PATH, os.pardir), 'static'))
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
@@ -73,7 +74,7 @@ STATIC_URL = '/static/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
-    os.path.join(CURRENT_PATH,'static'),
+    os.path.join(CURRENT_PATH, 'static'),
 )
 
 # List of finder classes that know how to find static files in
@@ -91,7 +92,7 @@ SECRET_KEY = 'o*w2sbrhel0^qx5dljbv6eyjwx)(76^wppdjrrxnj%wcny3h2r'
 TEMPLATE_LOADERS = (
     'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
-#     'django.template.loaders.eggs.Loader',
+    # 'django.template.loaders.eggs.Loader',
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -142,13 +143,12 @@ ROOT_URLCONF = 'DionaeaFR.urls'
 WSGI_APPLICATION = 'DionaeaFR.wsgi.application'
 
 TEMPLATE_DIRS = (
-	os.path.join(CURRENT_PATH,'Templates'),
+os.path.join(CURRENT_PATH, 'Templates'),
 )
 
 COMPRESS_PRECOMPILERS = (
-   ('text/less', 'lessc {infile} {outfile}'),
+    ('text/less', 'lessc {infile} {outfile}'),
 )
-
 
 INTERNAL_IPS = ('127.0.0.1',)
 
@@ -163,7 +163,7 @@ INSTALLED_APPS = (
     'django_tables2',
     'django_tables2_simplefilter',
     'pagination',
-	'django.contrib.humanize',
+    'django.contrib.humanize',
     'Web',
 )
 

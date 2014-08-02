@@ -26,6 +26,9 @@ DATABASES = {
     }
 }
 
+# How many days (going backwards) worth of results to show
+RESULTS_DAYS = 7
+
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
 # although not all choices may be available on all operating systems.

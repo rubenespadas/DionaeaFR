@@ -11,6 +11,7 @@ except ImportError:
     print "\tpip install pygeoip"
     pass
 
+from django.template import RequestContext
 from django.conf import settings
 from django.shortcuts import render_to_response
 
@@ -71,7 +72,8 @@ def countriesMap(request):
         'maps/countries.html',
         {
             'cc': var
-        }
+        },
+        context_instance=RequestContext(request)
     )
 
 
@@ -109,7 +111,8 @@ def attackersMap(request):
         'maps/attackers.html',
         {
             'attackers': var
-        }
+        },
+        context_instance=RequestContext(request)
     )
 
 # vim: set expandtab:ts=4

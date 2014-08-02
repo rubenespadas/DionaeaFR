@@ -13,6 +13,7 @@ except ImportError:
 
 from django.conf import settings
 from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.http import HttpResponse
 from django.db.models import Count
 from collections import defaultdict
@@ -49,7 +50,8 @@ gi = pygeoip.GeoIP(
 
 def services(request):
     return render_to_response(
-        'graphs/services.html'
+        'graphs/services.html',
+        context_instance=RequestContext(request)
     )
 
 
@@ -84,7 +86,8 @@ def servicesData(request):
 
 def ports(request):
     return render_to_response(
-        'graphs/ports.html'
+        'graphs/ports.html',
+        context_instance=RequestContext(request)
     )
 
 
@@ -118,7 +121,10 @@ def portsData(request):
 
 
 def urls(request):
-    return render_to_response('graphs/urls.html')
+    return render_to_response(
+        'graphs/urls.html',
+        context_instance=RequestContext(request)
+    )
 
 
 def urlsData(request):
@@ -177,7 +183,8 @@ def malwareData(request):
 
 def ips(request):
     return render_to_response(
-        'graphs/ips.html'
+        'graphs/ips.html',
+        context_instance=RequestContext(request)
     )
 
 
@@ -215,7 +222,8 @@ def ipsData(request):
 
 def connections(request):
     return render_to_response(
-        'graphs/connections.html'
+        'graphs/connections.html',
+        context_instance=RequestContext(request)
     )
 
 

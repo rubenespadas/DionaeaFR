@@ -1,251 +1,263 @@
 {% extends "base.html" %}
 
 {% block title %}
-Home
+    Home
 {% endblock %}
 {% block scripts %}
-	{% load staticfiles %}
-	<script type="text/javascript" src="{% static "js/kendo.core.min.js" %}"></script>
-	<script type="text/javascript" src="{% static "js/kendo.data.min.js" %}"></script>
-	<script type="text/javascript" src="{% static "js/kendo.chart.min.js" %}"></script>
-	<script type="text/javascript" src="{% static "js/kendo.fx.min.js" %}"></script>
+    {% load staticfiles %}
+    <script type="text/javascript" src="{% static "js/kendo.core.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/kendo.data.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/kendo.chart.min.js" %}"></script>
+    <script type="text/javascript" src="{% static "js/kendo.fx.min.js" %}"></script>
 {% endblock %}
 {% block titlecontent %}
-Home
+    Home
 {% endblock %}
 {% block content %}
-	{% load humanize %}
-	<ul class="thumbnails">
-		<li class="span2">
-			<div class="thumbnail" rel="tooltip" title="Number of total connections" alt="Number of total connections" data-placement="top">
-				<h2 class="statistics">
-				{% if num_connections %}
-					{{ num_connections|intcomma }}
-				{% else %}
-					0
-				{% endif %}
-				</h2>
-				<h5>Connections</h5>
-			</div>
-		</li>
-		<li class="span2">
-			<div class="thumbnail" rel="tooltip" title="Number of unique IPs" alt="Number of unique IPs" data-placement="top">
-				<h2 class="statistics">
-				{% if num_ips %}
-					{{ num_ips|intcomma }}
-				{% else %}
-					0
-				{% endif %}
-				</h2>
-				<h5>IPs</h5>
-			</div>
-		</li>
-		<li class="span2">
-			<div class="thumbnail" rel="tooltip" title="Number of unique URLs" alt="Number of unique URLs" data-placement="top">
-				<h2 class="statistics">
-				{% if num_urls %}
-					{{ num_urls|intcomma }}
-				{% else %}
-					0
-				{% endif %}
-				</h2>
-				<h5>URLs</h5>
-			</div>
-		</li>
-		<li class="span2">
-			<div class="thumbnail" rel="tooltip" title="Number of total downloads" alt="Number of total downloads" data-placement="top">
-				<h2 class="statistics">
-				{% if num_downloads %}
-					{{ num_downloads|intcomma }}
-				{% else %}
-					0
-				{% endif %}
-				</h2>
-				<h5>Downloads</h5>
-			</div>
-		</li>
-		<li class="span2">
-			<div class="thumbnail" rel="tooltip" title="Number of malware analized with {{ av_motor }}" alt="Number of malware analized with {{ av_motor }}" data-placement="top">
-				<h2 class="statistics">
-				{% if num_analized %}
-					{{ num_analized|intcomma }}
-				{% else %}
-					0
-				{% endif %}
-				</h2>
-				<h5>Malware Analized</h5>
-			</div>
-		</li>
-		<li class="span2">
-			<div class="thumbnail" rel="tooltip" title="Number of malware detected with {{ av_motor }}" alt="Number of malware detected with {{ av_motor }}" data-placement="top">
-				<h2 class="statistics">
-				{% if num_known %}
-					{{ num_known|intcomma }}
-				{% else %}
-					0
-				{% endif %}
-				</h2>
-				<h5>Malware Known</h5>
-			</div>
-		</li>
-	</ul>
+    {% load humanize %}
     <ul class="thumbnails">
-		<li class="span6">
-			<div class="thumbnail" id="chart1">
-			</div>
-		</li>
-		<li class="span6">
-			<div class="thumbnail" id="chart2">
-			</div>
-		</li>
-	</ul>
-	<ul class="thumbnails">
-    	<li class="span12">
-			<div class="thumbnail" id="timeline">
-			</div>
-		</li>
+        <li class="span2">
+            <div class="thumbnail" rel="tooltip" title="Number of total connections" alt="Number of total connections"
+                 data-placement="top">
+                <h2 class="statistics">
+                    {% if num_connections %}
+                        {{ num_connections|intcomma }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </h2>
+                <h5>Connections</h5>
+            </div>
+        </li>
+        <li class="span2">
+            <div class="thumbnail" rel="tooltip" title="Number of unique IPs" alt="Number of unique IPs"
+                 data-placement="top">
+                <h2 class="statistics">
+                    {% if num_ips %}
+                        {{ num_ips|intcomma }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </h2>
+                <h5>IPs</h5>
+            </div>
+        </li>
+        <li class="span2">
+            <div class="thumbnail" rel="tooltip" title="Number of unique URLs" alt="Number of unique URLs"
+                 data-placement="top">
+                <h2 class="statistics">
+                    {% if num_urls %}
+                        {{ num_urls|intcomma }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </h2>
+                <h5>URLs</h5>
+            </div>
+        </li>
+        <li class="span2">
+            <div class="thumbnail" rel="tooltip" title="Number of total downloads" alt="Number of total downloads"
+                 data-placement="top">
+                <h2 class="statistics">
+                    {% if num_downloads %}
+                        {{ num_downloads|intcomma }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </h2>
+                <h5>Downloads</h5>
+            </div>
+        </li>
+        <li class="span2">
+            <div class="thumbnail" rel="tooltip" title="Number of malware analized with {{ av_motor }}"
+                 alt="Number of malware analized with {{ av_motor }}" data-placement="top">
+                <h2 class="statistics">
+                    {% if num_analized %}
+                        {{ num_analized|intcomma }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </h2>
+                <h5>Malware Analized</h5>
+            </div>
+        </li>
+        <li class="span2">
+            <div class="thumbnail" rel="tooltip" title="Number of malware detected with {{ av_motor }}"
+                 alt="Number of malware detected with {{ av_motor }}" data-placement="top">
+                <h2 class="statistics">
+                    {% if num_known %}
+                        {{ num_known|intcomma }}
+                    {% else %}
+                        0
+                    {% endif %}
+                </h2>
+                <h5>Malware Known</h5>
+            </div>
+        </li>
+    </ul>
+    <ul class="thumbnails">
+        <li class="span6">
+            <div class="thumbnail" id="chart1">
+            </div>
+        </li>
+        <li class="span6">
+            <div class="thumbnail" id="chart2">
+            </div>
+        </li>
+    </ul>
+    <ul class="thumbnails">
+        <li class="span12">
+            <div class="thumbnail" id="timeline">
+            </div>
+        </li>
     </ul>
 {% endblock %}
 {% block Lastscripts %}
-	<script type="text/javascript">
-		function ConnCountries() {
-		    $("#chart1").kendoChart({
-		        dataSource: {
-		            transport: {
-		                read: {
-		                    url: "/graphs/conncountries/",
-		                    dataType: "json"
-		                }
-		            },
-		            sort: {
-						field: "value",
-						dir: "desc"
-						}
-				},
-		        autoBind: true,
-		        title: {
-		            text: "Connections by country"
-		        },
-		        legend: {
-		            visible: true,
-		            offsetY: 20,
-		        },
-		        seriesDefaults: {
-					type: "pie"
-				},
-		        series: [{
-					field: "value",
-					categoryField: "cc",
-					padding: 0
-				}],
-				seriesColors: ['#005F97', '#6E009E','#A034CF','#AC5DCF','#CA88E7','#D2A1E7','#E2BCF3','#E7CAF3', '#EFD9F9', '#F2E2F9'],
-		        tooltip: {
-					visible: true,
-					template: "#= category # - #= kendo.format('{0:P}', percentage)#"
-				},
-		        chartArea: {
-		            background: "",
-		            height: 220
-		        }
-		    });
-		}
-	</script>
-	<script type="text/javascript">
-		function IPsCountries() {
-		    $("#chart2").kendoChart({
-		        dataSource: {
-		            transport: {
-		                read: {
-		                    url: "/graphs/ipscountries/",
-		                    dataType: "json"
-		                }
-		            },
-		            sort: {
-						field: "value",
-						dir: "desc"
-						}
-				},
-		        autoBind: true,
-		        title: {
-		            text: "IPs by country"
-		        },
-		        legend: {
-		            visible: true,
-		            offsetY: 20,
-		        },
-		        seriesDefaults: {
-					type: "pie"
-				},
-		        series: [{
-					field: "value",
-					categoryField: "cc",
-					padding: 0
-				}],
-				seriesColors: ['#005F97', '#6E009E','#A034CF','#AC5DCF','#CA88E7','#D2A1E7','#E2BCF3','#E7CAF3', '#EFD9F9', '#F2E2F9'],
-		        tooltip: {
-					visible: true,
-					template: "#= category # - #= kendo.format('{0:P}', percentage)#"
-				},
-		        chartArea: {
-		            background: "",
-		            height: 220
-		        }
-		    });
-		}
-	</script>
-	<script type="text/javascript">
-		function Attacks() {
-		    $("#timeline").kendoChart({
-		        dataSource: {
-		            transport: {
-		                read: {
-		                    url: "/graphs/timeline/",
-		                    dataType: "json"
-		                }
-		            }
-		        },
-		        autoBind: true,
-		        title: {
-		            text: "Connections of last year"
-		        },
-		        legend: {
-		            visible: false
-		        },
-		        series: [{
-		            type: "line",
-		            color: "#6E009E",
-		            field: "value"
-		        }],
-		        axisDefaults: {
-		            labels: {
-		                font: "13px Tahoma, sans-serif"
-		            }
-		        },
-		        valueAxis: {
-		            labels: {
-		                format: "{0:N0}"
-		            }
-		        },
-		        categoryAxis: {
-		            field: "month",
-		        },
-		        tooltip: {
-		            visible: true,
-		            format: "{0:N0}"
-		        },
-		        chartArea: {
-		            background: "",
-		            height: 210
-		        }
-		    });
-		}
-		$(document).ready(function() {
-			ConnCountries();
-			setInterval(ConnCountries, 60000);
-			IPsCountries();
-			setInterval(IPsCountries, 60000);
-			Attacks();
-			setInterval(Attacks, 60000);
-		});
-	</script>
+    <script type="text/javascript">
+        function ConnCountries() {
+            $("#chart1").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "/graphs/conncountries/",
+                            dataType: "json"
+                        }
+                    },
+                    sort: {
+                        field: "value",
+                        dir: "desc"
+                    }
+                },
+                autoBind: true,
+                title: {
+                    text: "Connections by country"
+                },
+                legend: {
+                    visible: true,
+                    offsetY: 20,
+                },
+                seriesDefaults: {
+                    type: "pie"
+                },
+                series: [
+                    {
+                        field: "value",
+                        categoryField: "cc",
+                        padding: 0
+                    }
+                ],
+                seriesColors: ['#005F97', '#6E009E', '#A034CF', '#AC5DCF', '#CA88E7', '#D2A1E7', '#E2BCF3', '#E7CAF3', '#EFD9F9', '#F2E2F9'],
+                tooltip: {
+                    visible: true,
+                    template: "#= category # - #= kendo.format('{0:P}', percentage)#"
+                },
+                chartArea: {
+                    background: "",
+                    height: 220
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        function IPsCountries() {
+            $("#chart2").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "/graphs/ipscountries/",
+                            dataType: "json"
+                        }
+                    },
+                    sort: {
+                        field: "value",
+                        dir: "desc"
+                    }
+                },
+                autoBind: true,
+                title: {
+                    text: "IPs by country"
+                },
+                legend: {
+                    visible: true,
+                    offsetY: 20,
+                },
+                seriesDefaults: {
+                    type: "pie"
+                },
+                series: [
+                    {
+                        field: "value",
+                        categoryField: "cc",
+                        padding: 0
+                    }
+                ],
+                seriesColors: ['#005F97', '#6E009E', '#A034CF', '#AC5DCF', '#CA88E7', '#D2A1E7', '#E2BCF3', '#E7CAF3', '#EFD9F9', '#F2E2F9'],
+                tooltip: {
+                    visible: true,
+                    template: "#= category # - #= kendo.format('{0:P}', percentage)#"
+                },
+                chartArea: {
+                    background: "",
+                    height: 220
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        function Attacks() {
+            $("#timeline").kendoChart({
+                dataSource: {
+                    transport: {
+                        read: {
+                            url: "/graphs/timeline/",
+                            dataType: "json"
+                        }
+                    }
+                },
+                autoBind: true,
+                title: {
+                    text: "Connections of last year"
+                },
+                legend: {
+                    visible: false
+                },
+                series: [
+                    {
+                        type: "line",
+                        color: "#6E009E",
+                        field: "value"
+                    }
+                ],
+                axisDefaults: {
+                    labels: {
+                        font: "13px Tahoma, sans-serif"
+                    }
+                },
+                valueAxis: {
+                    labels: {
+                        format: "{0:N0}"
+                    }
+                },
+                categoryAxis: {
+                    field: "month",
+                },
+                tooltip: {
+                    visible: true,
+                    format: "{0:N0}"
+                },
+                chartArea: {
+                    background: "",
+                    height: 210
+                }
+            });
+        }
+        $(document).ready(function () {
+            ConnCountries();
+            setInterval(ConnCountries, 60000);
+            IPsCountries();
+            setInterval(IPsCountries, 60000);
+            Attacks();
+            setInterval(Attacks, 60000);
+        });
+    </script>
 {% endblock %}

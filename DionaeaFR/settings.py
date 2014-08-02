@@ -103,6 +103,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.static',
     'django.contrib.messages.context_processors.messages',
     'django.contrib.auth.context_processors.auth',
+    'Web.context_processors.expose_extra_settings_keys',
 )
 
 MIDDLEWARE_CLASSES = (

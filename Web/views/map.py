@@ -10,6 +10,7 @@ except ImportError:
     print "\tpip install pygeoip"
     pass
 
+from django.conf import settings
 from django.shortcuts import render_to_response
 
 from Web.models.connection import Connection
@@ -39,7 +40,7 @@ COUNTRY_PATTERN = '"{0}":{1},'
 
 
 def countriesMap(request):
-    date_now = datetime.date.today() - datetime.timedelta(days=7)
+    date_now = datetime.date.today() - datetime.timedelta(days=settings.RESULTS_DAYS)
     conn = Connection.objects.filter(
         connection_timestamp__gt=time.mktime(
             date_now.timetuple()
@@ -74,7 +75,7 @@ def countriesMap(request):
 
 
 def attackersMap(request):
-    date_now = datetime.date.today() - datetime.timedelta(days=7)
+    date_now = datetime.date.today() - datetime.timedelta(days=settings.RESULTS_DAYS)
     conn = Connection.objects.filter(
         connection_timestamp__gt=time.mktime(
             date_now.timetuple()

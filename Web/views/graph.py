@@ -52,7 +52,7 @@ def services(request):
 
 
 def servicesData(request):
-    date_now = datetime.date.today() - datetime.timedelta(days=7)
+    date_now = datetime.date.today() - datetime.timedelta(days=settings.RESULTS_DAYS)
     conn = Connection.objects.filter(
         connection_timestamp__gt=time.mktime(
             date_now.timetuple()
@@ -87,7 +87,7 @@ def ports(request):
 
 
 def portsData(request):
-    date_now = datetime.date.today() - datetime.timedelta(days=7)
+    date_now = datetime.date.today() - datetime.timedelta(days=settings.RESULTS_DAYS)
     conn = Connection.objects.filter(
         connection_timestamp__gt=time.mktime(
             date_now.timetuple()
@@ -179,7 +179,7 @@ def ips(request):
 
 
 def ipsData(request):
-    date_now = datetime.date.today() - datetime.timedelta(days=7)
+    date_now = datetime.date.today() - datetime.timedelta(days=settings.RESULTS_DAYS)
     conn = Connection.objects.filter(
         connection_timestamp__gt=time.mktime(
             date_now.timetuple()

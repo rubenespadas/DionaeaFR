@@ -1,6 +1,9 @@
 import os
 import datetime
+
 import django_tables2 as tables
+
+
 try:
     import pygeoip
 except:
@@ -14,6 +17,7 @@ from netaddr import IPAddress
 
 try:
     import SubnetTree
+
     reserved_ipv4 = SubnetTree.SubnetTree()
     for subnet in settings.RESERVED_IP:
         reserved_ipv4[subnet] = subnet

@@ -6,7 +6,6 @@ from Web.models.download import Download
 
 
 class DownloadTable(tables.Table):
-
     connection = tables.LinkColumn(
         'connection-detail',
         args=[A('connection')],

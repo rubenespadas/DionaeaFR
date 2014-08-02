@@ -5,7 +5,6 @@ from Web.models.virustotal import Virustotal
 
 
 class Download(models.Model):
-
     download = models.IntegerField(
         primary_key=True,
         blank=True,

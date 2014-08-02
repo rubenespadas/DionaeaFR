@@ -4,7 +4,6 @@ LI_PATTERN = '<li><b>{0}:</b> {1} {2}:{3}@{4}:{5}</li>'
 
 
 class SipAddr(models.Model):
-
     sip_addr = models.IntegerField(
         primary_key=True,
         blank=True

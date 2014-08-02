@@ -4,7 +4,6 @@ from Web.models.connection import Connection
 
 
 class ConnectionFilter(filters.FilterSet):
-
     connection_type = filters.CharFilter(
         lookup_type='contains'
     )

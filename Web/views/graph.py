@@ -3,6 +3,7 @@ import time
 import json
 import sys
 import os
+
 try:
     import pygeoip
 except ImportError:
@@ -23,6 +24,7 @@ from Web.models.offer import Offer
 
 try:
     import SubnetTree
+
     reserved_ipv4 = SubnetTree.SubnetTree()
     for subnet in settings.RESERVED_IP:
         reserved_ipv4[subnet] = subnet
@@ -149,6 +151,7 @@ def malware(request):
 
 def malwareData(request):
     from django.db import connection
+
     cursor = connection.cursor()
     sql = U"""SELECT virustotalscans.virustotalscan_result, count(*) as num
         FROM downloads, virustotals, virustotalscans
@@ -218,6 +221,7 @@ def connections(request):
 
 def connectionsData(request):
     from django.db import connection
+
     cursor = connection.cursor()
     sql = u"""SELECT strftime('%%Y', connection_timestamp,'unixepoch') as 'year', strftime('%%m', connection_timestamp,'unixepoch') as 'month', strftime('%%d', connection_timestamp,'unixepoch') as 'day', count(strftime('%%m', connection_timestamp,'unixepoch')) as 'num'
             FROM connections
@@ -242,6 +246,7 @@ def connectionsData(request):
 
 def timeline(request):
     from django.db import connection
+
     cursor = connection.cursor()
     sql = u"""SELECT strftime('%%Y', connection_timestamp,'unixepoch') as 'year', strftime('%%m', connection_timestamp,'unixepoch') as 'month', count(strftime('%%m', connection_timestamp,'unixepoch')) as 'num'
             FROM connections

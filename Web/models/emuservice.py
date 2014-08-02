@@ -4,7 +4,6 @@ from Web.models.connection import Connection
 
 
 class EmuService(models.Model):
-
     emu_serivce = models.IntegerField(
         primary_key=True,
         blank=True

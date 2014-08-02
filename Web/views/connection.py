@@ -1,8 +1,8 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from django_tables2 import RequestConfig
 from django.http import Http404
 
+from django_tables2 import RequestConfig
 from Web.models.connection import Connection
 from Web.models.dcerpcbind import Dcerpcbind
 from Web.models.dcerpcrequest import Dcerpcrequest
@@ -17,11 +17,8 @@ from Web.models.offer import Offer
 from Web.models.p0f import P0f
 from Web.models.resolve import Resolve
 from Web.models.sipcommand import SipCommand
-
 from Web.tables.connection import ConnectionTable
-
 from Web.forms.connection import ConnectionFilterForm
-
 from Web.filters.connection import ConnectionFilter
 
 

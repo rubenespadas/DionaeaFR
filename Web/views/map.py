@@ -3,6 +3,7 @@ import time
 import datetime
 import sys
 import os
+
 try:
     import pygeoip
 except ImportError:
@@ -50,7 +51,7 @@ def countriesMap(request):
     )
     data = {}
     for c in conn:
-        if(re.match(IP_PATTERN, c['remote_host']) is not None):
+        if (re.match(IP_PATTERN, c['remote_host']) is not None):
             cc = gi.country_code_by_addr(
                 c['remote_host']
             )
@@ -86,13 +87,13 @@ def attackersMap(request):
     var = "var gdpData = ["
     counts = {}
     for c in conn:
-        if(re.match(IP_PATTERN, c['remote_host']) is not None):
+        if (re.match(IP_PATTERN, c['remote_host']) is not None):
             try:
                 counts[c['remote_host']] += 1
             except:
                 counts[c['remote_host']] = 1
     for c in counts:
-        if(re.match(IP_PATTERN, c) is not None):
+        if (re.match(IP_PATTERN, c) is not None):
             cc = gic.record_by_addr(
                 c
             )

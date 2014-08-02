@@ -1,12 +1,12 @@
 import datetime
 import os
+
 try:
     import pygeoip
 except ImportError:
     print "Install pygeoip"
     print "\tpip install pygeoip"
     pass
-
 
 from django.db import models
 
@@ -21,7 +21,6 @@ gi = pygeoip.GeoIP(
 
 
 class Connection(models.Model):
-
     connection = models.IntegerField(
         primary_key=True,
         blank=True,

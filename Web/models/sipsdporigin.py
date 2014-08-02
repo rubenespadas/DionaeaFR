@@ -4,7 +4,6 @@ from Web.models.sipcommand import SipCommand
 
 
 class SipSdpOrigin(models.Model):
-
     sip_sdp_origin = models.IntegerField(
         primary_key=True,
         blank=True

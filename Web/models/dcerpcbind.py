@@ -4,7 +4,6 @@ from Web.models.connection import Connection
 
 
 class Dcerpcbind(models.Model):
-
     dcerpcbind = models.IntegerField(
         primary_key=True,
         blank=True

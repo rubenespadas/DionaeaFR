@@ -1,4 +1,5 @@
 from django.conf.urls import patterns, url
+
 from Web.views.other import home
 from Web.views.connection import connectionIndex, connectionDetail
 from Web.views.download import downloadIndex

@@ -5,7 +5,6 @@ from Web.models.dcerpcserviceop import Dcerpcserviceop
 
 
 class Dcerpcrequest(models.Model):
-
     dcerpcrequest = models.IntegerField(
         primary_key=True,
         blank=True

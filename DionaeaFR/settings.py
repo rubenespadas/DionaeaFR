@@ -22,7 +22,7 @@ DATABASES = {
         'PORT': '',  # Set to empty string for default. Not used with sqlite3.
     },
     'OPTIONS': {
-    'timeout': 60,
+        'timeout': 60,
     }
 }
 
@@ -146,7 +146,7 @@ ROOT_URLCONF = 'DionaeaFR.urls'
 WSGI_APPLICATION = 'DionaeaFR.wsgi.application'
 
 TEMPLATE_DIRS = (
-os.path.join(CURRENT_PATH, 'Templates'),
+    os.path.join(CURRENT_PATH, 'Templates'),
 )
 
 COMPRESS_PRECOMPILERS = (

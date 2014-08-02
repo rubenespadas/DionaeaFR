@@ -4,7 +4,6 @@ LI_PATTERN = '<li><b>{0}:</b> {1}</li>'
 
 
 class SipSdpConnectionData(models.Model):
-
     sip_sdp_connectiondata = models.IntegerField(
         primary_key=True,
         blank=True

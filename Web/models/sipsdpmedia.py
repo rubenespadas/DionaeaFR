@@ -4,7 +4,6 @@ UL_PATTERN = '<ul class="unstyled"><li><b>{0}:</b> {1}:{2}</li></ul>'
 
 
 class SipSdpMedia(models.Model):
-
     sip_sdp_media = models.IntegerField(
         primary_key=True,
         blank=True

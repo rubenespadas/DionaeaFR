@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Dcerpcservice(models.Model):
-
     dcerpcservice = models.IntegerField(
         primary_key=True,
         blank=True

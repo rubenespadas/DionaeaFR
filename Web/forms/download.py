@@ -2,7 +2,6 @@ from django import forms
 
 
 class DownloadFilterForm(forms.Form):
-
     download_url = forms.CharField(
         label='Url',
         required=False

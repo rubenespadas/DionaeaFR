@@ -7,7 +7,6 @@ from Web.models.virustotalscan import Virustotalscan
 
 
 class Virustotal(models.Model):
-
     virustotal = models.IntegerField(
         primary_key=True,
         blank=True

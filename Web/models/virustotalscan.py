@@ -2,7 +2,6 @@ from django.db import models
 
 
 class Virustotalscan(models.Model):
-
     virustotalscan = models.IntegerField(
         primary_key=True,
         blank=True

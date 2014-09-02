@@ -3,6 +3,7 @@ import time
 import json
 import sys
 import os
+
 try:
     import pygeoip
 except ImportError:
@@ -12,6 +13,7 @@ except ImportError:
 
 from django.conf import settings
 from django.shortcuts import render_to_response
+from django.template import RequestContext
 from django.http import HttpResponse
 from django.db.models import Count
 from collections import defaultdict
@@ -23,6 +25,7 @@ from Web.models.offer import Offer
 
 try:
     import SubnetTree
+
     reserved_ipv4 = SubnetTree.SubnetTree()
     for subnet in settings.RESERVED_IP:
         reserved_ipv4[subnet] = subnet
@@ -47,12 +50,13 @@ gi = pygeoip.GeoIP(
 
 def services(request):
     return render_to_response(
-        'graphs/services.html'
+        'graphs/services.html',
+        context_instance=RequestContext(request)
     )
 
 
 def servicesData(request):
-    date_now = datetime.date.today() - datetime.timedelta(days=7)
+    date_now = datetime.date.today() - datetime.timedelta(days=settings.RESULTS_DAYS)
     conn = Connection.objects.filter(
         connection_timestamp__gt=time.mktime(
             date_now.timetuple()
@@ -82,12 +86,13 @@ def servicesData(request):
 
 def ports(request):
     return render_to_response(
-        'graphs/ports.html'
+        'graphs/ports.html',
+        context_instance=RequestContext(request)
     )
 
 
 def portsData(request):
-    date_now = datetime.date.today() - datetime.timedelta(days=7)
+    date_now = datetime.date.today() - datetime.timedelta(days=settings.RESULTS_DAYS)
     conn = Connection.objects.filter(
         connection_timestamp__gt=time.mktime(
             date_now.timetuple()
@@ -116,7 +121,10 @@ def portsData(request):
 
 
 def urls(request):
-    return render_to_response('graphs/urls.html')
+    return render_to_response(
+        'graphs/urls.html',
+        context_instance=RequestContext(request)
+    )
 
 
 def urlsData(request):
@@ -149,6 +157,7 @@ def malware(request):
 
 def malwareData(request):
     from django.db import connection
+
     cursor = connection.cursor()
     sql = U"""SELECT virustotalscans.virustotalscan_result, count(*) as num
         FROM downloads, virustotals, virustotalscans
@@ -174,12 +183,13 @@ def malwareData(request):
 
 def ips(request):
     return render_to_response(
-        'graphs/ips.html'
+        'graphs/ips.html',
+        context_instance=RequestContext(request)
     )
 
 
 def ipsData(request):
-    date_now = datetime.date.today() - datetime.timedelta(days=7)
+    date_now = datetime.date.today() - datetime.timedelta(days=settings.RESULTS_DAYS)
     conn = Connection.objects.filter(
         connection_timestamp__gt=time.mktime(
             date_now.timetuple()
@@ -212,12 +222,14 @@ def ipsData(request):
 
 def connections(request):
     return render_to_response(
-        'graphs/connections.html'
+        'graphs/connections.html',
+        context_instance=RequestContext(request)
     )
 
 
 def connectionsData(request):
     from django.db import connection
+
     cursor = connection.cursor()
     sql = u"""SELECT strftime('%%Y', connection_timestamp,'unixepoch') as 'year', strftime('%%m', connection_timestamp,'unixepoch') as 'month', strftime('%%d', connection_timestamp,'unixepoch') as 'day', count(strftime('%%m', connection_timestamp,'unixepoch')) as 'num'
             FROM connections
@@ -242,6 +254,7 @@ def connectionsData(request):
 
 def timeline(request):
     from django.db import connection
+
     cursor = connection.cursor()
     sql = u"""SELECT strftime('%%Y', connection_timestamp,'unixepoch') as 'year', strftime('%%m', connection_timestamp,'unixepoch') as 'month', count(strftime('%%m', connection_timestamp,'unixepoch')) as 'num'
             FROM connections

@@ -1,12 +1,12 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+
 from django_tables2 import RequestConfig
-
 from Web.models.download import Download
-
 from Web.tables.download import DownloadTable
 from Web.filters.download import DownloadFilter
 from Web.forms.download import DownloadFilterForm
+
 
 length = len(Download.objects.all())
 

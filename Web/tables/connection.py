@@ -9,7 +9,6 @@ from Web.columns.base import FormatIP
 
 
 class ConnectionTable(tables.Table):
-
     connection = tables.LinkColumn(
         'connection-detail',
         args=[A('pk')],

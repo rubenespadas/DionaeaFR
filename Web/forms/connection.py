@@ -43,7 +43,6 @@ PROTOCOL = (
 
 
 class ConnectionFilterForm(forms.Form):
-
     connection_type = forms.CharField(
         label='State',
         required=False,

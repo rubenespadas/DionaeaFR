@@ -4,7 +4,6 @@ from Web.models.sipcommand import SipCommand
 
 
 class SipVia(models.Model):
-
     sip_via = models.IntegerField(
         primary_key=True,
         blank=True

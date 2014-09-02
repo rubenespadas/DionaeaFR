@@ -4,7 +4,6 @@ from Web.models.connection import Connection
 
 
 class Offer(models.Model):
-
     offer = models.IntegerField(primary_key=True, blank=True)
 
     connection = models.ForeignKey(

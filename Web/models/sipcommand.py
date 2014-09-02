@@ -7,7 +7,6 @@ from Web.models.sipsdpmedia import SipSdpMedia
 
 
 class SipCommand(models.Model):
-
     sip_command = models.IntegerField(
         primary_key=True,
         blank=True

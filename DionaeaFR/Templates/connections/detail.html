@@ -16,38 +16,41 @@
         <span class="label label-important">Info</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>State</th>
-                    <th>Protocol</th>
-                    <th>Service</th>
-                    <th>Timestamp</th>
-                    <th>Root</th>
-                    <th>Parent</th>
-                    <th>CC</th>
-                    <th>IP_SRC</th>
-                    <th>Port_SRC</th>
-                    <th>IP_DST</th>
-                    <th>Port_DST</th>
-                </tr>
+            <tr>
+                <th>State</th>
+                <th>Protocol</th>
+                <th>Service</th>
+                <th>Timestamp</th>
+                <th>Root</th>
+                <th>Parent</th>
+                <th>CC</th>
+                <th>IP_SRC</th>
+                <th>Port_SRC</th>
+                <th>IP_DST</th>
+                <th>Port_DST</th>
+            </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>{{ connection.connection_type }}</td>
-                    <td>{{ connection.connection_transport }}</td>
-                    <td>{{ connection.connection_protocol }}</td>
-                    <td>{{ connection.getDate }}</td>
-                    <td><a href="/connections/{{ connection.connection_root }}/">{{ connection.connection_root }}</a>
+            <tr>
+                <td>{{ connection.connection_type }}</td>
+                <td>{{ connection.connection_transport }}</td>
+                <td>{{ connection.connection_protocol }}</td>
+                <td>{{ connection.getDate }}</td>
+                <td><a href="/connections/{{ connection.connection_root }}/">{{ connection.connection_root }}</a>
                     {% if connection.connection_parent != None %}
-                        <td><a href="/connections/{{ connection.connection_parent }}/">{{ connection.connection_parent }}</a>
-                    {% else %}
+                        <td>
+                            <a href="/connections/{{ connection.connection_parent }}/">{{ connection.connection_parent }}</a>
+                            {% else %}
                         <td>{{ connection.connection_parent }}</td>
                     {% endif %}
-                    <td><img class="flag" src="/static/img/flags/{{ connection.getCC }}.gif" rel="tooltip" title="{{ connection.getCountryName }}" alt="{{ connection.getCountryName }}" data-placement="top"/></td>
-                    <td>{{ connection.getRemoteHost }}</td>
-                    <td>{{ connection.remote_port }}</td>
-                    <td>{{ connection.local_host }}</td>
-                    <td>{{ connection.local_port }}</td>
-                                                    </tr>
+                <td><img class="flag" src="/static/img/flags/{{ connection.getCC }}.gif" rel="tooltip"
+                         title="{{ connection.getCountryName }}" alt="{{ connection.getCountryName }}"
+                         data-placement="top"/></td>
+                <td>{{ connection.getRemoteHost }}</td>
+                <td>{{ connection.remote_port }}</td>
+                <td>{{ connection.local_host }}</td>
+                <td>{{ connection.local_port }}</td>
+            </tr>
             </tbody>
         </table>
     {% endif %}
@@ -55,20 +58,20 @@
         <span class="label label-important">RPC Binds</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>UUID</th>
-                    <th>Transfer Syntax</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>UUID</th>
+                <th>Transfer Syntax</th>
+            </tr>
             </thead>
             <tbody>
-                {% for bind in dcerpcbind %}
-                    <tr>
-                        <td>{{ bind.dcerpcbind }}</td>
-                        <td>{{ bind.dcerpcbind_uuid }}</td>
-                        <td>{{ bind.dcerpcbind_transfersyntax }}</td>
-                    </tr>
-                {% endfor %}
+            {% for bind in dcerpcbind %}
+                <tr>
+                    <td>{{ bind.dcerpcbind }}</td>
+                    <td>{{ bind.dcerpcbind_uuid }}</td>
+                    <td>{{ bind.dcerpcbind_transfersyntax }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -76,26 +79,37 @@
         <span class="label label-important">RPC Request</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>UUID</th>
-                    <th>OpNum</th>
-                    <th>Service</th>
-                    <th>Name</th>
-                    <th>Vuln</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>UUID</th>
+                <th>OpNum</th>
+                <th>Service</th>
+                <th>Name</th>
+                <th>Vuln</th>
+            </tr>
             </thead>
             <tbody>
-                {% for request in dcerpcrequest %}
-                    <tr>
-                        <td>{{ request.dcerpcrequest }}</td>
-                        <td>{{ request.dcerpcrequest_uuid }}</td>
-                        <td>{{ request.dcerpcrequest_opnum }}</td>
-                        <td><ul class="unstyled">{% for op in request.getOps %}{% if op %}<li>{{ op.getService.getName|safe }}</li>{% endif %}{% endfor %}</ul></td>
-                        <td><ul class="unstyled">{% for op in request.getOps %}{% if op %}<li>{{ op.getName|safe }}</li>{% endif %}{% endfor %}</ul></td>
-                        <td><ul class="unstyled">{% for op in request.getOps %}{% if op %}<li><a href="https://technet.microsoft.com/en-us/security/bulletin/{{ op.getVuln|safe }}">{{ op.getVuln|safe }}</a></li>{% endif %}{% endfor %}</ul></td>
-                    </tr>
-                {% endfor %}
+            {% for request in dcerpcrequest %}
+                <tr>
+                    <td>{{ request.dcerpcrequest }}</td>
+                    <td>{{ request.dcerpcrequest_uuid }}</td>
+                    <td>{{ request.dcerpcrequest_opnum }}</td>
+                    <td>
+                        <ul class="unstyled">{% for op in request.getOps %}{% if op %}
+                            <li>{{ op.getService.getName|safe }}</li>{% endif %}{% endfor %}</ul>
+                    </td>
+                    <td>
+                        <ul class="unstyled">{% for op in request.getOps %}{% if op %}
+                            <li>{{ op.getName|safe }}</li>{% endif %}{% endfor %}</ul>
+                    </td>
+                    <td>
+                        <ul class="unstyled">{% for op in request.getOps %}{% if op %}
+                            <li>
+                            <a href="https://technet.microsoft.com/en-us/security/bulletin/{{ op.getVuln|safe }}">{{ op.getVuln|safe }}</a>
+                            </li>{% endif %}{% endfor %}</ul>
+                    </td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -103,34 +117,34 @@
         <span class="label label-important">Downloads</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Url</th>
-                    <th>Hash</th>
-                    <th>Report VT</th>
-                    <th>Date VT</th>
-                    <th>Results VT</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Url</th>
+                <th>Hash</th>
+                <th>Report VT</th>
+                <th>Date VT</th>
+                <th>Results VT</th>
+            </tr>
             </thead>
             <tbody>
-                {% for file in download %}
-                    <tr>
-                        <td>{{ file.download }}</td>
-                        <td>{{ file.download_url }}</td>
-                        <td>{{ file.download_md5_hash }}</td>
-                        {% if file.getReport %}
-                            {% for report in file.getReport %}
-                                <td><a href="{{ report.getUrl }}">See Report</a></td>
-                                <td>{{ report.getDate }}</td>
-                                <td>{{ report.getResult.getVirusName }}</td>
-                            {% endfor %}
-                        {% else %}
-                            <td>None</td>
-                            <td>None</td>
-                            <td>None</td>
-                        {% endif %}
-                    </tr>
-                {% endfor %}
+            {% for file in download %}
+                <tr>
+                    <td>{{ file.download }}</td>
+                    <td>{{ file.download_url }}</td>
+                    <td>{{ file.download_md5_hash }}</td>
+                    {% if file.getReport %}
+                        {% for report in file.getReport %}
+                            <td><a href="{{ report.getUrl }}">See Report</a></td>
+                            <td>{{ report.getDate }}</td>
+                            <td>{{ report.getResult.getVirusName }}</td>
+                        {% endfor %}
+                    {% else %}
+                        <td>None</td>
+                        <td>None</td>
+                        <td>None</td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -138,18 +152,18 @@
         <span class="label label-important">Emu Profile</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Json</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Json</th>
+            </tr>
             </thead>
             <tbody>
-                {% for profile in emuProfile %}
-                    <tr>
-                        <td>{{ profile.emu_profile }}</td>
-                        <td>{{ profile.emu_profile_json }}</td>
-                    </tr>
-                {% endfor %}
+            {% for profile in emuProfile %}
+                <tr>
+                    <td>{{ profile.emu_profile }}</td>
+                    <td>{{ profile.emu_profile_json }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -157,18 +171,18 @@
         <span class="label label-important">Emu Services</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Url</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Url</th>
+            </tr>
             </thead>
             <tbody>
-                {% for service in emuService %}
-                    <tr>
-                        <td>{{ service.emu_serivce }}</td>
-                        <td>{{ service.emu_service_url }}</td>
-                    </tr>
-                {% endfor %}
+            {% for service in emuService %}
+                <tr>
+                    <td>{{ service.emu_serivce }}</td>
+                    <td>{{ service.emu_service_url }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -176,18 +190,18 @@
         <span class="label label-important">Emu Services Old</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Json</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Json</th>
+            </tr>
             </thead>
             <tbody>
-                {% for service in emuServiceOld %}
-                    <tr>
-                        <td>{{ service.emu_serivce }}</td>
-                        <td>{{ service.emu_service_url }}</td>
-                    </tr>
-                {% endfor %}
+            {% for service in emuServiceOld %}
+                <tr>
+                    <td>{{ service.emu_serivce }}</td>
+                    <td>{{ service.emu_service_url }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -195,20 +209,20 @@
         <span class="label label-important">Login</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>User</th>
-                    <th>Password</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>User</th>
+                <th>Password</th>
+            </tr>
             </thead>
             <tbody>
-                {% for data in login %}
-                    <tr>
-                        <td>{{ data.login }}</td>
-                        <td>{{ data.login_username }}</td>
-                        <td>{{ data.login_password }}</td>
-                    </tr>
-                {% endfor %}
+            {% for data in login %}
+                <tr>
+                    <td>{{ data.login }}</td>
+                    <td>{{ data.login_username }}</td>
+                    <td>{{ data.login_password }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -216,20 +230,20 @@
         <span class="label label-important">Mssql Command</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Status</th>
-                    <th>Cmd</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Status</th>
+                <th>Cmd</th>
+            </tr>
             </thead>
             <tbody>
-                {% for command in mssqlCommand %}
-                    <tr>
-                        <td>{{ command.mssql_command }}</td>
-                        <td>{{ command.mssql_command_status }}</td>
-                        <td>{{ command.mssql_command_cmd }}</td>
-                    </tr>
-                {% endfor %}
+            {% for command in mssqlCommand %}
+                <tr>
+                    <td>{{ command.mssql_command }}</td>
+                    <td>{{ command.mssql_command_status }}</td>
+                    <td>{{ command.mssql_command_cmd }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -237,22 +251,22 @@
         <span class="label label-important">Mssql Fingerprint</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Hostname</th>
-                    <th>Appname</th>
-                    <th>Cltintname</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Hostname</th>
+                <th>Appname</th>
+                <th>Cltintname</th>
+            </tr>
             </thead>
             <tbody>
-                {% for finger in mssqlFingerprint %}
-                    <tr>
-                        <td>{{ finger.mssql_fingerprint }}</td>
-                        <td>{{ finger.mssql_fingerprint_hostname }}</td>
-                        <td>{{ finger.mssql_fingerprint_appname }}</td>
-                        <td>{{ finger.mssql_fingerprint_cltintname }}</td>
-                    </tr>
-                {% endfor %}
+            {% for finger in mssqlFingerprint %}
+                <tr>
+                    <td>{{ finger.mssql_fingerprint }}</td>
+                    <td>{{ finger.mssql_fingerprint_hostname }}</td>
+                    <td>{{ finger.mssql_fingerprint_appname }}</td>
+                    <td>{{ finger.mssql_fingerprint_cltintname }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -260,20 +274,20 @@
         <span class="label label-important">MySQL Commands</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Command</th>
-                    <th>Data</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Command</th>
+                <th>Data</th>
+            </tr>
             </thead>
             <tbody>
-                {% for command in mysqlCommand %}
-                    <tr>
-                        <td>{{ command.mysql_command }}</td>
-                        <td>{{ command.getOps.getName }}</td>
-                        <td>{{ command.getArgs.getData }}</td>
-                    </tr>
-                {% endfor %}
+            {% for command in mysqlCommand %}
+                <tr>
+                    <td>{{ command.mysql_command }}</td>
+                    <td>{{ command.getOps.getName }}</td>
+                    <td>{{ command.getArgs.getData }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -281,18 +295,18 @@
         <span class="label label-important">Offers</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Url</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Url</th>
+            </tr>
             </thead>
             <tbody>
-                {% for o in offer %}
-                    <tr>
-                        <td>{{ o.offer }}</td>
-                        <td>{{ o.offer_url }}</td>
-                    </tr>
-                {% endfor %}
+            {% for o in offer %}
+                <tr>
+                    <td>{{ o.offer }}</td>
+                    <td>{{ o.offer_url }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -300,32 +314,32 @@
         <span class="label label-important">P0f</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Genre</th>
-                    <th>Link</th>
-                    <th>Detail</th>
-                    <th>Uptime</th>
-                    <th>Tos</th>
-                    <th>Dist</th>
-                    <th>Nat</th>
-                    <th>Fw</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Genre</th>
+                <th>Link</th>
+                <th>Detail</th>
+                <th>Uptime</th>
+                <th>Tos</th>
+                <th>Dist</th>
+                <th>Nat</th>
+                <th>Fw</th>
+            </tr>
             </thead>
             <tbody>
-                {% for p in p0f %}
-                    <tr>
-                        <td>{{ p.p0f }}</td>
-                        <td>{{ p.p0f_genre }}</td>
-                        <td>{{ p.p0f_link }}</td>
-                        <td>{{ p.p0f_detail }}</td>
-                        <td>{{ p.p0f_uptime }}</td>
-                        <td>{{ p.p0f_tos }}</td>
-                        <td>{{ p.p0f_dist }}</td>
-                        <td>{{ p.p0f_nat }}</td>
-                        <td>{{ p.p0f_fw }}</td>
-                    </tr>
-                {% endfor %}
+            {% for p in p0f %}
+                <tr>
+                    <td>{{ p.p0f }}</td>
+                    <td>{{ p.p0f_genre }}</td>
+                    <td>{{ p.p0f_link }}</td>
+                    <td>{{ p.p0f_detail }}</td>
+                    <td>{{ p.p0f_uptime }}</td>
+                    <td>{{ p.p0f_tos }}</td>
+                    <td>{{ p.p0f_dist }}</td>
+                    <td>{{ p.p0f_nat }}</td>
+                    <td>{{ p.p0f_fw }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -333,22 +347,22 @@
         <span class="label label-important">Resolves</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Hostname</th>
-                    <th>Type</th>
-                    <th>Result</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Hostname</th>
+                <th>Type</th>
+                <th>Result</th>
+            </tr>
             </thead>
             <tbody>
-                {% for r in resolve %}
-                    <tr>
-                        <td>{{ r.resolve }}</td>
-                        <td>{{ r.resolve_hostname }}</td>
-                        <td>{{ r.resolve_type }}</td>
-                        <td>{{ r.resolve_result }}</td>
-                    </tr>
-                {% endfor %}
+            {% for r in resolve %}
+                <tr>
+                    <td>{{ r.resolve }}</td>
+                    <td>{{ r.resolve_hostname }}</td>
+                    <td>{{ r.resolve_type }}</td>
+                    <td>{{ r.resolve_result }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -356,26 +370,29 @@
         <span class="label label-important">SIP Commands</span>
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Mmethod</th>
-                    <th>Call ID</th>
-                    <th>User Agent</th>
-                    <th>Allow</th>
-                    <th>Data</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Mmethod</th>
+                <th>Call ID</th>
+                <th>User Agent</th>
+                <th>Allow</th>
+                <th>Data</th>
+            </tr>
             </thead>
             <tbody>
-                 {% for command in sipcommand %}
-                    <tr>
-                        <td>{{ command.sip_command }}</td>
-                        <td>{{ command.sip_command_method }}</td>
-                        <td>{{ command.sip_command_call_id }}</td>
-                        <td>{{ command.sip_command_user_agent }}</td>
-                        <td>{{ command.sip_command_allow }}</td>
-                        <td><ul class="unstyled">{% for addr in command.getAddr %}{% if addr %}<li>{{ addr.getData|safe }}</li>{% endif %}{% endfor %}</ul>{{ command.getData.getData|safe }}{{ command.getMedia.getData|safe }}</td>
-                    </tr>
-                {% endfor %}
+            {% for command in sipcommand %}
+                <tr>
+                    <td>{{ command.sip_command }}</td>
+                    <td>{{ command.sip_command_method }}</td>
+                    <td>{{ command.sip_command_call_id }}</td>
+                    <td>{{ command.sip_command_user_agent }}</td>
+                    <td>{{ command.sip_command_allow }}</td>
+                    <td>
+                        <ul class="unstyled">{% for addr in command.getAddr %}{% if addr %}
+                            <li>{{ addr.getData|safe }}</li>{% endif %}{% endfor %}</ul>
+                        {{ command.getData.getData|safe }}{{ command.getMedia.getData|safe }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -383,42 +400,43 @@
         <span class="label label-important">Trace</span>
         <table class="table" id="connections">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>State</th>
-                    <th>Protocol</th>
-                    <th>Service</th>
-                    <th>Timestamp</th>
-                    <th>Root</th>
-                    <th>Parent</th>
-                    <th>CC</th>
-                    <th>IP_SRC</th>
-                    <th>Port_SRC</th>
-                    <th>IP_DST</th>
-                    <th>Port_DST</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>State</th>
+                <th>Protocol</th>
+                <th>Service</th>
+                <th>Timestamp</th>
+                <th>Root</th>
+                <th>Parent</th>
+                <th>CC</th>
+                <th>IP_SRC</th>
+                <th>Port_SRC</th>
+                <th>IP_DST</th>
+                <th>Port_DST</th>
+            </tr>
             </thead>
             <tbody>
-                {% for c in connection.getTrace %}
-                    <tr>
-                        <td><a href="/connections/{{ c.connection }}/">{{ c.connection }}</a></td>
-                        <td>{{ c.connection_type }}</td>
-                        <td>{{ c.connection_transport }}</td>
-                        <td>{{ c.connection_protocol }}</td>
-                        <td>{{ c.getDate }}</td>
-                        <td><a href="/connections/{{ c.connection_root }}/">{{ c.connection_root }}</a></td>
-                        {% if c.connection_parent != None %}
-                            <td><a href="/connections/{{ c.connection_parent }}/">{{ c.connection_parent }}</a></td>
-                        {% else %}
-                            <td>{{ c.connection_parent }}</td>
-                        {% endif %}
-                        <td><img class="flag" src="/static/img/flags/{{ c.getCC }}.gif" rel="tooltip" title="{{ c.getCountryName }}" alt="{{ c.getCountryName }}" data-placement="top"/></td>
-                        <td>{{ c.getRemoteHost }}</td>
-                        <td>{{ c.remote_port }}</td>
-                        <td>{{ c.local_host }}</td>
-                        <td>{{ c.local_port }}</td>
-                    </tr>
-                {% endfor %}
+            {% for c in connection.getTrace %}
+                <tr>
+                    <td><a href="/connections/{{ c.connection }}/">{{ c.connection }}</a></td>
+                    <td>{{ c.connection_type }}</td>
+                    <td>{{ c.connection_transport }}</td>
+                    <td>{{ c.connection_protocol }}</td>
+                    <td>{{ c.getDate }}</td>
+                    <td><a href="/connections/{{ c.connection_root }}/">{{ c.connection_root }}</a></td>
+                    {% if c.connection_parent != None %}
+                        <td><a href="/connections/{{ c.connection_parent }}/">{{ c.connection_parent }}</a></td>
+                    {% else %}
+                        <td>{{ c.connection_parent }}</td>
+                    {% endif %}
+                    <td><img class="flag" src="/static/img/flags/{{ c.getCC }}.gif" rel="tooltip"
+                             title="{{ c.getCountryName }}" alt="{{ c.getCountryName }}" data-placement="top"/></td>
+                    <td>{{ c.getRemoteHost }}</td>
+                    <td>{{ c.remote_port }}</td>
+                    <td>{{ c.local_host }}</td>
+                    <td>{{ c.local_port }}</td>
+                </tr>
+            {% endfor %}
             </tbody>
         </table>
     {% endif %}
@@ -426,24 +444,24 @@
 {% block pagination %}
     <div class="pagination pagination-centered">
         <ul class="pager">
-    {% if next != 0 %}
-            <li class="next">
-                <a href="/connections/{{ next }}/">next</a>
-            </li>
-    {% else %}
-            <li class="next disabled">
-                <a href="">next</a>
-            </li>
-    {% endif %}
-    {% if previous != 0 %}
-            <li class="previous ">
-                <a href="/connections/{{ previous }}/">previous</a>
-            </li>
-    {% else %}
-            <li class="previous disabled">
-                <a href="">previous</a>
-            </li>
-    {% endif %}
+            {% if next != 0 %}
+                <li class="next">
+                    <a href="/connections/{{ next }}/">next</a>
+                </li>
+            {% else %}
+                <li class="next disabled">
+                    <a href="">next</a>
+                </li>
+            {% endif %}
+            {% if previous != 0 %}
+                <li class="previous ">
+                    <a href="/connections/{{ previous }}/">previous</a>
+                </li>
+            {% else %}
+                <li class="previous disabled">
+                    <a href="">previous</a>
+                </li>
+            {% endif %}
         </ul>
     </div>
 {% endblock %}
@@ -454,7 +472,7 @@
 {% endblock %}
 {% block Lastscripts %}
     <script type="text/javascript">
-        $(document).ready(function() {
+        $(document).ready(function () {
             $('.flag').tooltip();
         });
     </script>

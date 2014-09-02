@@ -4,7 +4,6 @@ from Web.models.dcerpcservice import Dcerpcservice
 
 
 class Dcerpcserviceop(models.Model):
-
     dcerpcserviceop = models.IntegerField(
         primary_key=True,
         blank=True

@@ -2,7 +2,6 @@ from django.db import models
 
 
 class MysqlCommandOp(models.Model):
-
     mysql_command_op = models.IntegerField(
         primary_key=True,
         blank=True

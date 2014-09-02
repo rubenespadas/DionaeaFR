@@ -1,15 +1,14 @@
 try:
-	import django_filters as filters
+    import django_filters as filters
 except ImportError:
-	print "Install django-filter"
-	print "\tpip install django-filter"
-	pass
+    print "Install django-filter"
+    print "\tpip install django-filter"
+    pass
 
 from Web.models.download import Download
 
 
 class DownloadFilter(filters.FilterSet):
-
     download_url = filters.CharFilter(
         lookup_type='icontains'
     )

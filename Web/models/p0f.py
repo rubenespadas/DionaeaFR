@@ -4,7 +4,6 @@ from Web.models.connection import Connection
 
 
 class P0f(models.Model):
-
     p0f = models.IntegerField(
         primary_key=True,
         blank=True

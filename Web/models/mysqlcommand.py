@@ -6,7 +6,6 @@ from Web.models.mysqlcommandarg import MysqlCommandArg
 
 
 class MysqlCommand(models.Model):
-
     mysql_command = models.IntegerField(
         primary_key=True,
         blank=True

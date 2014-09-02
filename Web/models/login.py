@@ -4,7 +4,6 @@ from Web.models.connection import Connection
 
 
 class Login(models.Model):
-
     login = models.IntegerField(
         primary_key=True,
         blank=True

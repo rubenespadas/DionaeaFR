@@ -4,7 +4,6 @@ from Web.models.connection import Connection
 
 
 class MssqlCommand(models.Model):
-
     mssql_command = models.IntegerField(
         primary_key=True,
         blank=True

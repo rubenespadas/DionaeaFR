@@ -3,6 +3,7 @@ import time
 import datetime
 import sys
 import os
+
 try:
     import pygeoip
 except ImportError:
@@ -10,6 +11,8 @@ except ImportError:
     print "\tpip install pygeoip"
     pass
 
+from django.template import RequestContext
+from django.conf import settings
 from django.shortcuts import render_to_response
 
 from Web.models.connection import Connection
@@ -39,7 +42,7 @@ COUNTRY_PATTERN = '"{0}":{1},'
 
 
 def countriesMap(request):
-    date_now = datetime.date.today() - datetime.timedelta(days=7)
+    date_now = datetime.date.today() - datetime.timedelta(days=settings.RESULTS_DAYS)
     conn = Connection.objects.filter(
         connection_timestamp__gt=time.mktime(
             date_now.timetuple()
@@ -49,7 +52,7 @@ def countriesMap(request):
     )
     data = {}
     for c in conn:
-        if(re.match(IP_PATTERN, c['remote_host']) is not None):
+        if (re.match(IP_PATTERN, c['remote_host']) is not None):
             cc = gi.country_code_by_addr(
                 c['remote_host']
             )
@@ -69,12 +72,13 @@ def countriesMap(request):
         'maps/countries.html',
         {
             'cc': var
-        }
+        },
+        context_instance=RequestContext(request)
     )
 
 
 def attackersMap(request):
-    date_now = datetime.date.today() - datetime.timedelta(days=7)
+    date_now = datetime.date.today() - datetime.timedelta(days=settings.RESULTS_DAYS)
     conn = Connection.objects.filter(
         connection_timestamp__gt=time.mktime(
             date_now.timetuple()
@@ -85,13 +89,13 @@ def attackersMap(request):
     var = "var gdpData = ["
     counts = {}
     for c in conn:
-        if(re.match(IP_PATTERN, c['remote_host']) is not None):
+        if (re.match(IP_PATTERN, c['remote_host']) is not None):
             try:
                 counts[c['remote_host']] += 1
             except:
                 counts[c['remote_host']] = 1
     for c in counts:
-        if(re.match(IP_PATTERN, c) is not None):
+        if (re.match(IP_PATTERN, c) is not None):
             cc = gic.record_by_addr(
                 c
             )
@@ -107,7 +111,8 @@ def attackersMap(request):
         'maps/attackers.html',
         {
             'attackers': var
-        }
+        },
+        context_instance=RequestContext(request)
     )
 
 # vim: set expandtab:ts=4

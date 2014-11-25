@@ -6,4 +6,6 @@ __pycache__/
 /DionaeaFR.sublime-workspace
 
 static/*
-settings.py
+DionaeaFR/settings.py
+DionaeaFR/static/GeoIP.dat
+DionaeaFR/static/GeoLiteCity.dat

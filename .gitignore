@@ -4,3 +4,6 @@ __pycache__/
 .idea/
 /DionaeaFR.sublime-project
 /DionaeaFR.sublime-workspace
+
+static/*
+settings.py

@@ -4,3 +4,8 @@ __pycache__/
 .idea/
 /DionaeaFR.sublime-project
 /DionaeaFR.sublime-workspace
+
+static/*
+DionaeaFR/settings.py
+DionaeaFR/static/GeoIP.dat
+DionaeaFR/static/GeoLiteCity.dat

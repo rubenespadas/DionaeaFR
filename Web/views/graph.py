@@ -80,7 +80,7 @@ def servicesData(request):
         data.append(b)
     return HttpResponse(
         json.dumps(data),
-        mimetype="application/json"
+        content_type="application/json"
     )
 
 
@@ -116,7 +116,7 @@ def portsData(request):
         data.append(b)
     return HttpResponse(
         json.dumps(data),
-        mimetype="application/json"
+        content_type="application/json"
     )
 
 
@@ -145,7 +145,7 @@ def urlsData(request):
         data.append(b)
     return HttpResponse(
         json.dumps(data),
-        mimetype="application/json"
+        content_type="application/json"
     )
 
 
@@ -177,7 +177,7 @@ def malwareData(request):
         data.append(b)
     return HttpResponse(
         json.dumps(data),
-        mimetype="application/json"
+        content_type="application/json"
     )
 
 
@@ -216,7 +216,7 @@ def ipsData(request):
             data.append(b)
     return HttpResponse(
         json.dumps(data),
-        mimetype="application/json"
+        content_type="application/json"
     )
 
 
@@ -248,7 +248,7 @@ def connectionsData(request):
     data.reverse()
     return HttpResponse(
         json.dumps(data),
-        mimetype="application/json"
+        content_type="application/json"
     )
 
 
@@ -272,7 +272,7 @@ def timeline(request):
     data.reverse()
     return HttpResponse(
         json.dumps(data),
-        mimetype="application/json"
+        content_type="application/json"
     )
 
 
@@ -364,7 +364,7 @@ def connCountries(request):
     )
     return HttpResponse(
         json.dumps(data),
-        mimetype="application/json"
+        content_type="application/json"
     )
 
 
@@ -456,5 +456,5 @@ def ipsCountries(request):
     )
     return HttpResponse(
         json.dumps(data),
-        mimetype="application/json"
+        content_type="application/json"
     )

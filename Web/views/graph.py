@@ -231,10 +231,10 @@ def connectionsData(request):
     from django.db import connection
 
     cursor = connection.cursor()
-    sql = u"""SELECT strftime('%%Y', connection_timestamp,'unixepoch') as 'year', strftime('%%m', connection_timestamp,'unixepoch') as 'month', strftime('%%d', connection_timestamp,'unixepoch') as 'day', count(strftime('%%m', connection_timestamp,'unixepoch')) as 'num'
+    sql = u"""SELECT strftime('%Y', connection_timestamp,'unixepoch') as 'year', strftime('%m', connection_timestamp,'unixepoch') as 'month', strftime('%d', connection_timestamp,'unixepoch') as 'day', count(strftime('%m', connection_timestamp,'unixepoch')) as 'num'
             FROM connections
-            GROUP BY strftime('%%Y', connection_timestamp,'unixepoch'), strftime('%%m', connection_timestamp,'unixepoch'), strftime('%%d', connection_timestamp,'unixepoch')
-            ORDER BY strftime('%%Y', connection_timestamp,'unixepoch') DESC, strftime('%%m', connection_timestamp,'unixepoch') DESC, strftime('%%d', connection_timestamp,'unixepoch') DESC
+            GROUP BY strftime('%Y', connection_timestamp,'unixepoch'), strftime('%m', connection_timestamp,'unixepoch'), strftime('%d', connection_timestamp,'unixepoch')
+            ORDER BY strftime('%Y', connection_timestamp,'unixepoch') DESC, strftime('%m', connection_timestamp,'unixepoch') DESC, strftime('%d', connection_timestamp,'unixepoch') DESC
             LIMIT 7"""
     cursor.execute(sql)
     data = []
@@ -256,10 +256,10 @@ def timeline(request):
     from django.db import connection
 
     cursor = connection.cursor()
-    sql = u"""SELECT strftime('%%Y', connection_timestamp,'unixepoch') as 'year', strftime('%%m', connection_timestamp,'unixepoch') as 'month', count(strftime('%%m', connection_timestamp,'unixepoch')) as 'num'
+    sql = u"""SELECT strftime('%Y', connection_timestamp,'unixepoch') as 'year', strftime('%m', connection_timestamp,'unixepoch') as 'month', count(strftime('%m', connection_timestamp,'unixepoch')) as 'num'
             FROM connections
-            GROUP BY strftime('%%Y', connection_timestamp,'unixepoch'), strftime('%%m', connection_timestamp,'unixepoch')
-            ORDER BY strftime('%%Y', connection_timestamp,'unixepoch') DESC, strftime('%%m', connection_timestamp,'unixepoch') DESC
+            GROUP BY strftime('%Y', connection_timestamp,'unixepoch'), strftime('%m', connection_timestamp,'unixepoch')
+            ORDER BY strftime('%Y', connection_timestamp,'unixepoch') DESC, strftime('%m', connection_timestamp,'unixepoch') DESC
             LIMIT 12"""
     cursor.execute(sql)
     data = []

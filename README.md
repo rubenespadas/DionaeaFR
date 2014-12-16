@@ -36,9 +36,9 @@ Home Dionaea:   http://dionaea.carnivore.it/
 		python setup.py install
 	
 	nodejs:
-		http://nodejs.org/dist/v0.8.16/node-v0.8.16.tar.gz
-		tar xzvf node-v0.8.16.tar.gz
-		cd node-v0.8.16
+		http://nodejs.org/dist/v0.8.16/node-v0.10.33.tar.gz
+		tar xzvf node-v0.10.33.tar.gz
+		cd node-v0.10.33
 		./configure
 		make
 		make install

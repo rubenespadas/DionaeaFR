@@ -87,7 +87,7 @@ class ConnectionFilterForm(forms.Form):
         required=False
     )
 
-    remote_host = forms.IPAddressField(
+    remote_host = forms.GenericIPAddressField(
         label='Attacker',
         required=False
     )
